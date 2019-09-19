@@ -1,26 +1,43 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import getStock from './avanza';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  state = {
+    stockName: 'Loading',
+    priceEarningsRatio: '-',
+          directYield: '-'
+  };
+
+  componentDidMount() {
+    getStock('5284')
+      .then((data) => {
+        const parsedData = JSON.parse(data); 
+        this.setState({
+          stockName: parsedData.company.name,
+          priceEarningsRatio:parsedData.keyRatios.priceEarningsRatio,
+          directYield:parsedData.keyRatios.directYield
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        this.setState({
+          stockName: err.message
+        });
+      });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, Linni!</h1>
+        <h2>{this.state.stockName}.</h2>
+        <p>P/E: {this.state.priceEarningsRatio}</p>
+        <p>Direktavkastning: {this.state.directYield}</p>
+      </div>
+    );
+  }
 }
 
 export default App;
