@@ -1,5 +1,5 @@
 import React from "react";
-import getAllStocks from "./avanza";
+import { getInterestingYieldStocks } from "../avanza";
 import {
   yieldIsGood,
   yieldIsVeryGood,
@@ -16,7 +16,7 @@ class BestYield extends React.Component {
   };
 
   componentDidMount() {
-    getAllStocks()
+    getInterestingYieldStocks()
       .then(stocks => {
         this.setState({
           stocks: stocks
@@ -28,16 +28,6 @@ class BestYield extends React.Component {
           error: err.message
         });
       });
-  }
-
-  renderStock(stockData) {
-    return (
-      <tr key={stockData.id}>
-        <td>{stockData.stockName}</td>
-        <td>{stockData.priceEarningsRatio}</td>
-        <td>{stockData.directYield}</td>
-      </tr>
-    );
   }
 
   render() {

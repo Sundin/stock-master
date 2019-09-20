@@ -1,6 +1,6 @@
 var rp = require("request-promise-native");
 
-const stockIds = [
+const interestingYieldStocks = [
   "5261",
   "5332",
   "5241",
@@ -15,11 +15,11 @@ const stockIds = [
   "5422"
 ];
 
-export default function getAllStocks() {
+export function getInterestingYieldStocks() {
   return new Promise((resolve, reject) => {
     let promises = [];
 
-    stockIds.forEach(id => {
+    interestingYieldStocks.forEach(id => {
       promises.push(getStock(id));
     });
 
@@ -51,6 +51,47 @@ function getStock(id) {
       cachedStocks[parsedData.id] = parsedData;
       console.log("got data", parsedData);
       resolve(parsedData);
+    });
+  });
+}
+
+const portfolios = [
+  {
+    id: "1",
+    name: "Portfolio 1",
+    stocks: [
+      {
+        id: "5261",
+        amount: 1
+      },
+      {
+        id: "5332",
+        amount: 1
+      }
+    ]
+  }
+];
+
+export function getPortfolios() {
+  let returnData = portfolios;
+
+  return new Promise((resolve, reject) => {
+    portfolios.forEach((portfolio, portfolioIndex) => {
+      let promises = [];
+      portfolio.stocks.forEach((stock, stockIndex) => {
+        promises.push(getStock(stock.id));
+
+        Promise.all(promises).then(stocks => {
+          stocks.forEach(stockData => {
+            returnData[portfolioIndex].stocks[stockIndex] = {
+              ...stockData,
+              amount: portfolios[portfolioIndex].stocks[stockIndex].amount
+            };
+          });
+          console.log("resolving");
+          resolve(returnData);
+        });
+      });
     });
   });
 }
