@@ -70,7 +70,6 @@ class BestYield extends React.Component {
 
 function Stock(props) {
   const { stockData } = props;
-  console.log("stock", stockData);
 
   const { priceEarningsRatio, directYield } = stockData.keyRatios;
   return (

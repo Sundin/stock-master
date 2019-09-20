@@ -26,9 +26,7 @@ export default function getAllStocks() {
     Promise.all(promises).then(stocks => {
       let returnData = [];
       stocks.forEach(stockData => {
-        const parsedData = JSON.parse(stockData);
-        console.log("got data", parsedData);
-        returnData.push(parsedData);
+        returnData.push(stockData);
       });
 
       returnData.sort((a, b) => {
@@ -39,6 +37,20 @@ export default function getAllStocks() {
   });
 }
 
+let cachedStocks = {};
+
 function getStock(id) {
-  return rp("https://avanza.se/_mobile/market/stock/" + id);
+  if (cachedStocks[id] != null) {
+    console.log("Found in cache", cachedStocks[id]);
+    return Promise.resolve(cachedStocks[id]);
+  }
+
+  return new Promise((resolve, reject) => {
+    rp("https://avanza.se/_mobile/market/stock/" + id).then(stockData => {
+      const parsedData = JSON.parse(stockData);
+      cachedStocks[parsedData.id] = parsedData;
+      console.log("got data", parsedData);
+      resolve(parsedData);
+    });
+  });
 }
