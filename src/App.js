@@ -1,43 +1,77 @@
-import React from 'react';
-import './App.css';
-import getStock from './avanza';
+import React from "react";
+import "./App.css";
+import getAllStocks from "./avanza";
 
 class App extends React.Component {
-
   state = {
-    stockName: 'Loading',
-    priceEarningsRatio: '-',
-          directYield: '-'
+    stocks: [],
+    error: null
   };
 
   componentDidMount() {
-    getStock('5284')
-      .then((data) => {
-        const parsedData = JSON.parse(data); 
+    getAllStocks()
+      .then(stocks => {
         this.setState({
-          stockName: parsedData.company.name,
-          priceEarningsRatio:parsedData.keyRatios.priceEarningsRatio,
-          directYield:parsedData.keyRatios.directYield
+          stocks: stocks
         });
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
         this.setState({
-          stockName: err.message
+          error: err.message
         });
       });
   }
 
+  renderStock(stockData) {
+    return (
+      <tr key={stockData.id}>
+        <td>{stockData.stockName}</td>
+        <td>{stockData.priceEarningsRatio}</td>
+        <td>{stockData.directYield}</td>
+      </tr>
+    );
+  }
+
   render() {
+    if (this.state.error != null) {
+      return <p>{this.state.error}</p>;
+    }
+
     return (
       <div>
-        <h1>Hello, Linni!</h1>
-        <h2>{this.state.stockName}.</h2>
-        <p>P/E: {this.state.priceEarningsRatio}</p>
-        <p>Direktavkastning: {this.state.directYield}</p>
+        <h1>Hello!</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Aktie</th>
+              <th>P/E</th>
+              <th>Direktavkastning</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.stocks.map(stockData => (
+              <Stock stockData={stockData} key={stockData.id} />
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
+}
+
+function Stock(props) {
+  const { stockData } = props;
+  console.log("stock", stockData);
+  return (
+    <tr key={stockData.id}>
+      <td>{stockData.id}</td>
+      <td>{stockData.name}</td>
+      <td>{stockData.keyRatios.priceEarningsRatio}</td>
+      <td>{stockData.keyRatios.directYield}</td>
+    </tr>
+  );
 }
 
 export default App;
