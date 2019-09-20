@@ -1,6 +1,14 @@
 import React from "react";
 import "./App.css";
 import getAllStocks from "./avanza";
+import {
+  yieldIsGood,
+  yieldIsVeryGood,
+  peIsGood,
+  peIsVeryGood
+} from "./stockIndicators";
+
+var classNames = require("classnames");
 
 class App extends React.Component {
   state = {
@@ -64,12 +72,28 @@ class App extends React.Component {
 function Stock(props) {
   const { stockData } = props;
   console.log("stock", stockData);
+
+  const { priceEarningsRatio, directYield } = stockData.keyRatios;
   return (
     <tr key={stockData.id}>
       <td>{stockData.id}</td>
       <td>{stockData.name}</td>
-      <td>{stockData.keyRatios.priceEarningsRatio}</td>
-      <td>{stockData.keyRatios.directYield}</td>
+      <td
+        className={classNames({
+          good: peIsGood(stockData),
+          veryGood: peIsVeryGood(stockData)
+        })}
+      >
+        {priceEarningsRatio}
+      </td>
+      <td
+        className={classNames({
+          good: yieldIsGood(stockData),
+          veryGood: yieldIsVeryGood(stockData)
+        })}
+      >
+        {directYield}
+      </td>
     </tr>
   );
 }

@@ -20,6 +20,15 @@ table {
 th, td {
   text-align: left;
   padding: 8px;
+
+}
+
+.good {
+  background-color: #a4d6a4;
+}
+
+.veryGood {
+  background-color: #79d379;
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}

@@ -12,7 +12,8 @@ const stockIds = [
   "5264",
   "96767",
   "5455",
-  "5422"
+  "5422",
+  "36687"
 ];
 
 export default function getAllStocks() {
