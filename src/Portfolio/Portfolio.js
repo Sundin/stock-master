@@ -8,7 +8,7 @@ import {
 
 var classNames = require("classnames");
 
-class BestYield extends React.Component {
+class Portfolio extends React.Component {
   state = {
     portfolios: [],
     error: null
@@ -53,7 +53,7 @@ class BestYield extends React.Component {
           </thead>
           <tbody>
             {this.state.portfolios.map(portfolioData => (
-              <Portfolio
+              <PortfolioRow
                 portfolioData={portfolioData}
                 totalPortfolioValue={this.getTotalPortfolioValue()}
                 key={portfolioData.id}
@@ -61,12 +61,19 @@ class BestYield extends React.Component {
             ))}
           </tbody>
         </table>
+
+        {this.state.portfolios.map(portfolioData => (
+          <PortfolioDetails
+            portfolioData={portfolioData}
+            key={portfolioData.id}
+          />
+        ))}
       </div>
     );
   }
 }
 
-function Portfolio(props) {
+function PortfolioRow(props) {
   const { portfolioData, totalPortfolioValue } = props;
   const portfolioRatio =
     (getPortfolioValue(portfolioData) / totalPortfolioValue) * 100;
@@ -93,4 +100,62 @@ function Portfolio(props) {
   );
 }
 
-export default BestYield;
+function PortfolioDetails(props) {
+  const { portfolioData } = props;
+  const {
+    minShareOfEachShareInPortfolio,
+    maxShareOfEachShareInPortfolio
+  } = portfolioData;
+
+  return (
+    <div>
+      <h2>{portfolioData.name}</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Aktie</th>
+            <th>Andel av portfolio</th>
+          </tr>
+        </thead>
+        <tbody>
+          {portfolioData.stocks.map(stock => (
+            <StockRow
+              stock={stock}
+              portfolioValue={getPortfolioValue(portfolioData)}
+              minRatio={minShareOfEachShareInPortfolio}
+              maxRatio={maxShareOfEachShareInPortfolio}
+              key={stock.id}
+            />
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function stockRatioIsGood(stockRatio, minRatio, maxRatio) {
+  return stockRatio >= minRatio && stockRatio <= maxRatio;
+}
+
+function StockRow(props) {
+  const { stock, portfolioValue, minRatio, maxRatio } = props;
+
+  const stockRatio = ((stock.amount * stock.lastPrice) / portfolioValue) * 100;
+  return (
+    <tr key={stock.id}>
+      <td>{stock.id}</td>
+      <td>{stock.name}</td>
+      <td
+        className={classNames({
+          good: stockRatioIsGood(stockRatio, minRatio, maxRatio),
+          bad: !stockRatioIsGood(stockRatio, minRatio, maxRatio)
+        })}
+      >
+        {stockRatio.toFixed(2)}%
+      </td>
+    </tr>
+  );
+}
+
+export default Portfolio;
