@@ -3,7 +3,8 @@ import { getPortfolios } from "./dataRetriever";
 import {
   getPortfolioValue,
   portfolioRatioIsGood,
-  numberOfStocksIsGood
+  numberOfStocksIsGood,
+  getStockValue
 } from "./portfolioUtils";
 
 var classNames = require("classnames");
@@ -141,7 +142,7 @@ function stockRatioIsGood(stockRatio, minRatio, maxRatio) {
 function StockRow(props) {
   const { stock, portfolioValue, minRatio, maxRatio } = props;
 
-  const stockRatio = ((stock.amount * stock.lastPrice) / portfolioValue) * 100;
+  const stockRatio = (getStockValue(stock) / portfolioValue) * 100;
   return (
     <tr key={stock.id}>
       <td>{stock.id}</td>

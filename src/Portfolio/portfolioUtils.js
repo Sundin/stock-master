@@ -1,6 +1,6 @@
 export function getPortfolioValue(portfolioData) {
   return portfolioData.stocks.reduce((sum, stock) => {
-    return sum + stock.amount * stock.lastPrice;
+    return sum + getStockValue(stock);
   }, 0);
 }
 
@@ -18,4 +18,8 @@ export function numberOfStocksIsGood(portfolioData) {
     portfolioData.stocks.length >= portfolioData.strategy.minNumberOfStocks &&
     portfolioData.stocks.length <= portfolioData.strategy.maxNumberOfStocks
   );
+}
+
+export function getStockValue(stock) {
+  return stock.amount * stock.lastPrice;
 }

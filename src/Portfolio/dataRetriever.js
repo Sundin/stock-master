@@ -1,5 +1,6 @@
 import { getStockWithAmount } from "../avanza";
 import portfolios from "../data/portfolioData";
+import { getStockValue } from "./portfolioUtils";
 
 export function getPortfolios() {
   return new Promise((resolve, reject) => {
@@ -21,7 +22,9 @@ function getStocksInPortfolio(portfolio) {
       promises.push(getStockWithAmount(stock.id, stock.amount));
     });
     Promise.all(promises).then(stocks => {
-      returnData.stocks = stocks;
+      returnData.stocks = stocks.sort((a, b) => {
+        return getStockValue(b) - getStockValue(a);
+      });
       resolve(returnData);
     });
   });
