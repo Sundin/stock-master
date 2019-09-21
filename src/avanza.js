@@ -62,6 +62,15 @@ function getStockWithAmount(id, amount) {
   });
 }
 
+const basePortfolioStrategy = {
+  minShare: 25,
+  maxShare: 50,
+  minNumberOfStocks: 8,
+  maxNumberOfStocks: 12,
+  minShareOfEachShareInPortfolio: 5,
+  maxShareOfEachShareInPortfolio: 20
+};
+
 const portfolios = [
   {
     id: "1",
@@ -75,7 +84,8 @@ const portfolios = [
         id: "5332",
         amount: 1
       }
-    ]
+    ],
+    strategy: basePortfolioStrategy
   },
   {
     id: "2",
@@ -89,7 +99,8 @@ const portfolios = [
         id: "5332",
         amount: 1
       }
-    ]
+    ],
+    strategy: basePortfolioStrategy
   }
 ];
 
@@ -114,7 +125,6 @@ function getStocksInPortfolio(portfolio) {
     });
     Promise.all(promises).then(stocks => {
       returnData.stocks = stocks;
-      console.log("resolving");
       resolve(returnData);
     });
   });

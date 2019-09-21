@@ -1,6 +1,10 @@
 import React from "react";
 import { getPortfolios } from "../avanza";
-import { getPortfolioValue } from "./portfolioUtils";
+import {
+  getPortfolioValue,
+  portfolioRatioIsGood,
+  numberOfStocksIsGood
+} from "./portfolioUtils";
 
 var classNames = require("classnames");
 
@@ -69,8 +73,22 @@ function Portfolio(props) {
   return (
     <tr key={portfolioData.id}>
       <td>{portfolioData.name}</td>
-      <td>{portfolioRatio.toFixed(2)}%</td>
-      <td>{portfolioData.stocks.length}</td>
+      <td
+        className={classNames({
+          good: portfolioRatioIsGood(portfolioData, totalPortfolioValue),
+          bad: !portfolioRatioIsGood(portfolioData, totalPortfolioValue)
+        })}
+      >
+        {portfolioRatio.toFixed(2)}%
+      </td>
+      <td
+        className={classNames({
+          good: numberOfStocksIsGood(portfolioData),
+          bad: !numberOfStocksIsGood(portfolioData)
+        })}
+      >
+        {portfolioData.stocks.length}
+      </td>
     </tr>
   );
 }
