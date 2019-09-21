@@ -49,8 +49,15 @@ function getStock(id) {
     rp("https://avanza.se/_mobile/market/stock/" + id).then(stockData => {
       const parsedData = JSON.parse(stockData);
       cachedStocks[parsedData.id] = parsedData;
-      console.log("got data", parsedData);
       resolve(parsedData);
+    });
+  });
+}
+
+function getStockWithAmount(id, amount) {
+  return new Promise((resolve, reject) => {
+    getStock(id).then(stockData => {
+      resolve({ ...stockData, amount: amount });
     });
   });
 }
@@ -69,29 +76,46 @@ const portfolios = [
         amount: 1
       }
     ]
+  },
+  {
+    id: "2",
+    name: "Portfolio 2",
+    stocks: [
+      {
+        id: "5261",
+        amount: 1
+      },
+      {
+        id: "5332",
+        amount: 1
+      }
+    ]
   }
 ];
 
 export function getPortfolios() {
-  let returnData = portfolios;
-
   return new Promise((resolve, reject) => {
+    let promises = [];
     portfolios.forEach((portfolio, portfolioIndex) => {
-      let promises = [];
-      portfolio.stocks.forEach((stock, stockIndex) => {
-        promises.push(getStock(stock.id));
+      promises.push(getStocksInPortfolio(portfolio));
+    });
+    Promise.all(promises).then(returnData => {
+      resolve(returnData);
+    });
+  });
+}
 
-        Promise.all(promises).then(stocks => {
-          stocks.forEach(stockData => {
-            returnData[portfolioIndex].stocks[stockIndex] = {
-              ...stockData,
-              amount: portfolios[portfolioIndex].stocks[stockIndex].amount
-            };
-          });
-          console.log("resolving");
-          resolve(returnData);
-        });
-      });
+function getStocksInPortfolio(portfolio) {
+  let returnData = portfolio;
+  return new Promise((resolve, reject) => {
+    let promises = [];
+    portfolio.stocks.forEach(stock => {
+      promises.push(getStockWithAmount(stock.id, stock.amount));
+    });
+    Promise.all(promises).then(stocks => {
+      returnData.stocks = stocks;
+      console.log("resolving");
+      resolve(returnData);
     });
   });
 }

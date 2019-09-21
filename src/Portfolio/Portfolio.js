@@ -25,6 +25,12 @@ class BestYield extends React.Component {
       });
   }
 
+  getTotalPortfolioValue() {
+    return this.state.portfolios.reduce((sum, portfolio) => {
+      return sum + getPortfolioValue(portfolio);
+    }, 0);
+  }
+
   render() {
     if (this.state.error != null) {
       return <p>{this.state.error}</p>;
@@ -37,13 +43,17 @@ class BestYield extends React.Component {
           <thead>
             <tr>
               <th>Portfolio</th>
-              <th>Värde</th>
+              <th>Andel</th>
               <th>Antal innehav</th>
             </tr>
           </thead>
           <tbody>
             {this.state.portfolios.map(portfolioData => (
-              <Portfolio portfolioData={portfolioData} key={portfolioData.id} />
+              <Portfolio
+                portfolioData={portfolioData}
+                totalPortfolioValue={this.getTotalPortfolioValue()}
+                key={portfolioData.id}
+              />
             ))}
           </tbody>
         </table>
@@ -53,12 +63,13 @@ class BestYield extends React.Component {
 }
 
 function Portfolio(props) {
-  const { portfolioData } = props;
-  const portfolioValue = getPortfolioValue(portfolioData);
+  const { portfolioData, totalPortfolioValue } = props;
+  const portfolioRatio =
+    (getPortfolioValue(portfolioData) / totalPortfolioValue) * 100;
   return (
     <tr key={portfolioData.id}>
       <td>{portfolioData.name}</td>
-      <td>{portfolioValue}</td>
+      <td>{portfolioRatio.toFixed(2)}%</td>
       <td>{portfolioData.stocks.length}</td>
     </tr>
   );
