@@ -103,9 +103,9 @@ function PortfolioRow(props) {
 function PortfolioDetails(props) {
   const { portfolioData } = props;
   const {
-    minShareOfEachShareInPortfolio,
-    maxShareOfEachShareInPortfolio
-  } = portfolioData;
+    minRatioOfEachShareInPortfolio,
+    maxRatioOfEachShareInPortfolio
+  } = portfolioData.strategy;
 
   return (
     <div>
@@ -123,8 +123,8 @@ function PortfolioDetails(props) {
             <StockRow
               stock={stock}
               portfolioValue={getPortfolioValue(portfolioData)}
-              minRatio={minShareOfEachShareInPortfolio}
-              maxRatio={maxShareOfEachShareInPortfolio}
+              minRatio={minRatioOfEachShareInPortfolio}
+              maxRatio={maxRatioOfEachShareInPortfolio}
               key={stock.id}
             />
           ))}

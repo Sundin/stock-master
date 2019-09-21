@@ -3,8 +3,8 @@ const basePortfolioStrategy = {
   maxShare: 50,
   minNumberOfStocks: 8,
   maxNumberOfStocks: 12,
-  minShareOfEachShareInPortfolio: 5,
-  maxShareOfEachShareInPortfolio: 20
+  minRatioOfEachShareInPortfolio: 5,
+  maxRatioOfEachShareInPortfolio: 20
 };
 
 const examplePortfolios = [
