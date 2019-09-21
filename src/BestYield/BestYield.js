@@ -1,5 +1,5 @@
 import React from "react";
-import { getInterestingYieldStocks } from "../avanza";
+import { getInterestingYieldStocks } from "./dataRetriever";
 import {
   yieldIsGood,
   yieldIsVeryGood,

@@ -1,5 +1,5 @@
 import React from "react";
-import { getPortfolios } from "../avanza";
+import { getPortfolios } from "./dataRetriever";
 import {
   getPortfolioValue,
   portfolioRatioIsGood,
