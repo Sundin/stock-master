@@ -37,7 +37,7 @@ class BestYield extends React.Component {
 
     return (
       <div>
-        <h1>Hello!</h1>
+        <h1>Intressanta utdelningsaktier</h1>
         <table>
           <thead>
             <tr>
