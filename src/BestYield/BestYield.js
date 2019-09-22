@@ -43,18 +43,13 @@ class BestYield extends React.Component {
       <div>
         <h1>Intressanta utdelningsaktier</h1>
         <table>
-          <col width="15%" />
-          <col width="40%" />
-          <col width="15%" />
-          <col width="15%" />
-          <col width="15%" />
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Aktie</th>
-              <th>P/E</th>
-              <th>Direktavkastning</th>
-              <th>Volatilitet</th>
+              <th width="15%">ID</th>
+              <th width="40%">Aktie</th>
+              <th width="15%">P/E</th>
+              <th width="15%">Direktavkastning</th>
+              <th width="15%">Volatilitet</th>
             </tr>
           </thead>
           <tbody>

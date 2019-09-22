@@ -45,14 +45,11 @@ class Portfolio extends React.Component {
       <div>
         <h1>Portfolio</h1>
         <table>
-          <col width="40%" />
-          <col width="30%" />
-          <col width="30%" />
           <thead>
             <tr>
-              <th>Portfolio</th>
-              <th>Andel</th>
-              <th>Antal innehav</th>
+              <th width="40%">Portfolio</th>
+              <th width="30%">Andel</th>
+              <th width="30%">Antal innehav</th>
             </tr>
           </thead>
           <tbody>
@@ -115,14 +112,11 @@ function PortfolioDetails(props) {
     <div>
       <h2>{portfolioData.name}</h2>
       <table>
-        <col width="20%" />
-        <col width="50%" />
-        <col width="30%" />
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Aktie</th>
-            <th>Andel av portfolio</th>
+            <th width="20%">Id</th>
+            <th width="50%">Aktie</th>
+            <th width="30%">Andel av portfolio</th>
           </tr>
         </thead>
         <tbody>
