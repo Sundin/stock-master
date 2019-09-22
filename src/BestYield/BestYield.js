@@ -12,7 +12,7 @@ import {
   peIsVeryBad
 } from "./stockIndicators";
 
-var classNames = require("classnames");
+const classNames = require("classnames");
 
 class BestYield extends React.Component {
   state = {

@@ -43,3 +43,22 @@ td {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+button {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  font-size: 16px;
+  padding: 16px 32px;
+  border-radius: 4px;
+  outline: none;
+}
+
+button:hover {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+button.active {
+  background-color: #4caf50;
+  color: white;
+}

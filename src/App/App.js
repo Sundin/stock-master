@@ -6,6 +6,8 @@ import Portfolio from "../Portfolio/Portfolio";
 const portfolioPage = "PORTFOLIO_PAGE";
 const bestYieldPage = "BEST_YIELD_PAGE";
 
+const classNames = require("classnames");
+
 class App extends React.Component {
   state = {
     activePage: portfolioPage
@@ -30,6 +32,9 @@ class App extends React.Component {
           onClick={() => {
             this.setState({ activePage: portfolioPage });
           }}
+          className={classNames({
+            active: this.state.activePage === portfolioPage
+          })}
         >
           Portfolio
         </button>
@@ -37,6 +42,9 @@ class App extends React.Component {
           onClick={() => {
             this.setState({ activePage: bestYieldPage });
           }}
+          className={classNames({
+            active: this.state.activePage === bestYieldPage
+          })}
         >
           Utdelningsaktier
         </button>
