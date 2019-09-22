@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #ebebeb;
 }
 
 code {
@@ -51,14 +52,15 @@ button {
   padding: 16px 32px;
   border-radius: 4px;
   outline: none;
+  background-color: #ebebeb;
 }
 
 button:hover {
   background-color: #4caf50; /* Green */
-  color: white;
+  color: #ebebeb;
 }
 
 button.active {
   background-color: #4caf50;
-  color: white;
+  color: #ebebeb;
 }
