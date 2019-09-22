@@ -45,6 +45,9 @@ class Portfolio extends React.Component {
       <div>
         <h1>Portfolio</h1>
         <table>
+          <col width="40%" />
+          <col width="30%" />
+          <col width="30%" />
           <thead>
             <tr>
               <th>Portfolio</th>
@@ -112,6 +115,9 @@ function PortfolioDetails(props) {
     <div>
       <h2>{portfolioData.name}</h2>
       <table>
+        <col width="20%" />
+        <col width="50%" />
+        <col width="30%" />
         <thead>
           <tr>
             <th>Id</th>
