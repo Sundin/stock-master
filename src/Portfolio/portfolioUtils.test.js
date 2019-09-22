@@ -47,6 +47,7 @@ it("portfolioRatioIsGood", () => {
   };
   expect(portfolioRatioIsGood(portfolio, 700)).toEqual(true);
   expect(portfolioRatioIsGood(portfolio, 500)).toEqual(false);
+  expect(portfolioRatioIsGood(portfolio, 500000)).toEqual(false);
 });
 
 it("numberOfStocksIsGood", () => {

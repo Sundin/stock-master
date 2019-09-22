@@ -8,7 +8,8 @@ import {
   volatilityIsGood,
   volatilityIsBad,
   volatilityIsVeryGood,
-  volatilityIsVeryBad
+  volatilityIsVeryBad,
+  peIsVeryBad
 } from "./stockIndicators";
 
 var classNames = require("classnames");
@@ -74,7 +75,8 @@ function Stock(props) {
       <td
         className={classNames({
           good: peIsGood(stockData),
-          veryGood: peIsVeryGood(stockData)
+          veryGood: peIsVeryGood(stockData),
+          veryBad: peIsVeryBad(stockData)
         })}
       >
         {priceEarningsRatio}

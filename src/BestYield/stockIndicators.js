@@ -26,9 +26,9 @@ export function peIsVeryGood(stockData) {
   );
 }
 
-export function peIsVeryBadGood(stockData) {
+export function peIsVeryBad(stockData) {
   const { priceEarningsRatio } = stockData;
-  return priceEarningsRatio < 0;
+  return priceEarningsRatio <= 0;
 }
 
 function getYieldTarget() {
