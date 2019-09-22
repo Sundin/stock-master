@@ -26,6 +26,11 @@ export function peIsVeryGood(stockData) {
   );
 }
 
+export function peIsVeryBadGood(stockData) {
+  const { priceEarningsRatio } = stockData;
+  return priceEarningsRatio < 0;
+}
+
 function getYieldTarget() {
   // TODO: get tenYearsBondInterest from some API?
   const tenYearsBondInterest = -0.2;
@@ -40,7 +45,17 @@ export function volatilityIsGood(stockData) {
   return volatility <= averageOMXS30volatility * 0.75;
 }
 
+export function volatilityIsVeryGood(stockData) {
+  const { volatility } = stockData;
+  return volatility <= averageOMXS30volatility * 0.5;
+}
+
 export function volatilityIsBad(stockData) {
   const { volatility } = stockData;
   return volatility > averageOMXS30volatility * 1.25;
+}
+
+export function volatilityIsVeryBad(stockData) {
+  const { volatility } = stockData;
+  return volatility > averageOMXS30volatility * 1.9;
 }

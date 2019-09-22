@@ -36,6 +36,10 @@ td {
   background-color: #bd5050;
 }
 
+.veryBad {
+  background-color: #c52e2e;
+}
+
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
