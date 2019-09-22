@@ -32,3 +32,15 @@ function getYieldTarget() {
   const riskPremium = 5;
   return tenYearsBondInterest + riskPremium;
 }
+
+const averageOMXS30volatility = 21.6;
+
+export function volatilityIsGood(stockData) {
+  const { volatility } = stockData;
+  return volatility <= averageOMXS30volatility * 0.75;
+}
+
+export function volatilityIsBad(stockData) {
+  const { volatility } = stockData;
+  return volatility > averageOMXS30volatility * 1.25;
+}

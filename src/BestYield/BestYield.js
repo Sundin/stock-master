@@ -4,7 +4,9 @@ import {
   yieldIsGood,
   yieldIsVeryGood,
   peIsGood,
-  peIsVeryGood
+  peIsVeryGood,
+  volatilityIsGood,
+  volatilityIsBad
 } from "./stockIndicators";
 
 var classNames = require("classnames");
@@ -45,6 +47,7 @@ class BestYield extends React.Component {
               <th>Aktie</th>
               <th>P/E</th>
               <th>Direktavkastning</th>
+              <th>Volatilitet</th>
             </tr>
           </thead>
           <tbody>
@@ -61,7 +64,7 @@ class BestYield extends React.Component {
 function Stock(props) {
   const { stockData } = props;
 
-  const { priceEarningsRatio, directYield } = stockData;
+  const { priceEarningsRatio, directYield, volatility } = stockData;
   return (
     <tr key={stockData.id}>
       <td>{stockData.id}</td>
@@ -81,6 +84,14 @@ function Stock(props) {
         })}
       >
         {directYield}
+      </td>
+      <td
+        className={classNames({
+          good: volatilityIsGood(stockData),
+          bad: volatilityIsBad(stockData)
+        })}
+      >
+        {volatility}
       </td>
     </tr>
   );
