@@ -1,12 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Stock Master
+
+This web app is intended to make keeping a stock portfolio that follows a pre-decided investment strategy easier and more fun. It is NOT intended to be used for algorithmic trading.
 
 ## Requirements
 
-* npm
-* In order to access the Avanza API locally, you need to add a plugin to your browser that allows CORS requests.
-    * For Chrome: [moseif-origin-cors-changer](https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc)
+- npm
+- In order to access the Avanza API locally, you need to add a plugin to your browser that allows CORS requests.
+  - For Chrome: [moseif-origin-cors-changer](https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc)
+
+## Configuration
+
+The file `src/data/portfolioData.js` needs to be created, which should contain details about your current portfolio. You can use [examplePortfolioData.js](examplePortfolioData.js) as a starting point.
+
+The following variables need to be manually kept up to date:
+
+- The currency exchange rates in [src/avanza.js](src/avanza.js).
+- `tenYearsBondInterest` and `averageOMXS30volatility` in [src/BestYield/stockIndicators.js](src/BestYield/stockIndicators.js).
 
 ## Available Scripts
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 In the project directory, you can run:
 
