@@ -11,6 +11,7 @@ export function getStock(id) {
     rp("https://avanza.se/_mobile/market/stock/" + id).then(stockData => {
       let parsedData = JSON.parse(stockData);
 
+      parsedData = transformJson(parsedData);
       parsedData = convertToSEK(parsedData);
 
       cachedStocks[parsedData.id] = parsedData;
@@ -27,6 +28,21 @@ export function getStockWithAmount(id, amount) {
   });
 }
 
+// Convert stock data json into a format that's easier to use
+function transformJson(stockData) {
+  // Add more fields from stockData here if necessary
+  return {
+    name: stockData.name,
+    id: stockData.id,
+    directYield: stockData.keyRatios.directYield,
+    priceEarningsRatio: stockData.keyRatios.priceEarningsRatio,
+    volatility: stockData.keyRatios.volatility,
+    currency: stockData.currency,
+    lastPrice: stockData.lastPrice
+  };
+}
+
+// TODO: Get currency exchange rates from some API
 function convertToSEK(stockData) {
   switch (stockData.currency) {
     case "SEK":

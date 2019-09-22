@@ -30,7 +30,7 @@ export function getInterestingYieldStocks() {
       });
 
       returnData.sort((a, b) => {
-        return b.keyRatios.directYield - a.keyRatios.directYield;
+        return b.directYield - a.directYield;
       });
       resolve(returnData);
     });
