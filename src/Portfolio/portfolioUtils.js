@@ -1,3 +1,5 @@
+import { getPortfolios } from "./dataRetriever";
+
 export function getPortfolioValue(portfolioData) {
   return portfolioData.stocks.reduce((sum, stock) => {
     return sum + getStockValue(stock);
@@ -22,4 +24,16 @@ export function numberOfStocksIsGood(portfolioData) {
 
 export function getStockValue(stock) {
   return stock.amount * stock.lastPrice;
+}
+
+export function getAllOwnedStocks() {
+  return new Promise((resolve, reject) => {
+    let stocks = [];
+    getPortfolios().then(portfolios => {
+      portfolios.forEach(portfolio => {
+        stocks = stocks.concat(portfolio.stocks);
+      });
+      resolve(stocks);
+    });
+  });
 }

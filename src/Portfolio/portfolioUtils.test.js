@@ -2,7 +2,8 @@ import {
   getPortfolioValue,
   getStockValue,
   numberOfStocksIsGood,
-  portfolioRatioIsGood
+  portfolioRatioIsGood,
+  stockIsOwned
 } from "./portfolioUtils";
 
 it("getPortfolioValue for empty portfolio should be 0", () => {

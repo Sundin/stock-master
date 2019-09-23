@@ -64,3 +64,8 @@ button.active {
   background-color: #4caf50;
   color: #ebebeb;
 }
+
+/* For stock row in stock table */
+.owned {
+  font-weight: bold;
+}

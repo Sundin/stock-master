@@ -11,12 +11,15 @@ import {
   volatilityIsVeryBad,
   peIsVeryBad
 } from "./stockIndicators";
+import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
+import { stockIsOwned } from "../stockUtils";
 
 const classNames = require("classnames");
 
 class BestYield extends React.Component {
   state = {
     stocks: [],
+    ownedStocks: [],
     error: null
   };
 
@@ -33,6 +36,12 @@ class BestYield extends React.Component {
           error: err.message
         });
       });
+
+    getAllOwnedStocks().then(ownedStocks => {
+      this.setState({
+        ownedStocks: ownedStocks
+      });
+    });
   }
 
   render() {
@@ -54,9 +63,12 @@ class BestYield extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.stocks.map(stockData => (
-              <Stock stockData={stockData} key={stockData.id} />
-            ))}
+            {this.state.stocks.map(stockData => {
+              const owned = stockIsOwned(stockData.id, this.state.ownedStocks);
+              return (
+                <Stock stockData={stockData} key={stockData.id} owned={owned} />
+              );
+            })}
           </tbody>
         </table>
       </div>
@@ -65,18 +77,31 @@ class BestYield extends React.Component {
 }
 
 function Stock(props) {
-  const { stockData } = props;
-
+  const { stockData, owned } = props;
   const { priceEarningsRatio, directYield, volatility } = stockData;
+
   return (
     <tr key={stockData.id}>
-      <td>{stockData.id}</td>
-      <td>{stockData.name}</td>
+      <td
+        className={classNames({
+          owned: owned
+        })}
+      >
+        {stockData.id}
+      </td>
+      <td
+        className={classNames({
+          owned: owned
+        })}
+      >
+        {stockData.name}
+      </td>
       <td
         className={classNames({
           good: peIsGood(stockData),
           veryGood: peIsVeryGood(stockData),
-          veryBad: peIsVeryBad(stockData)
+          veryBad: peIsVeryBad(stockData),
+          owned: owned
         })}
       >
         {priceEarningsRatio}
@@ -84,7 +109,8 @@ function Stock(props) {
       <td
         className={classNames({
           good: yieldIsGood(stockData),
-          veryGood: yieldIsVeryGood(stockData)
+          veryGood: yieldIsVeryGood(stockData),
+          owned: owned
         })}
       >
         {directYield}
@@ -94,7 +120,8 @@ function Stock(props) {
           good: volatilityIsGood(stockData),
           veryGood: volatilityIsVeryGood(stockData),
           bad: volatilityIsBad(stockData),
-          veryBad: volatilityIsVeryBad(stockData)
+          veryBad: volatilityIsVeryBad(stockData),
+          owned: owned
         })}
       >
         {volatility}
