@@ -4,11 +4,16 @@ This web app is intended to make keeping a stock portfolio that follows a pre-de
 
 ## Requirements
 
+- Node
 - npm
 - In order to access the Avanza API locally, you need to add a plugin to your browser that allows CORS requests.
   - For Chrome: [moseif-origin-cors-changer](https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc)
 
-## Configuration
+## Setup
+
+    npm install
+
+### Configuration
 
 The file `src/data/portfolioData.js` needs to be created, which should contain details about your current portfolio. You can use [examplePortfolioData.js](examplePortfolioData.js) as a starting point.
 

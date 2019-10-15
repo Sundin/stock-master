@@ -13,7 +13,8 @@ const interestingYieldStocks = [
   "96767",
   "5455",
   "5422",
-  "703653"
+  "703653",
+  "572897"
 ];
 
 export function getInterestingYieldStocks() {

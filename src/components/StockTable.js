@@ -46,11 +46,7 @@ function Stock(props) {
 
   return (
     <tr key={stockData.id}>
-      <td
-        className={classNames({
-          owned: owned
-        })}
-      >
+      <td>
         {stockData.id}
       </td>
       <td
@@ -65,7 +61,6 @@ function Stock(props) {
           good: peIsGood(stockData),
           veryGood: peIsVeryGood(stockData),
           veryBad: peIsVeryBad(stockData),
-          owned: owned
         })}
       >
         {priceEarningsRatio}
@@ -74,7 +69,6 @@ function Stock(props) {
         className={classNames({
           good: yieldIsGood(stockData),
           veryGood: yieldIsVeryGood(stockData),
-          owned: owned
         })}
       >
         {directYield}
@@ -85,7 +79,6 @@ function Stock(props) {
           veryGood: volatilityIsVeryGood(stockData),
           bad: volatilityIsBad(stockData),
           veryBad: volatilityIsVeryBad(stockData),
-          owned: owned
         })}
       >
         {volatility}
