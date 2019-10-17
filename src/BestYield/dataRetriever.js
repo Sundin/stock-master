@@ -31,9 +31,6 @@ export function getInterestingYieldStocks() {
         returnData.push(stockData);
       });
 
-      returnData.sort((a, b) => {
-        return b.directYield - a.directYield;
-      });
       resolve(returnData);
     });
   });

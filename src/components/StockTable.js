@@ -15,7 +15,13 @@ import { stockIsOwned } from "../stockUtils";
 const classNames = require("classnames");
 
 function StockTable(props) {
-  const { stocks, ownedStocks } = props;
+  const { stocks, ownedStocks, sortKey } = props;
+
+  if (sortKey) {
+    stocks.sort((a, b) => {
+      return b[sortKey] - a[sortKey];
+    });
+  }
 
   return (
     <table>

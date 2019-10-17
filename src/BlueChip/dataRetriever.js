@@ -30,17 +30,30 @@ const omsx30stocks = [
   "5266",
   "5386",
   "5479",
-  "5269",
+  "5269"
+];
+
+const omsx30otherVersions = [
   "5261",
   "5265",
   "5256"
+];
+
+const interestingStocks = [
+  "5465",
+  "5245",
+  "31607",
+  "5287",
 ];
 
 export function getBlueChipStocks() {
   return new Promise((resolve, reject) => {
     let promises = [];
 
-    omsx30stocks.forEach(id => {
+    let stocksToShow = omsx30stocks.concat(omsx30otherVersions);
+    stocksToShow = stocksToShow.concat(interestingStocks);
+
+    stocksToShow.forEach(id => {
       promises.push(getStock(id));
     });
 
@@ -50,9 +63,6 @@ export function getBlueChipStocks() {
         returnData.push(stockData);
       });
 
-      returnData.sort((a, b) => {
-        return b.directYield - a.directYield;
-      });
       resolve(returnData);
     });
   });

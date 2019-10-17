@@ -8,7 +8,8 @@ class BlueChip extends React.Component {
   state = {
     stocks: [],
     ownedStocks: [],
-    error: null
+    error: null,
+    sortKey: 'priceEarningsRatio'
   };
 
   componentDidMount() {
@@ -43,6 +44,8 @@ class BlueChip extends React.Component {
         <StockTable
           stocks={this.state.stocks}
           ownedStocks={this.state.ownedStocks}
+          sortKey={this.state.sortKey}
+          onSort={(sortKey)=>{this.setState({sortKey: sortKey})}}
         />
       </div>
     );
