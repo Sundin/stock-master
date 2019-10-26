@@ -26,6 +26,8 @@ function translate(key) {
       return "Anställda";
     case "revenue":
       return "Omsättning";
+    case "revenuePerEmployee":
+      return "Omsättning/anställd";
     default:
       return "";
   }

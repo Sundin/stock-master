@@ -10,7 +10,13 @@ class Weapons extends React.Component {
     ownedStocks: [],
     error: null,
     sortKey: "priceEarningsRatio",
-    columnsToShow: ["numberOfEmployees", "revenue"]
+    columnsToShow: [
+      "priceEarningsRatio",
+      "directYield",
+      "numberOfEmployees",
+      "revenue",
+      "revenuePerEmployee"
+    ]
   };
 
   componentDidMount() {
