@@ -15,7 +15,7 @@ import { stockIsOwned } from "../stockUtils";
 const classNames = require("classnames");
 
 function StockTable(props) {
-  const { stocks, ownedStocks, sortKey } = props;
+  const { stocks, ownedStocks, sortKey, extraColumns } = props;
 
   if (sortKey) {
     stocks.sort((a, b) => {
@@ -32,13 +32,25 @@ function StockTable(props) {
           <th width="15%">P/E</th>
           <th width="15%">Direktavkastning</th>
           <th width="15%">Volatilitet</th>
+          {extraColumns.map(column => {
+            return (
+              <th width="15%" key={column}>
+                {column}
+              </th>
+            );
+          })}
         </tr>
       </thead>
       <tbody>
         {stocks.map(stockData => {
           const owned = stockIsOwned(stockData.id, ownedStocks);
           return (
-            <Stock stockData={stockData} key={stockData.id} owned={owned} />
+            <Stock
+              stockData={stockData}
+              key={stockData.id}
+              owned={owned}
+              extraColumns={extraColumns}
+            />
           );
         })}
       </tbody>
@@ -47,14 +59,12 @@ function StockTable(props) {
 }
 
 function Stock(props) {
-  const { stockData, owned } = props;
+  const { stockData, owned, extraColumns } = props;
   const { priceEarningsRatio, directYield, volatility } = stockData;
 
   return (
     <tr key={stockData.id}>
-      <td>
-        {stockData.id}
-      </td>
+      <td>{stockData.id}</td>
       <td
         className={classNames({
           owned: owned
@@ -66,7 +76,7 @@ function Stock(props) {
         className={classNames({
           good: peIsGood(stockData),
           veryGood: peIsVeryGood(stockData),
-          veryBad: peIsVeryBad(stockData),
+          veryBad: peIsVeryBad(stockData)
         })}
       >
         {priceEarningsRatio}
@@ -74,7 +84,7 @@ function Stock(props) {
       <td
         className={classNames({
           good: yieldIsGood(stockData),
-          veryGood: yieldIsVeryGood(stockData),
+          veryGood: yieldIsVeryGood(stockData)
         })}
       >
         {directYield}
@@ -84,13 +94,24 @@ function Stock(props) {
           good: volatilityIsGood(stockData),
           veryGood: volatilityIsVeryGood(stockData),
           bad: volatilityIsBad(stockData),
-          veryBad: volatilityIsVeryBad(stockData),
+          veryBad: volatilityIsVeryBad(stockData)
         })}
       >
         {volatility}
       </td>
+      {extraColumns.map(column => {
+        return (
+          <td width="15%" key={column}>
+            {stockData[column]}
+          </td>
+        );
+      })}
     </tr>
   );
 }
+
+StockTable.defaultProps = {
+  extraColumns: []
+};
 
 export default StockTable;

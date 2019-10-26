@@ -33,18 +33,9 @@ const omsx30stocks = [
   "5269"
 ];
 
-const omsx30otherVersions = [
-  "5261",
-  "5265",
-  "5256"
-];
+const omsx30otherVersions = ["5261", "5265", "5256"];
 
-const interestingStocks = [
-  "5465",
-  "5245",
-  "31607",
-  "5287",
-];
+const interestingStocks = ["5465", "5245", "31607", "5287"];
 
 export function getBlueChipStocks() {
   return new Promise((resolve, reject) => {

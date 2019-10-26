@@ -1,19 +1,20 @@
 import React from "react";
 import StockTable from "../components/StockTable";
-import { getBlueChipStocks } from "./dataRetriever";
+import { getWeaponStocks } from "./dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
 
-class BlueChip extends React.Component {
+class Weapons extends React.Component {
   state = {
     stocks: [],
     ownedStocks: [],
     error: null,
-    sortKey: "priceEarningsRatio"
+    sortKey: "priceEarningsRatio",
+    extraColumns: ["numberOfEmployees", "revenue"]
   };
 
   componentDidMount() {
-    getBlueChipStocks()
+    getWeaponStocks()
       .then(stocks => {
         this.setState({
           stocks: stocks
@@ -40,7 +41,7 @@ class BlueChip extends React.Component {
 
     return (
       <div>
-        <h1>Intressanta basaktier</h1>
+        <h1>Vapen</h1>
         <StockTable
           stocks={this.state.stocks}
           ownedStocks={this.state.ownedStocks}
@@ -48,10 +49,11 @@ class BlueChip extends React.Component {
           onSort={sortKey => {
             this.setState({ sortKey: sortKey });
           }}
+          extraColumns={this.state.extraColumns}
         />
       </div>
     );
   }
 }
 
-export default BlueChip;
+export default Weapons;
