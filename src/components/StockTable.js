@@ -14,8 +14,25 @@ import { stockIsOwned } from "../stockUtils";
 
 const classNames = require("classnames");
 
+function translate(key) {
+  switch (key) {
+    case "priceEarningsRatio":
+      return "P/E";
+    case "directYield":
+      return "Direktavkastning";
+    case "volatility":
+      return "Volatilitet";
+    case "numberOfEmployees":
+      return "Anställda";
+    case "revenue":
+      return "Omsättning";
+    default:
+      return "";
+  }
+}
+
 function StockTable(props) {
-  const { stocks, ownedStocks, sortKey, extraColumns } = props;
+  const { stocks, ownedStocks, sortKey, columnsToShow } = props;
 
   if (sortKey) {
     stocks.sort((a, b) => {
@@ -29,13 +46,10 @@ function StockTable(props) {
         <tr>
           <th width="15%">ID</th>
           <th width="40%">Aktie</th>
-          <th width="15%">P/E</th>
-          <th width="15%">Direktavkastning</th>
-          <th width="15%">Volatilitet</th>
-          {extraColumns.map(column => {
+          {columnsToShow.map(column => {
             return (
               <th width="15%" key={column}>
-                {column}
+                {translate(column)}
               </th>
             );
           })}
@@ -49,7 +63,7 @@ function StockTable(props) {
               stockData={stockData}
               key={stockData.id}
               owned={owned}
-              extraColumns={extraColumns}
+              columnsToShow={columnsToShow}
             />
           );
         })}
@@ -59,8 +73,7 @@ function StockTable(props) {
 }
 
 function Stock(props) {
-  const { stockData, owned, extraColumns } = props;
-  const { priceEarningsRatio, directYield, volatility } = stockData;
+  const { stockData, owned, columnsToShow } = props;
 
   return (
     <tr key={stockData.id}>
@@ -72,36 +85,13 @@ function Stock(props) {
       >
         {stockData.name}
       </td>
-      <td
-        className={classNames({
-          good: peIsGood(stockData),
-          veryGood: peIsVeryGood(stockData),
-          veryBad: peIsVeryBad(stockData)
-        })}
-      >
-        {priceEarningsRatio}
-      </td>
-      <td
-        className={classNames({
-          good: yieldIsGood(stockData),
-          veryGood: yieldIsVeryGood(stockData)
-        })}
-      >
-        {directYield}
-      </td>
-      <td
-        className={classNames({
-          good: volatilityIsGood(stockData),
-          veryGood: volatilityIsVeryGood(stockData),
-          bad: volatilityIsBad(stockData),
-          veryBad: volatilityIsVeryBad(stockData)
-        })}
-      >
-        {volatility}
-      </td>
-      {extraColumns.map(column => {
+      {columnsToShow.map(column => {
         return (
-          <td width="15%" key={column}>
+          <td
+            width="15%"
+            key={column}
+            className={getClassNames(column, stockData)}
+          >
             {stockData[column]}
           </td>
         );
@@ -110,8 +100,33 @@ function Stock(props) {
   );
 }
 
+function getClassNames(key, stockData) {
+  switch (key) {
+    case "priceEarningsRatio":
+      return classNames({
+        good: peIsGood(stockData),
+        veryGood: peIsVeryGood(stockData),
+        veryBad: peIsVeryBad(stockData)
+      });
+    case "directYield":
+      return classNames({
+        good: yieldIsGood(stockData),
+        veryGood: yieldIsVeryGood(stockData)
+      });
+    case "volatility":
+      return classNames({
+        good: volatilityIsGood(stockData),
+        veryGood: volatilityIsVeryGood(stockData),
+        bad: volatilityIsBad(stockData),
+        veryBad: volatilityIsVeryBad(stockData)
+      });
+    default:
+      return classNames({});
+  }
+}
+
 StockTable.defaultProps = {
-  extraColumns: []
+  columnsToShow: ["priceEarningsRatio", "directYield", "volatility"]
 };
 
 export default StockTable;

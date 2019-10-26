@@ -10,7 +10,7 @@ class Weapons extends React.Component {
     ownedStocks: [],
     error: null,
     sortKey: "priceEarningsRatio",
-    extraColumns: ["numberOfEmployees", "revenue"]
+    columnsToShow: ["numberOfEmployees", "revenue"]
   };
 
   componentDidMount() {
@@ -49,7 +49,7 @@ class Weapons extends React.Component {
           onSort={sortKey => {
             this.setState({ sortKey: sortKey });
           }}
-          extraColumns={this.state.extraColumns}
+          columnsToShow={this.state.columnsToShow}
         />
       </div>
     );
