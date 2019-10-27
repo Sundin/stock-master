@@ -59,9 +59,11 @@ export function getStockDetails(id, basicStockData) {
     );
   }
 
-  stockDetails[TOTAL_DEBT] = formatNumber(
-    stockDetails[TOTAL_ASSETS] - stockDetails[TOTAL_EQUITY]
-  );
+  if (!stockDetails[TOTAL_DEBT]) {
+    stockDetails[TOTAL_DEBT] = formatNumber(
+      stockDetails[TOTAL_ASSETS] - stockDetails[TOTAL_EQUITY]
+    );
+  }
 
   stockDetails[SOLIDITY] = formatNumber(
     (stockDetails[TOTAL_EQUITY] / stockDetails[TOTAL_ASSETS]) * 100
