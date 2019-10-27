@@ -24,7 +24,8 @@ import {
   TOTAL_ASSETS,
   EARNINGS_PER_SHARE,
   PRICE_BOOK_VALUE,
-  SOLIDITY
+  SOLIDITY,
+  MARKET_CAP
 } from "../constants";
 
 const classNames = require("classnames");
@@ -57,6 +58,8 @@ function translate(key) {
       return "P/B";
     case SOLIDITY:
       return "Soliditet (%)";
+    case MARKET_CAP:
+      return "Börsvärde";
     default:
       return "";
   }

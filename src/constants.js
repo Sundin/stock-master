@@ -24,3 +24,4 @@ export const NUMBER_OF_SHARES = "numberOfShares";
 export const TOTAL_EQUITY = "totalEquity"; // = eget kapital
 export const TOTAL_DEBT = "totalDebt";
 export const SOLIDITY = "soldity";
+export const MARKET_CAP = "marketCap";

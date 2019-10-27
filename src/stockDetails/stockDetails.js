@@ -14,7 +14,8 @@ import {
   TOTAL_EQUITY,
   TOTAL_DEBT,
   TOTAL_ASSETS,
-  SOLIDITY
+  SOLIDITY,
+  MARKET_CAP
 } from "../constants";
 
 function getAllStocks() {
@@ -66,6 +67,10 @@ export function getStockDetails(id, basicStockData) {
     stockDetails[PRICE_BOOK_VALUE] = formatNumber(
       basicData.lastPrice /
         (stockDetails[TOTAL_EQUITY] / stockDetails[NUMBER_OF_SHARES])
+    );
+
+    stockDetails[MARKET_CAP] = formatNumber(
+      stockDetails[NUMBER_OF_SHARES] * basicData.lastPrice
     );
   }
 

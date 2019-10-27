@@ -14,7 +14,8 @@ import {
   TOTAL_ASSETS,
   EARNINGS_PER_SHARE,
   PRICE_BOOK_VALUE,
-  SOLIDITY
+  SOLIDITY,
+  MARKET_CAP
 } from "../constants";
 
 class Weapons extends React.Component {
@@ -34,7 +35,8 @@ class Weapons extends React.Component {
       TOTAL_ASSETS,
       EARNINGS_PER_SHARE,
       PRICE_BOOK_VALUE,
-      SOLIDITY
+      SOLIDITY,
+      MARKET_CAP
     ]
   };
 
