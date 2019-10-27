@@ -21,7 +21,10 @@ import {
   DIRECT_YIELD,
   PRICE_SALES_RATIO,
   PRICE_EARNINGS_RATIO,
-  TOTAL_ASSETS
+  TOTAL_ASSETS,
+  EARNINGS_PER_SHARE,
+  PRICE_BOOK_VALUE,
+  SOLIDITY
 } from "../constants";
 
 const classNames = require("classnames");
@@ -48,6 +51,12 @@ function translate(key) {
       return "Rörelsemarginal (%)";
     case TOTAL_ASSETS:
       return "Tillgångar";
+    case EARNINGS_PER_SHARE:
+      return "EPS";
+    case PRICE_BOOK_VALUE:
+      return "P/B";
+    case SOLIDITY:
+      return "Soliditet (%)";
     default:
       return "";
   }

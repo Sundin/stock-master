@@ -11,7 +11,10 @@ import {
   NUMBER_OF_EMPLOYEES,
   REVENUE,
   REVENUE_PER_EMPLOYEE,
-  TOTAL_ASSETS
+  TOTAL_ASSETS,
+  EARNINGS_PER_SHARE,
+  PRICE_BOOK_VALUE,
+  SOLIDITY
 } from "../constants";
 
 class Weapons extends React.Component {
@@ -28,7 +31,10 @@ class Weapons extends React.Component {
       REVENUE,
       REVENUE_PER_EMPLOYEE,
       OPERATING_MARGIN,
-      TOTAL_ASSETS
+      TOTAL_ASSETS,
+      EARNINGS_PER_SHARE,
+      PRICE_BOOK_VALUE,
+      SOLIDITY
     ]
   };
 

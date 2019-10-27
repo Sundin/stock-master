@@ -1,7 +1,20 @@
 import raytheon from "./stocks/raytheon";
 import northrupGrumman from "./stocks/northrupGrumman";
 import generalDynamics from "./stocks/generalDynamics";
-import { exchangeRates, THOUSAND, MILLION, BILLION } from "../constants";
+import {
+  exchangeRates,
+  THOUSAND,
+  MILLION,
+  BILLION,
+  EARNINGS_PER_SHARE,
+  NET_EARNINGS,
+  NUMBER_OF_SHARES,
+  PRICE_BOOK_VALUE,
+  TOTAL_EQUITY,
+  TOTAL_DEBT,
+  TOTAL_ASSETS,
+  SOLIDITY
+} from "../constants";
 
 function getAllStocks() {
   let stocks = {};
@@ -35,10 +48,28 @@ export function getStockDetails(id, basicStockData) {
       basicData.lastPrice,
       stockDetails.currency
     );
+
     stockDetails.priceSalesRatio = formatNumber(
       basicData.lastPrice / (stockDetails.revenue / stockDetails.numberOfShares)
     );
+
+    stockDetails[PRICE_BOOK_VALUE] = formatNumber(
+      basicData.lastPrice /
+        (stockDetails[TOTAL_EQUITY] / stockDetails[NUMBER_OF_SHARES])
+    );
   }
+
+  stockDetails[TOTAL_DEBT] = formatNumber(
+    stockDetails[TOTAL_ASSETS] - stockDetails[TOTAL_EQUITY]
+  );
+
+  stockDetails[SOLIDITY] = formatNumber(
+    (stockDetails[TOTAL_EQUITY] / stockDetails[TOTAL_ASSETS]) * 100
+  );
+
+  stockDetails[EARNINGS_PER_SHARE] = formatNumber(
+    stockDetails[NET_EARNINGS] / stockDetails[NUMBER_OF_SHARES]
+  );
 
   // Rörelsemarginal:
   stockDetails.operatingMargin = formatNumber(
