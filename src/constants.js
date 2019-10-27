@@ -16,3 +16,4 @@ export const NUMBER_OF_EMPLOYEES = "numberOfEmployees";
 export const REVENUE = "revenue"; // = sales
 export const REVENUE_PER_EMPLOYEE = "revenuePerEmployee";
 export const REVENUE_PER_SHARE = "revenuePerShare";
+export const TOTAL_ASSETS = "totalAssets";

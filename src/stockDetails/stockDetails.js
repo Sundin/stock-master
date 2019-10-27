@@ -55,11 +55,17 @@ export function getStockDetails(id, basicStockData) {
 
   stockDetails.revenue = formatNumber(stockDetails.revenue);
   stockDetails.numberOfEmployees = formatNumber(stockDetails.numberOfEmployees);
+  if (stockDetails.totalAssets) {
+    stockDetails.totalAssets = formatNumber(stockDetails.totalAssets);
+  }
 
   return stockDetails;
 }
 
 function formatNumber(number) {
+  if (isNaN(number)) {
+    return "";
+  }
   if (number >= BILLION) {
     return number.toPrecision(3) / BILLION + " miljarder";
   } else if (number >= MILLION) {

@@ -10,7 +10,8 @@ import {
   DIRECT_YIELD,
   NUMBER_OF_EMPLOYEES,
   REVENUE,
-  REVENUE_PER_EMPLOYEE
+  REVENUE_PER_EMPLOYEE,
+  TOTAL_ASSETS
 } from "../constants";
 
 class Weapons extends React.Component {
@@ -26,7 +27,8 @@ class Weapons extends React.Component {
       NUMBER_OF_EMPLOYEES,
       REVENUE,
       REVENUE_PER_EMPLOYEE,
-      OPERATING_MARGIN
+      OPERATING_MARGIN,
+      TOTAL_ASSETS
     ]
   };
 

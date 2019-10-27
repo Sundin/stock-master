@@ -20,7 +20,8 @@ import {
   VOLATILITY,
   DIRECT_YIELD,
   PRICE_SALES_RATIO,
-  PRICE_EARNINGS_RATIO
+  PRICE_EARNINGS_RATIO,
+  TOTAL_ASSETS
 } from "../constants";
 
 const classNames = require("classnames");
@@ -45,6 +46,8 @@ function translate(key) {
       return "Omsättning/aktie";
     case OPERATING_MARGIN:
       return "Rörelsemarginal (%)";
+    case TOTAL_ASSETS:
+      return "Tillgångar";
     default:
       return "";
   }
