@@ -18,6 +18,8 @@ function translate(key) {
   switch (key) {
     case "priceEarningsRatio":
       return "P/E";
+    case "priceSalesRatio":
+      return "P/S";
     case "directYield":
       return "Direktavkastning";
     case "volatility":
@@ -28,6 +30,8 @@ function translate(key) {
       return "Omsättning";
     case "revenuePerEmployee":
       return "Omsättning/anställd";
+    case "revenuePerShare":
+      return "Omsättning/aktie";
     default:
       return "";
   }

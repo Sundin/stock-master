@@ -12,10 +12,12 @@ class Weapons extends React.Component {
     sortKey: "priceEarningsRatio",
     columnsToShow: [
       "priceEarningsRatio",
+      "priceSalesRatio",
       "directYield",
       "numberOfEmployees",
       "revenue",
-      "revenuePerEmployee"
+      "revenuePerEmployee",
+      "revenuePerShare"
     ]
   };
 

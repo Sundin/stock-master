@@ -1,3 +1,5 @@
+import { exchangeRates } from "./constants";
+
 var rp = require("request-promise-native");
 
 let cachedStocks = {};
@@ -51,13 +53,13 @@ function convertToSEK(stockData) {
       return {
         ...stockData,
         currency: "SEK",
-        lastPrice: stockData.lastPrice * 9.7
+        lastPrice: stockData.lastPrice * exchangeRates.USD
       };
     case "DKK":
       return {
         ...stockData,
         currency: "SEK",
-        lastPrice: stockData.lastPrice * 1.43
+        lastPrice: stockData.lastPrice * exchangeRates.DKK
       };
     default:
       console.error("Missing currency: " + stockData.currency);

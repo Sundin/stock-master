@@ -1,5 +1,5 @@
 import { getStock } from "../avanza";
-import { getStockDetails } from "../stockData/stockData";
+import { getStockDetails } from "../stockDetails/stockDetails";
 
 const interestingStocks = ["4231", "4093", "4262"];
 
@@ -16,7 +16,7 @@ export function getWeaponStocks() {
     Promise.all(promises).then(stocks => {
       let returnData = [];
       stocks.forEach(stockData => {
-        const stockDetails = getStockDetails(stockData.id);
+        const stockDetails = getStockDetails(stockData.id, stockData);
         returnData.push({ ...stockData, ...stockDetails });
       });
 
