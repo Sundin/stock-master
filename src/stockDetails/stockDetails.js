@@ -43,6 +43,14 @@ export function getStockDetails(id, basicStockData) {
   let stockDetails = { ...getAllStocks()[id] };
   let basicData = { ...basicStockData };
 
+  if (!stockDetails[TOTAL_DEBT]) {
+    stockDetails[TOTAL_DEBT] =
+      stockDetails[TOTAL_ASSETS] - stockDetails[TOTAL_EQUITY];
+  } else if (!stockDetails[TOTAL_EQUITY]) {
+    stockDetails[TOTAL_EQUITY] =
+      stockDetails[TOTAL_ASSETS] - stockDetails[TOTAL_DEBT];
+  }
+
   if (basicData) {
     basicData.lastPrice = convertFromSEK(
       basicData.lastPrice,
@@ -56,12 +64,6 @@ export function getStockDetails(id, basicStockData) {
     stockDetails[PRICE_BOOK_VALUE] = formatNumber(
       basicData.lastPrice /
         (stockDetails[TOTAL_EQUITY] / stockDetails[NUMBER_OF_SHARES])
-    );
-  }
-
-  if (!stockDetails[TOTAL_DEBT]) {
-    stockDetails[TOTAL_DEBT] = formatNumber(
-      stockDetails[TOTAL_ASSETS] - stockDetails[TOTAL_EQUITY]
     );
   }
 
@@ -88,6 +90,8 @@ export function getStockDetails(id, basicStockData) {
 
   stockDetails.revenue = formatNumber(stockDetails.revenue);
   stockDetails.numberOfEmployees = formatNumber(stockDetails.numberOfEmployees);
+  stockDetails[TOTAL_DEBT] = formatNumber(stockDetails[TOTAL_DEBT]);
+  stockDetails[TOTAL_EQUITY] = formatNumber(stockDetails[TOTAL_EQUITY]);
   if (stockDetails.totalAssets) {
     stockDetails.totalAssets = formatNumber(stockDetails.totalAssets);
   }
