@@ -1,7 +1,7 @@
 import { getStock } from "../avanza";
 import { getStockDetails } from "../stockDetails/stockDetails";
 
-const interestingStocks = ["4231", "4093", "4262"];
+const interestingStocks = ["4231", "4093", "4262", "3937"];
 
 export function getWeaponStocks() {
   return new Promise((resolve, reject) => {

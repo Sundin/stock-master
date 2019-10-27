@@ -44,9 +44,9 @@ function translate(key) {
     case REVENUE:
       return "Omsättning";
     case REVENUE_PER_EMPLOYEE:
-      return "Omsättning/anställd";
+      return "Omsättning / anställd";
     case REVENUE_PER_SHARE:
-      return "Omsättning/aktie";
+      return "Omsättning / aktie";
     case OPERATING_MARGIN:
       return "Rörelsemarginal (%)";
     case TOTAL_ASSETS:

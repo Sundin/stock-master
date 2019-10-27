@@ -1,6 +1,7 @@
 import raytheon from "./stocks/raytheon";
 import northrupGrumman from "./stocks/northrupGrumman";
 import generalDynamics from "./stocks/generalDynamics";
+import lockheedMartin from "./stocks/lockheedMartin";
 import {
   exchangeRates,
   THOUSAND,
@@ -21,6 +22,7 @@ function getAllStocks() {
   stocks[raytheon.id] = raytheon;
   stocks[northrupGrumman.id] = northrupGrumman;
   stocks[generalDynamics.id] = generalDynamics;
+  stocks[lockheedMartin.id] = lockheedMartin;
   return stocks;
 }
 
