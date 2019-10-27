@@ -27,7 +27,7 @@ function convertFromSEK(amount, currency) {
 }
 
 export function getStockDetails(id, basicData) {
-  let stockDetails = getAllStocks()[id];
+  let stockDetails = { ...getAllStocks()[id] };
 
   if (basicData) {
     basicData.lastPrice = convertFromSEK(
