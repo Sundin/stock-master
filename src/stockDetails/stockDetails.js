@@ -39,6 +39,11 @@ export function getStockDetails(id, basicData) {
     );
   }
 
+  // Rörelsemarginal:
+  stockDetails.operatingMargin = formatNumber(
+    (stockDetails.earningsBeforeInterestAndTax / stockDetails.revenue) * 100
+  );
+
   stockDetails.revenuePerEmployee = formatNumber(
     stockDetails.revenue / stockDetails.numberOfEmployees
   );

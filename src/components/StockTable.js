@@ -11,27 +11,40 @@ import {
   peIsVeryBad
 } from "./stockIndicators";
 import { stockIsOwned } from "../stockUtils";
+import {
+  OPERATING_MARGIN,
+  REVENUE_PER_SHARE,
+  REVENUE_PER_EMPLOYEE,
+  REVENUE,
+  NUMBER_OF_EMPLOYEES,
+  VOLATILITY,
+  DIRECT_YIELD,
+  PRICE_SALES_RATIO,
+  PRICE_EARNINGS_RATIO
+} from "../constants";
 
 const classNames = require("classnames");
 
 function translate(key) {
   switch (key) {
-    case "priceEarningsRatio":
+    case PRICE_EARNINGS_RATIO:
       return "P/E";
-    case "priceSalesRatio":
+    case PRICE_SALES_RATIO:
       return "P/S";
-    case "directYield":
-      return "Direktavkastning";
-    case "volatility":
+    case DIRECT_YIELD:
+      return "Direktavkastning (%)";
+    case VOLATILITY:
       return "Volatilitet";
-    case "numberOfEmployees":
+    case NUMBER_OF_EMPLOYEES:
       return "Anställda";
-    case "revenue":
+    case REVENUE:
       return "Omsättning";
-    case "revenuePerEmployee":
+    case REVENUE_PER_EMPLOYEE:
       return "Omsättning/anställd";
-    case "revenuePerShare":
+    case REVENUE_PER_SHARE:
       return "Omsättning/aktie";
+    case OPERATING_MARGIN:
+      return "Rörelsemarginal (%)";
     default:
       return "";
   }

@@ -3,21 +3,30 @@ import StockTable from "../components/StockTable";
 import { getWeaponStocks } from "./dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
+import {
+  OPERATING_MARGIN,
+  PRICE_EARNINGS_RATIO,
+  PRICE_SALES_RATIO,
+  DIRECT_YIELD,
+  NUMBER_OF_EMPLOYEES,
+  REVENUE,
+  REVENUE_PER_EMPLOYEE
+} from "../constants";
 
 class Weapons extends React.Component {
   state = {
     stocks: [],
     ownedStocks: [],
     error: null,
-    sortKey: "priceEarningsRatio",
+    sortKey: PRICE_EARNINGS_RATIO,
     columnsToShow: [
-      "priceEarningsRatio",
-      "priceSalesRatio",
-      "directYield",
-      "numberOfEmployees",
-      "revenue",
-      "revenuePerEmployee",
-      "revenuePerShare"
+      PRICE_EARNINGS_RATIO,
+      PRICE_SALES_RATIO,
+      DIRECT_YIELD,
+      NUMBER_OF_EMPLOYEES,
+      REVENUE,
+      REVENUE_PER_EMPLOYEE,
+      OPERATING_MARGIN
     ]
   };
 
