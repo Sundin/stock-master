@@ -9,7 +9,7 @@ class BestYield extends React.Component {
     stocks: [],
     ownedStocks: [],
     error: null,
-    sortKey: 'directYield'
+    sortKey: "directYield"
   };
 
   componentDidMount() {
@@ -45,6 +45,7 @@ class BestYield extends React.Component {
           stocks={this.state.stocks}
           ownedStocks={this.state.ownedStocks}
           sortKey={this.state.sortKey}
+          showSingleStock={this.props.showSingleStock}
         />
       </div>
     );

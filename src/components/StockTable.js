@@ -98,6 +98,7 @@ function StockTable(props) {
               key={stockData.id}
               owned={owned}
               columnsToShow={columnsToShow}
+              showSingleStock={props.showSingleStock}
             />
           );
         })}
@@ -106,32 +107,40 @@ function StockTable(props) {
   );
 }
 
-function Stock(props) {
-  const { stockData, owned, columnsToShow } = props;
+class Stock extends React.Component {
+  handleClick() {
+    this.props.showSingleStock(this.props.stockData.id);
+  }
 
-  return (
-    <tr key={stockData.id}>
-      <td>{stockData.id}</td>
-      <td
-        className={classNames({
-          owned: owned
+  render() {
+    const { stockData, owned, columnsToShow } = this.props;
+
+    return (
+      <tr key={stockData.id}>
+        <td>{stockData.id}</td>
+        <td
+          className={classNames({
+            owned: owned
+          })}
+        >
+          <a href="#" onClick={e => this.handleClick(e)}>
+            {stockData.name}
+          </a>
+        </td>
+        {columnsToShow.map(column => {
+          return (
+            <td
+              width="15%"
+              key={column}
+              className={getClassNames(column, stockData)}
+            >
+              {stockData[column]}
+            </td>
+          );
         })}
-      >
-        {stockData.name}
-      </td>
-      {columnsToShow.map(column => {
-        return (
-          <td
-            width="15%"
-            key={column}
-            className={getClassNames(column, stockData)}
-          >
-            {stockData[column]}
-          </td>
-        );
-      })}
-    </tr>
-  );
+      </tr>
+    );
+  }
 }
 
 function getClassNames(key, stockData) {

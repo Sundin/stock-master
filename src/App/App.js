@@ -4,6 +4,7 @@ import BestYield from "../BestYield/BestYield";
 import BlueChip from "../BlueChip/BlueChip";
 import Portfolio from "../Portfolio/Portfolio";
 import Weapons from "../Weapons/Weapons";
+import SingleStock from "../SingleStock/SingleStock";
 
 const portfolioPage = "PORTFOLIO_PAGE";
 const bestYieldPage = "BEST_YIELD_PAGE";
@@ -14,19 +15,24 @@ const classNames = require("classnames");
 
 class App extends React.Component {
   state = {
-    activePage: portfolioPage
+    activePage: portfolioPage,
+    activeStock: null
   };
 
   renderActivePage() {
+    if (this.state.activeStock) {
+      return <SingleStock id={this.state.activeStock} />;
+    }
+
     switch (this.state.activePage) {
       case portfolioPage:
-        return <Portfolio />;
+        return <Portfolio showSingleStock={this.showSingleStock.bind(this)} />;
       case bestYieldPage:
-        return <BestYield />;
+        return <BestYield showSingleStock={this.showSingleStock.bind(this)} />;
       case blueChipPage:
-        return <BlueChip />;
+        return <BlueChip showSingleStock={this.showSingleStock.bind(this)} />;
       case weaponsPage:
-        return <Weapons />;
+        return <Weapons showSingleStock={this.showSingleStock.bind(this)} />;
       default:
         return <div></div>;
     }
@@ -45,6 +51,10 @@ class App extends React.Component {
         {title}
       </button>
     );
+  }
+
+  showSingleStock(id) {
+    this.setState({ activeStock: id });
   }
 
   render() {

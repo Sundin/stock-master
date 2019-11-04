@@ -77,6 +77,7 @@ class Weapons extends React.Component {
             this.setState({ sortKey: sortKey });
           }}
           columnsToShow={this.state.columnsToShow}
+          showSingleStock={this.props.showSingleStock}
         />
       </div>
     );

@@ -48,6 +48,7 @@ class BlueChip extends React.Component {
           onSort={sortKey => {
             this.setState({ sortKey: sortKey });
           }}
+          showSingleStock={this.props.showSingleStock}
         />
       </div>
     );
