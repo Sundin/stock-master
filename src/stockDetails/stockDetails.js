@@ -49,6 +49,14 @@ export function getStockDetails(id, basicStockData) {
   };
   let basicData = { ...basicStockData };
 
+  stockDetails = calculateKPIs(stockDetails, basicData);
+  stockDetails = formatAllFields(stockDetails);
+
+  return stockDetails;
+}
+
+function calculateKPIs(inputData, basicData) {
+  let stockDetails = { ...inputData };
   if (!stockDetails[TOTAL_DEBT]) {
     stockDetails[TOTAL_DEBT] =
       stockDetails[TOTAL_ASSETS] - stockDetails[TOTAL_EQUITY];
@@ -90,8 +98,6 @@ export function getStockDetails(id, basicStockData) {
 
   stockDetails.revenuePerShare =
     stockDetails.revenue / stockDetails.numberOfShares;
-
-  stockDetails = formatAllFields(stockDetails);
 
   return stockDetails;
 }
