@@ -12,6 +12,12 @@ import {
 } from "./stockIndicators";
 import { stockIsOwned } from "../stockUtils";
 import { translate } from "../translate";
+import {
+  PRICE_EARNINGS_RATIO,
+  DIRECT_YIELD,
+  VOLATILITY,
+  ID
+} from "../constants";
 
 const classNames = require("classnames");
 
@@ -28,7 +34,6 @@ function StockTable(props) {
     <table>
       <thead>
         <tr>
-          <th width="15%">ID</th>
           <th width="40%">Aktie</th>
           {columnsToShow.map(column => {
             return (
@@ -67,7 +72,6 @@ class Stock extends React.Component {
 
     return (
       <tr key={stockData.id}>
-        <td>{stockData.id}</td>
         <td
           className={classNames({
             owned: owned
@@ -119,7 +123,7 @@ function getClassNames(key, stockData) {
 }
 
 StockTable.defaultProps = {
-  columnsToShow: ["priceEarningsRatio", "directYield", "volatility"]
+  columnsToShow: [ID, PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY]
 };
 
 export default StockTable;

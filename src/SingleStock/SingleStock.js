@@ -2,6 +2,7 @@ import React from "react";
 import StockTable from "../components/StockTable";
 
 import {
+  YEAR,
   OPERATING_MARGIN,
   PRICE_EARNINGS_RATIO,
   PRICE_SALES_RATIO,
@@ -24,6 +25,7 @@ class SingleStock extends React.Component {
     error: null,
     sortKey: PRICE_EARNINGS_RATIO,
     columnsToShow: [
+      YEAR,
       PRICE_EARNINGS_RATIO,
       PRICE_SALES_RATIO,
       DIRECT_YIELD,
@@ -64,6 +66,11 @@ class SingleStock extends React.Component {
     return (
       <div>
         <h1>{stockDetails.name}</h1>
+        <StockTable
+          stocks={stockDetails.annualReports}
+          ownedStocks={[]}
+          columnsToShow={this.state.columnsToShow}
+        />
       </div>
     );
   }

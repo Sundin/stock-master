@@ -43,7 +43,10 @@ function convertFromSEK(amount, currency) {
 }
 
 export function getStockDetails(id, basicStockData) {
-  let stockDetails = { ...getAllStocks()[id] };
+  let stockDetails = {
+    ...getAllStocks()[id],
+    ...getAllStocks()[id].annualReports[0]
+  };
   let basicData = { ...basicStockData };
 
   if (!stockDetails[TOTAL_DEBT]) {
@@ -95,6 +98,13 @@ export function getStockDetails(id, basicStockData) {
     stockDetails.revenue / stockDetails.numberOfShares
   );
 
+  stockDetails = formatAllFields(stockDetails);
+
+  return stockDetails;
+}
+
+function formatAllFields(inputData) {
+  let stockDetails = { ...inputData };
   stockDetails.revenue = formatNumber(stockDetails.revenue);
   stockDetails.numberOfEmployees = formatNumber(stockDetails.numberOfEmployees);
   stockDetails[TOTAL_DEBT] = formatNumber(stockDetails[TOTAL_DEBT]);

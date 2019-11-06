@@ -12,7 +12,9 @@ import {
   EARNINGS_PER_SHARE,
   PRICE_BOOK_VALUE,
   SOLIDITY,
-  MARKET_CAP
+  MARKET_CAP,
+  YEAR,
+  ID
 } from "./constants";
 
 export function translate(key) {
@@ -45,6 +47,10 @@ export function translate(key) {
       return "Soliditet (%)";
     case MARKET_CAP:
       return "Börsvärde";
+    case YEAR:
+      return "År";
+    case ID:
+      return "ID";
     default:
       return "";
   }
