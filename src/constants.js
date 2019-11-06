@@ -27,3 +27,7 @@ export const SOLIDITY = "soldity";
 export const MARKET_CAP = "marketCap";
 export const YEAR = "year";
 export const ID = "id";
+
+export const ANNUAL_REPORTS_TABLE = "annualReportsTable";
+export const INTERIM_REPORTS_TABLE = "interimReportsTable";
+export const MULTIPLE_STOCKS_TABLE = "multipleStocksTable";

@@ -2,7 +2,6 @@ import React from "react";
 import StockTable from "../components/StockTable";
 
 import {
-  YEAR,
   OPERATING_MARGIN,
   PRICE_EARNINGS_RATIO,
   PRICE_SALES_RATIO,
@@ -13,7 +12,8 @@ import {
   TOTAL_ASSETS,
   EARNINGS_PER_SHARE,
   PRICE_BOOK_VALUE,
-  SOLIDITY
+  SOLIDITY,
+  ANNUAL_REPORTS_TABLE
 } from "../constants";
 import { getStockDetails } from "../stockDetails/stockDetails";
 import { getStock } from "../avanza";
@@ -24,7 +24,6 @@ class SingleStock extends React.Component {
     error: null,
     sortKey: PRICE_EARNINGS_RATIO,
     columnsToShow: [
-      YEAR,
       PRICE_EARNINGS_RATIO,
       PRICE_SALES_RATIO,
       DIRECT_YIELD,
@@ -50,6 +49,22 @@ class SingleStock extends React.Component {
     });
   }
 
+  renderAnnualReports() {
+    const { stockDetails } = this.state;
+
+    if (!stockDetails.annualReports) {
+      return <div></div>;
+    }
+    return (
+      <StockTable
+        type={ANNUAL_REPORTS_TABLE}
+        stocks={stockDetails.annualReports}
+        ownedStocks={[]}
+        columnsToShow={this.state.columnsToShow}
+      />
+    );
+  }
+
   render() {
     if (this.state.error != null) {
       return <p>{this.state.error}</p>;
@@ -64,11 +79,8 @@ class SingleStock extends React.Component {
     return (
       <div>
         <h1>{stockDetails.name}</h1>
-        <StockTable
-          stocks={stockDetails.annualReports}
-          ownedStocks={[]}
-          columnsToShow={this.state.columnsToShow}
-        />
+
+        {this.renderAnnualReports()}
       </div>
     );
   }

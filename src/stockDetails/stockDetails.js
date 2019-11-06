@@ -51,13 +51,25 @@ export function getStockDetails(id, basicStockData) {
 
   // TODO: sort reports
 
-  stockDetails.annualReports = stockDetails.annualReports
-    .map(report => calculateKPIs(report, basicData))
-    .map(report => formatAllFields(report));
+  if (stockDetails.annualReports) {
+    stockDetails.annualReports = stockDetails.annualReports
+      .map(report => calculateKPIs(report, basicData))
+      .map(report => formatAllFields(report));
+  }
+
+  if (stockDetails.interimReports) {
+    stockDetails.interimReports = stockDetails.interimReports
+      .map(report => calculateKPIs(report, basicData))
+      .map(report => formatAllFields(report));
+  }
+
+  const latestReport = stockDetails.annualReports
+    ? stockDetails.annualReports[0]
+    : {};
 
   stockDetails = {
     ...stockDetails,
-    ...stockDetails.annualReports[0]
+    ...latestReport
   };
 
   return stockDetails;

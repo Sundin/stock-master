@@ -16,13 +16,17 @@ import {
   PRICE_EARNINGS_RATIO,
   DIRECT_YIELD,
   VOLATILITY,
-  ID
+  ID,
+  ANNUAL_REPORTS_TABLE,
+  YEAR,
+  MULTIPLE_STOCKS_TABLE,
+  INTERIM_REPORTS_TABLE
 } from "../constants";
 
 const classNames = require("classnames");
 
 function StockTable(props) {
-  const { stocks, ownedStocks, sortKey, columnsToShow } = props;
+  const { stocks, ownedStocks, sortKey, columnsToShow, type } = props;
 
   if (sortKey) {
     stocks.sort((a, b) => {
@@ -34,7 +38,7 @@ function StockTable(props) {
     <table>
       <thead>
         <tr>
-          <th width="40%">Aktie</th>
+          <th width="40%">{getMainColumn(type)}</th>
           {columnsToShow.map(column => {
             return (
               <th width="15%" key={column}>
@@ -54,6 +58,7 @@ function StockTable(props) {
               owned={owned}
               columnsToShow={columnsToShow}
               showSingleStock={props.showSingleStock}
+              type={type}
             />
           );
         })}
@@ -62,25 +67,54 @@ function StockTable(props) {
   );
 }
 
+function getMainColumn(tableType) {
+  switch (tableType) {
+    case ANNUAL_REPORTS_TABLE:
+      return translate(YEAR);
+    case INTERIM_REPORTS_TABLE:
+      return "Period";
+    default:
+      return "Aktie";
+  }
+}
+
 class Stock extends React.Component {
   handleClick() {
     this.props.showSingleStock(this.props.stockData.id);
   }
 
+  renderMainColumn() {
+    const { type, stockData, owned } = this.props;
+    switch (type) {
+      case ANNUAL_REPORTS_TABLE:
+        return <td>{stockData.year}</td>;
+      case INTERIM_REPORTS_TABLE:
+        return (
+          <td>
+            {stockData.year} {stockData.period}
+          </td>
+        );
+      default:
+        return (
+          <td
+            className={classNames({
+              owned: owned
+            })}
+          >
+            <a href="#" onClick={e => this.handleClick(e)}>
+              {stockData.name}
+            </a>
+          </td>
+        );
+    }
+  }
+
   render() {
-    const { stockData, owned, columnsToShow } = this.props;
+    const { stockData, columnsToShow } = this.props;
 
     return (
       <tr key={stockData.id}>
-        <td
-          className={classNames({
-            owned: owned
-          })}
-        >
-          <a href="#" onClick={e => this.handleClick(e)}>
-            {stockData.name}
-          </a>
-        </td>
+        {this.renderMainColumn()}
         {columnsToShow.map(column => {
           return (
             <td
@@ -123,6 +157,7 @@ function getClassNames(key, stockData) {
 }
 
 StockTable.defaultProps = {
+  type: MULTIPLE_STOCKS_TABLE,
   columnsToShow: [ID, PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY]
 };
 
