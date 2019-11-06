@@ -42,7 +42,7 @@ class App extends React.Component {
     return (
       <button
         onClick={() => {
-          this.setState({ activePage: page });
+          this.setState({ activePage: page, activeStock: null });
         }}
         className={classNames({
           active: this.state.activePage === page
