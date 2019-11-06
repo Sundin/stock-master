@@ -63,40 +63,33 @@ export function getStockDetails(id, basicStockData) {
       stockDetails.currency
     );
 
-    stockDetails.priceSalesRatio = formatNumber(
-      basicData.lastPrice / (stockDetails.revenue / stockDetails.numberOfShares)
-    );
-
-    stockDetails[PRICE_BOOK_VALUE] = formatNumber(
+    stockDetails.priceSalesRatio =
       basicData.lastPrice /
-        (stockDetails[TOTAL_EQUITY] / stockDetails[NUMBER_OF_SHARES])
-    );
+      (stockDetails.revenue / stockDetails.numberOfShares);
 
-    stockDetails[MARKET_CAP] = formatNumber(
-      stockDetails[NUMBER_OF_SHARES] * basicData.lastPrice
-    );
+    stockDetails[PRICE_BOOK_VALUE] =
+      basicData.lastPrice /
+      (stockDetails[TOTAL_EQUITY] / stockDetails[NUMBER_OF_SHARES]);
+
+    stockDetails[MARKET_CAP] =
+      stockDetails[NUMBER_OF_SHARES] * basicData.lastPrice;
   }
 
-  stockDetails[SOLIDITY] = formatNumber(
-    (stockDetails[TOTAL_EQUITY] / stockDetails[TOTAL_ASSETS]) * 100
-  );
+  stockDetails[SOLIDITY] =
+    (stockDetails[TOTAL_EQUITY] / stockDetails[TOTAL_ASSETS]) * 100;
 
-  stockDetails[EARNINGS_PER_SHARE] = formatNumber(
-    stockDetails[NET_EARNINGS] / stockDetails[NUMBER_OF_SHARES]
-  );
+  stockDetails[EARNINGS_PER_SHARE] =
+    stockDetails[NET_EARNINGS] / stockDetails[NUMBER_OF_SHARES];
 
   // Rörelsemarginal:
-  stockDetails.operatingMargin = formatNumber(
-    (stockDetails.earningsBeforeInterestAndTax / stockDetails.revenue) * 100
-  );
+  stockDetails.operatingMargin =
+    (stockDetails.earningsBeforeInterestAndTax / stockDetails.revenue) * 100;
 
-  stockDetails.revenuePerEmployee = formatNumber(
-    stockDetails.revenue / stockDetails.numberOfEmployees
-  );
+  stockDetails.revenuePerEmployee =
+    stockDetails.revenue / stockDetails.numberOfEmployees;
 
-  stockDetails.revenuePerShare = formatNumber(
-    stockDetails.revenue / stockDetails.numberOfShares
-  );
+  stockDetails.revenuePerShare =
+    stockDetails.revenue / stockDetails.numberOfShares;
 
   stockDetails = formatAllFields(stockDetails);
 
@@ -105,20 +98,19 @@ export function getStockDetails(id, basicStockData) {
 
 function formatAllFields(inputData) {
   let stockDetails = { ...inputData };
-  stockDetails.revenue = formatNumber(stockDetails.revenue);
-  stockDetails.numberOfEmployees = formatNumber(stockDetails.numberOfEmployees);
-  stockDetails[TOTAL_DEBT] = formatNumber(stockDetails[TOTAL_DEBT]);
-  stockDetails[TOTAL_EQUITY] = formatNumber(stockDetails[TOTAL_EQUITY]);
-  if (stockDetails.totalAssets) {
-    stockDetails.totalAssets = formatNumber(stockDetails.totalAssets);
-  }
+
+  Object.keys(stockDetails).forEach(item => {
+    if (typeof item !== "undefined") {
+      stockDetails[item] = formatNumber(stockDetails[item]);
+    }
+  });
 
   return stockDetails;
 }
 
 function formatNumber(number) {
-  if (isNaN(number)) {
-    return "";
+  if (isNaN(number) || typeof number === "string") {
+    return number;
   }
   if (number >= BILLION) {
     return number.toPrecision(3) / BILLION + " miljarder";
