@@ -13,8 +13,7 @@ import {
   TOTAL_ASSETS,
   EARNINGS_PER_SHARE,
   PRICE_BOOK_VALUE,
-  SOLIDITY,
-  MARKET_CAP
+  SOLIDITY
 } from "../constants";
 import { getStockDetails } from "../stockDetails/stockDetails";
 import { getStock } from "../avanza";
@@ -36,8 +35,7 @@ class SingleStock extends React.Component {
       TOTAL_ASSETS,
       EARNINGS_PER_SHARE,
       PRICE_BOOK_VALUE,
-      SOLIDITY,
-      MARKET_CAP
+      SOLIDITY
     ]
   };
 

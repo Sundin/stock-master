@@ -1,8 +1,8 @@
 const stockDetails = {
   id: "4093",
-  currency: "USD",
   annualReports: [
     {
+      currency: "USD",
       year: 2018,
       revenue: 30095000000,
       numberOfEmployees: 85000,

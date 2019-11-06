@@ -15,7 +15,8 @@ import {
   TOTAL_DEBT,
   TOTAL_ASSETS,
   SOLIDITY,
-  MARKET_CAP
+  MARKET_CAP,
+  YEAR
 } from "../constants";
 
 function getAllStocks() {
@@ -44,19 +45,27 @@ function convertFromSEK(amount, currency) {
 
 export function getStockDetails(id, basicStockData) {
   let stockDetails = {
-    ...getAllStocks()[id],
-    ...getAllStocks()[id].annualReports[0]
+    ...getAllStocks()[id]
   };
   let basicData = { ...basicStockData };
 
-  stockDetails = calculateKPIs(stockDetails, basicData);
-  stockDetails = formatAllFields(stockDetails);
+  // TODO: sort reports
+
+  stockDetails.annualReports = stockDetails.annualReports
+    .map(report => calculateKPIs(report, basicData))
+    .map(report => formatAllFields(report));
+
+  stockDetails = {
+    ...stockDetails,
+    ...stockDetails.annualReports[0]
+  };
 
   return stockDetails;
 }
 
-function calculateKPIs(inputData, basicData) {
+function calculateKPIs(inputData, inputBasicData) {
   let stockDetails = { ...inputData };
+  let basicData = { ...inputBasicData };
   if (!stockDetails[TOTAL_DEBT]) {
     stockDetails[TOTAL_DEBT] =
       stockDetails[TOTAL_ASSETS] - stockDetails[TOTAL_EQUITY];
@@ -105,13 +114,22 @@ function calculateKPIs(inputData, basicData) {
 function formatAllFields(inputData) {
   let stockDetails = { ...inputData };
 
-  Object.keys(stockDetails).forEach(item => {
-    if (typeof item !== "undefined") {
-      stockDetails[item] = formatNumber(stockDetails[item]);
+  Object.keys(stockDetails).forEach(key => {
+    if (typeof key !== "undefined" && keyShouldBeFormatted(key)) {
+      stockDetails[key] = formatNumber(stockDetails[key]);
     }
   });
 
   return stockDetails;
+}
+
+function keyShouldBeFormatted(key) {
+  switch (key) {
+    case YEAR:
+      return false;
+    default:
+      return true;
+  }
 }
 
 function formatNumber(number) {
