@@ -13,7 +13,8 @@ import {
   EARNINGS_PER_SHARE,
   PRICE_BOOK_VALUE,
   SOLIDITY,
-  ANNUAL_REPORTS_TABLE
+  ANNUAL_REPORTS_TABLE,
+  INTERIM_REPORTS_TABLE
 } from "../constants";
 import { getStockDetails } from "../stockDetails/stockDetails";
 import { getStock } from "../avanza";
@@ -56,12 +57,34 @@ class SingleStock extends React.Component {
       return <div></div>;
     }
     return (
-      <StockTable
-        type={ANNUAL_REPORTS_TABLE}
-        stocks={stockDetails.annualReports}
-        ownedStocks={[]}
-        columnsToShow={this.state.columnsToShow}
-      />
+      <div>
+        <h2>Årsrapporter</h2>
+        <StockTable
+          type={ANNUAL_REPORTS_TABLE}
+          stocks={stockDetails.annualReports}
+          ownedStocks={[]}
+          columnsToShow={this.state.columnsToShow}
+        />
+      </div>
+    );
+  }
+
+  renderInterimReports() {
+    const { stockDetails } = this.state;
+
+    if (!stockDetails.interimReports) {
+      return <div></div>;
+    }
+    return (
+      <div>
+        <h2>Kvartalsrapporter</h2>
+        <StockTable
+          type={INTERIM_REPORTS_TABLE}
+          stocks={stockDetails.interimReports}
+          ownedStocks={[]}
+          columnsToShow={this.state.columnsToShow}
+        />
+      </div>
     );
   }
 
@@ -81,6 +104,7 @@ class SingleStock extends React.Component {
         <h1>{stockDetails.name}</h1>
 
         {this.renderAnnualReports()}
+        {this.renderInterimReports()}
       </div>
     );
   }

@@ -25,6 +25,20 @@ const stockDetails = {
       totalAssets: 46620 * MILLION,
       totalDebt: 14263 * MILLION
     }
+  ],
+  interimReports: [
+    {
+      currency: "USD",
+      year: 2019,
+      period: "Q3",
+      revenue: 15200 * MILLION,
+      numberOfEmployees: 105 * THOUSAND,
+      numberOfShares: 284 * MILLION, //UNSURE
+      earningsBeforeInterestAndTax: 2105 * MILLION,
+      netEarnings: 1600 * MILLION,
+      totalAssets: 49275 * MILLION,
+      totalDebt: 45338 * MILLION
+    }
   ]
 };
 
