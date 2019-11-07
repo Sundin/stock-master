@@ -27,6 +27,9 @@ export const SOLIDITY = "solidity";
 export const MARKET_CAP = "marketCap";
 export const YEAR = "year";
 export const ID = "id";
+export const LAST_PRICE = "lastPrice";
+export const CURRENCY = "currency";
+export const EBIT = "earningsBeforeInterestAndTax";
 
 export const ANNUAL_REPORTS_TABLE = "annualReportsTable";
 export const INTERIM_REPORTS_TABLE = "interimReportsTable";

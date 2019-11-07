@@ -8,7 +8,16 @@ import {
   TOTAL_DEBT,
   TOTAL_ASSETS,
   SOLIDITY,
-  MARKET_CAP
+  MARKET_CAP,
+  PRICE_SALES_RATIO,
+  LAST_PRICE,
+  CURRENCY,
+  REVENUE,
+  OPERATING_MARGIN,
+  NUMBER_OF_EMPLOYEES,
+  REVENUE_PER_EMPLOYEE,
+  REVENUE_PER_SHARE,
+  EBIT
 } from "../constants";
 
 // TODO: Get currency exchange rates from some API
@@ -34,23 +43,36 @@ export function calculateKPIs(inputData, inputBasicData) {
 
   stockDetails = calculateKPIsFromBasicData(stockDetails, basicData);
 
-  stockDetails[SOLIDITY] =
-    (stockDetails[TOTAL_EQUITY] / stockDetails[TOTAL_ASSETS]) * 100;
-
-  stockDetails[EARNINGS_PER_SHARE] =
-    stockDetails[NET_EARNINGS] / stockDetails[NUMBER_OF_SHARES];
-
-  // Rörelsemarginal:
-  stockDetails.operatingMargin =
-    (stockDetails.earningsBeforeInterestAndTax / stockDetails.revenue) * 100;
-
-  stockDetails.revenuePerEmployee =
-    stockDetails.revenue / stockDetails.numberOfEmployees;
-
-  stockDetails.revenuePerShare =
-    stockDetails.revenue / stockDetails.numberOfShares;
+  stockDetails[SOLIDITY] = calculateSolidity(stockDetails);
+  stockDetails[EARNINGS_PER_SHARE] = calculateEarningsPerShare(stockDetails);
+  stockDetails[OPERATING_MARGIN] = calculateOperatingMargin(stockDetails);
+  stockDetails[REVENUE_PER_EMPLOYEE] = calculateRevenuePerEmployee(
+    stockDetails
+  );
+  stockDetails[REVENUE_PER_SHARE] = calculateRevenuePerShare(stockDetails);
 
   return stockDetails;
+}
+
+export function calculateSolidity(stockDetails) {
+  return (stockDetails[TOTAL_EQUITY] / stockDetails[TOTAL_ASSETS]) * 100;
+}
+
+export function calculateEarningsPerShare(stockDetails) {
+  return stockDetails[NET_EARNINGS] / stockDetails[NUMBER_OF_SHARES];
+}
+
+// Rörelsemarginal:
+export function calculateOperatingMargin(stockDetails) {
+  return (stockDetails[EBIT] / stockDetails[REVENUE]) * 100;
+}
+
+export function calculateRevenuePerEmployee(stockDetails) {
+  return stockDetails[REVENUE] / stockDetails[NUMBER_OF_EMPLOYEES];
+}
+
+export function calculateRevenuePerShare(stockDetails) {
+  return stockDetails[REVENUE] / stockDetails[NUMBER_OF_SHARES];
 }
 
 export function calculateKPIsFromBasicData(inputData, inputBasicData) {
@@ -61,20 +83,21 @@ export function calculateKPIsFromBasicData(inputData, inputBasicData) {
     return stockDetails;
   }
 
-  basicData.lastPrice = convertFromSEK(
-    basicData.lastPrice,
-    stockDetails.currency
+  basicData[LAST_PRICE] = convertFromSEK(
+    basicData[LAST_PRICE],
+    stockDetails[CURRENCY]
   );
 
-  stockDetails.priceSalesRatio =
-    basicData.lastPrice / (stockDetails.revenue / stockDetails.numberOfShares);
+  stockDetails[PRICE_SALES_RATIO] =
+    basicData[LAST_PRICE] /
+    (stockDetails[REVENUE] / stockDetails[NUMBER_OF_SHARES]);
 
   stockDetails[PRICE_BOOK_VALUE] =
-    basicData.lastPrice /
+    basicData[LAST_PRICE] /
     (stockDetails[TOTAL_EQUITY] / stockDetails[NUMBER_OF_SHARES]);
 
   stockDetails[MARKET_CAP] =
-    stockDetails[NUMBER_OF_SHARES] * basicData.lastPrice;
+    stockDetails[NUMBER_OF_SHARES] * basicData[LAST_PRICE];
 
   return stockDetails;
 }
