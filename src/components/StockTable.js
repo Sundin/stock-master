@@ -109,6 +109,27 @@ class Stock extends React.Component {
     }
   }
 
+  renderStockData(column) {
+    const { stockData, type } = this.props;
+    switch (type) {
+      case ANNUAL_REPORTS_TABLE:
+      case INTERIM_REPORTS_TABLE:
+        if (stockData.changeValues && stockData.changeValues[column]) {
+          const sign = stockData.changeValues[column] > 0 ? "+" : "";
+          return (
+            stockData[column] +
+            " (" +
+            sign +
+            stockData.changeValues[column] +
+            "%)"
+          );
+        }
+        return stockData[column];
+      default:
+        return stockData[column];
+    }
+  }
+
   render() {
     const { stockData, columnsToShow } = this.props;
 
@@ -122,7 +143,7 @@ class Stock extends React.Component {
               key={column}
               className={getClassNames(column, stockData)}
             >
-              {stockData[column]}
+              {this.renderStockData(column)}
             </td>
           );
         })}

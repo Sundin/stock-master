@@ -1,6 +1,6 @@
 import { formatAllFields } from "./formatAllFields";
 
-it("formatAllFieldsShouldIgnoreNonNumericFields", () => {
+it("formatAllFieldsShouldIgnoreNonKPIFields", () => {
   const input = {
     id: "1234",
     year: 2018,

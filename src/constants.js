@@ -30,6 +30,7 @@ export const ID = "id";
 export const LAST_PRICE = "lastPrice";
 export const CURRENCY = "currency";
 export const EBIT = "earningsBeforeInterestAndTax";
+export const CHANGE_VALUES = "changeValues";
 
 export const ANNUAL_REPORTS_TABLE = "annualReportsTable";
 export const INTERIM_REPORTS_TABLE = "interimReportsTable";
