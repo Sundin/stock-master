@@ -14,7 +14,9 @@ import {
   PRICE_BOOK_VALUE,
   SOLIDITY,
   ANNUAL_REPORTS_TABLE,
-  INTERIM_REPORTS_TABLE
+  INTERIM_REPORTS_TABLE,
+  NET_EARNINGS,
+  EBIT
 } from "../constants";
 import { getStockDetails } from "../stockDetails/stockDetails";
 import { getStock } from "../avanza";
@@ -25,12 +27,12 @@ class SingleStock extends React.Component {
     error: null,
     sortKey: PRICE_EARNINGS_RATIO,
     columnsToShow: [
-      PRICE_EARNINGS_RATIO,
       PRICE_SALES_RATIO,
-      DIRECT_YIELD,
       NUMBER_OF_EMPLOYEES,
       REVENUE,
       REVENUE_PER_EMPLOYEE,
+      EBIT,
+      NET_EARNINGS,
       OPERATING_MARGIN,
       TOTAL_ASSETS,
       EARNINGS_PER_SHARE,

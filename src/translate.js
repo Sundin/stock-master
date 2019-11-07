@@ -14,7 +14,9 @@ import {
   SOLIDITY,
   MARKET_CAP,
   YEAR,
-  ID
+  ID,
+  EBIT,
+  NET_EARNINGS
 } from "./constants";
 
 export function translate(key) {
@@ -51,6 +53,10 @@ export function translate(key) {
       return "År";
     case ID:
       return "ID";
+    case EBIT:
+      return "EBIT";
+    case NET_EARNINGS:
+      return "Vinst";
     default:
       return "";
   }
