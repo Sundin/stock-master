@@ -1,4 +1,4 @@
-import { formatAllFields } from "./stockDetails";
+import { formatAllFields } from "./formatAllFields";
 
 it("formatAllFieldsShouldIgnoreNonNumericFields", () => {
   const input = {
