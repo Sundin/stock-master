@@ -32,23 +32,7 @@ export function calculateKPIs(inputData, inputBasicData) {
 
   stockDetails = calculateEquityDebtAndAssets(stockDetails);
 
-  if (basicData) {
-    basicData.lastPrice = convertFromSEK(
-      basicData.lastPrice,
-      stockDetails.currency
-    );
-
-    stockDetails.priceSalesRatio =
-      basicData.lastPrice /
-      (stockDetails.revenue / stockDetails.numberOfShares);
-
-    stockDetails[PRICE_BOOK_VALUE] =
-      basicData.lastPrice /
-      (stockDetails[TOTAL_EQUITY] / stockDetails[NUMBER_OF_SHARES]);
-
-    stockDetails[MARKET_CAP] =
-      stockDetails[NUMBER_OF_SHARES] * basicData.lastPrice;
-  }
+  stockDetails = calculateKPIsFromBasicData(stockDetails, basicData);
 
   stockDetails[SOLIDITY] =
     (stockDetails[TOTAL_EQUITY] / stockDetails[TOTAL_ASSETS]) * 100;
@@ -65,6 +49,32 @@ export function calculateKPIs(inputData, inputBasicData) {
 
   stockDetails.revenuePerShare =
     stockDetails.revenue / stockDetails.numberOfShares;
+
+  return stockDetails;
+}
+
+export function calculateKPIsFromBasicData(inputData, inputBasicData) {
+  let stockDetails = { ...inputData };
+  let basicData = { ...inputBasicData };
+
+  if (!basicData) {
+    return stockDetails;
+  }
+
+  basicData.lastPrice = convertFromSEK(
+    basicData.lastPrice,
+    stockDetails.currency
+  );
+
+  stockDetails.priceSalesRatio =
+    basicData.lastPrice / (stockDetails.revenue / stockDetails.numberOfShares);
+
+  stockDetails[PRICE_BOOK_VALUE] =
+    basicData.lastPrice /
+    (stockDetails[TOTAL_EQUITY] / stockDetails[NUMBER_OF_SHARES]);
+
+  stockDetails[MARKET_CAP] =
+    stockDetails[NUMBER_OF_SHARES] * basicData.lastPrice;
 
   return stockDetails;
 }
