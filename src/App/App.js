@@ -5,11 +5,13 @@ import BlueChip from "../BlueChip/BlueChip";
 import Portfolio from "../Portfolio/Portfolio";
 import Weapons from "../Weapons/Weapons";
 import SingleStock from "../SingleStock/SingleStock";
+import Industry from "../Industry/Industry";
 
 const portfolioPage = "PORTFOLIO_PAGE";
 const bestYieldPage = "BEST_YIELD_PAGE";
 const blueChipPage = "BLUE_CHIP_PAGE";
 const weaponsPage = "WEAPONS_PAGE";
+const industryPage = "INDUSTRY_PAGE";
 
 const classNames = require("classnames");
 
@@ -33,6 +35,8 @@ class App extends React.Component {
         return <BlueChip showSingleStock={this.showSingleStock.bind(this)} />;
       case weaponsPage:
         return <Weapons showSingleStock={this.showSingleStock.bind(this)} />;
+      case industryPage:
+        return <Industry showSingleStock={this.showSingleStock.bind(this)} />;
       default:
         return <div></div>;
     }
@@ -64,6 +68,7 @@ class App extends React.Component {
         {this.renderButton("Portfolio", portfolioPage)}
         {this.renderButton("Utdelningsaktier", bestYieldPage)}
         {this.renderButton("Basaktier", blueChipPage)}
+        {this.renderButton("Verkstad", industryPage)}
         {this.renderButton("Vapen", weaponsPage)}
         {this.renderActivePage()}
       </div>
