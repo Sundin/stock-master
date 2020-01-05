@@ -41,6 +41,18 @@ class Portfolio extends React.Component {
       return <p>{this.state.error}</p>;
     }
 
+    const trades = getTrades(this.state.portfolios);
+    let sortedTrades = [];
+    Object.keys(trades).forEach(trade => {
+      sortedTrades.push({
+        name: trade,
+        value: (trades[trade] / this.getTotalPortfolioValue()) * 100
+      });
+    });
+    sortedTrades = sortedTrades.sort(function(a, b) {
+      return a.value < b.value ? 1 : b.value < a.value ? -1 : 0;
+    });
+
     return (
       <div>
         <h1>Alla portföljer</h1>
@@ -63,6 +75,24 @@ class Portfolio extends React.Component {
           </tbody>
         </table>
 
+        <h2>Branschfördelning</h2>
+        <table>
+          <thead>
+            <tr>
+              <th width="40%">Bransch</th>
+              <th width="30%">Andel</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedTrades.map(trade => (
+              <tr>
+                <td>{trade.name}</td>
+                <td>{trade.value.toFixed(2)}%</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
         {this.state.portfolios.map(portfolioData => (
           <PortfolioDetails
             portfolioData={portfolioData}
@@ -72,6 +102,19 @@ class Portfolio extends React.Component {
       </div>
     );
   }
+}
+
+function getTrades(portfolios) {
+  let trades = {};
+  portfolios.forEach(portfolioData => {
+    portfolioData.stocks.forEach(stock => {
+      if (!trades[stock.trade]) {
+        trades[stock.trade] = 0;
+      }
+      trades[stock.trade] += stock.amount * stock.lastPrice;
+    });
+  });
+  return trades;
 }
 
 function PortfolioRow(props) {
@@ -114,9 +157,10 @@ function PortfolioDetails(props) {
       <table>
         <thead>
           <tr>
-            <th width="20%">ID</th>
-            <th width="50%">Aktie</th>
-            <th width="30%">Andel av portfölj</th>
+            <th width="10%">ID</th>
+            <th width="40%">Aktie</th>
+            <th width="20%">Andel av portfölj</th>
+            <th widrth="30%">Bransch</th>
           </tr>
         </thead>
         <tbody>
@@ -155,6 +199,7 @@ function StockRow(props) {
       >
         {stockRatio.toFixed(2)}%
       </td>
+      <td>{stock.trade}</td>
     </tr>
   );
 }

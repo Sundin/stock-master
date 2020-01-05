@@ -22,10 +22,10 @@ export function getStock(id) {
   });
 }
 
-export function getStockWithAmount(id, amount) {
+export function getStockWithAmount(stock) {
   return new Promise((resolve, reject) => {
-    getStock(id).then(stockData => {
-      resolve({ ...stockData, amount: amount });
+    getStock(stock.id).then(stockData => {
+      resolve({ ...stock, ...stockData });
     });
   });
 }

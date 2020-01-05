@@ -19,7 +19,7 @@ function getStocksInPortfolio(portfolio) {
   return new Promise((resolve, reject) => {
     let promises = [];
     portfolio.stocks.forEach(stock => {
-      promises.push(getStockWithAmount(stock.id, stock.amount));
+      promises.push(getStockWithAmount(stock));
     });
     Promise.all(promises).then(stocks => {
       returnData.stocks = stocks.sort((a, b) => {
