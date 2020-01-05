@@ -3,22 +3,7 @@ import StockTable from "../components/StockTable";
 import { getForestStocks } from "./dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
-import {
-  OPERATING_MARGIN,
-  PRICE_EARNINGS_RATIO,
-  PRICE_SALES_RATIO,
-  DIRECT_YIELD,
-  NUMBER_OF_EMPLOYEES,
-  REVENUE,
-  REVENUE_PER_EMPLOYEE,
-  TOTAL_ASSETS,
-  EARNINGS_PER_SHARE,
-  PRICE_BOOK_VALUE,
-  SOLIDITY,
-  MARKET_CAP,
-  NET_EARNINGS,
-  EBIT
-} from "../constants";
+import { PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY } from "../constants";
 
 class Forest extends React.Component {
   state = {
@@ -26,19 +11,7 @@ class Forest extends React.Component {
     ownedStocks: [],
     error: null,
     sortKey: PRICE_EARNINGS_RATIO,
-    columnsToShow: [
-      PRICE_EARNINGS_RATIO,
-      PRICE_SALES_RATIO,
-      DIRECT_YIELD,
-      NUMBER_OF_EMPLOYEES,
-      REVENUE,
-      REVENUE_PER_EMPLOYEE,
-      OPERATING_MARGIN,
-      TOTAL_ASSETS,
-      PRICE_BOOK_VALUE,
-      SOLIDITY,
-      MARKET_CAP
-    ]
+    columnsToShow: [PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY]
   };
 
   componentDidMount() {
@@ -77,7 +50,7 @@ class Forest extends React.Component {
           onSort={sortKey => {
             this.setState({ sortKey: sortKey });
           }}
-          // columnsToShow={this.state.columnsToShow}
+          columnsToShow={this.state.columnsToShow}
           showSingleStock={this.props.showSingleStock}
         />
       </div>
