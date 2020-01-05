@@ -42,15 +42,15 @@ class Portfolio extends React.Component {
       return <p>{this.state.error}</p>;
     }
 
-    const trades = getTrades(this.state.portfolios);
-    let sortedTrades = [];
-    Object.keys(trades).forEach(trade => {
-      sortedTrades.push({
-        name: trade,
-        value: (trades[trade] / this.getTotalPortfolioValue()) * 100
+    const sectors = getSectors(this.state.portfolios);
+    let sortedSectors = [];
+    Object.keys(sectors).forEach(sector => {
+      sortedSectors.push({
+        name: sector,
+        value: (sectors[sector] / this.getTotalPortfolioValue()) * 100
       });
     });
-    sortedTrades = sortedTrades.sort(function(a, b) {
+    sortedSectors = sortedSectors.sort(function(a, b) {
       return a.value < b.value ? 1 : b.value < a.value ? -1 : 0;
     });
 
@@ -85,10 +85,10 @@ class Portfolio extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {sortedTrades.map(trade => (
+            {sortedSectors.map(sector => (
               <tr>
-                <td>{trade.name}</td>
-                <td>{trade.value.toFixed(2)}%</td>
+                <td>{sector.name}</td>
+                <td>{sector.value.toFixed(2)}%</td>
               </tr>
             ))}
           </tbody>
@@ -105,17 +105,17 @@ class Portfolio extends React.Component {
   }
 }
 
-function getTrades(portfolios) {
-  let trades = {};
+function getSectors(portfolios) {
+  let sectors = {};
   portfolios.forEach(portfolioData => {
     portfolioData.stocks.forEach(stock => {
-      if (!trades[stock.trade]) {
-        trades[stock.trade] = 0;
+      if (!sectors[stock.sector]) {
+        sectors[stock.sector] = 0;
       }
-      trades[stock.trade] += stock.amount * stock.lastPrice;
+      sectors[stock.sector] += stock.amount * stock.lastPrice;
     });
   });
-  return trades;
+  return sectors;
 }
 
 function PortfolioRow(props) {
@@ -201,7 +201,7 @@ function StockRow(props) {
       >
         {stockRatio.toFixed(2)}%
       </td>
-      <td>{stock.trade}</td>
+      <td>{stock.sector}</td>
       <td>{stock[PRICE_EARNINGS_RATIO]}</td>
     </tr>
   );
