@@ -6,6 +6,7 @@ import {
   numberOfStocksIsGood,
   getStockValue
 } from "./portfolioUtils";
+import { PRICE_EARNINGS_RATIO } from "../constants";
 
 var classNames = require("classnames");
 
@@ -158,9 +159,10 @@ function PortfolioDetails(props) {
         <thead>
           <tr>
             <th width="10%">ID</th>
-            <th width="40%">Aktie</th>
+            <th width="30%">Aktie</th>
             <th width="20%">Andel av portfölj</th>
             <th widrth="30%">Bransch</th>
+            <th widrth="10%">P/E</th>
           </tr>
         </thead>
         <tbody>
@@ -200,6 +202,7 @@ function StockRow(props) {
         {stockRatio.toFixed(2)}%
       </td>
       <td>{stock.trade}</td>
+      <td>{stock[PRICE_EARNINGS_RATIO]}</td>
     </tr>
   );
 }
