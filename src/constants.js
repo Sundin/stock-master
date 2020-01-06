@@ -1,6 +1,6 @@
 export const exchangeRates = {
-  DKK: 1.43,
-  USD: 9.7
+  DKK: 1.41,
+  USD: 9.42
 };
 
 export const BILLION = 1000000000;
