@@ -1,5 +1,6 @@
 import { getStockWithAmount } from "../avanza";
-import portfolios from "../data/portfolioData";
+// import portfolios from "../data/portfolioData";
+import portfolios from "./portfolioData";
 import { getStockValue } from "./portfolioUtils";
 
 export function getPortfolios() {

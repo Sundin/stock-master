@@ -19,9 +19,13 @@ const classNames = require("classnames");
 
 class App extends React.Component {
   state = {
-    activePage: portfolioPage,
+    activePage: bestYieldPage,
     activeStock: null
   };
+
+  componentDidMount() {
+    require("dotenv").config();
+  }
 
   renderActivePage() {
     if (this.state.activeStock) {
