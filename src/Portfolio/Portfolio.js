@@ -16,20 +16,20 @@ class Portfolio extends React.Component {
     error: null
   };
 
-  componentDidMount() {
-    getPortfolios()
-      .then(portfolios => {
-        this.setState({
-          portfolios: portfolios
-        });
-      })
-      .catch(err => {
-        console.error(err);
-        this.setState({
-          error: err.message
-        });
-      });
-  }
+  // componentDidMount() {
+  //   getPortfolios()
+  //     .then(portfolios => {
+  //       this.setState({
+  //         portfolios: portfolios
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.error(err);
+  //       this.setState({
+  //         error: err.message
+  //       });
+  //     });
+  // }
 
   getTotalPortfolioValue() {
     return this.state.portfolios.reduce((sum, portfolio) => {
