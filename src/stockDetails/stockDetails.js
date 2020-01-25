@@ -5,7 +5,7 @@ import lockheedMartin from "./stocks/lockheedMartin";
 
 import { formatAllFields } from "./formatAllFields";
 import { calculateKPIs } from "./calculateKPIs";
-import { YEAR, ID, CHANGE_VALUES } from "../constants";
+import { CHANGE_VALUES } from "../constants";
 import { calculateChange } from "./calculateChangeValues";
 
 function getAllStocks() {

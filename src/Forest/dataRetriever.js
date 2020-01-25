@@ -1,35 +1,10 @@
-import { getStock } from "../avanza";
-import { getStockDetails } from "../stockDetails/stockDetails";
-
-const interestingStocks = [
-  "5263",
-  "5332",
-  "5422",
-  "5556",
-  "5262",
-  "5251",
-  "5250",
-  "52842"
-];
+const rp = require("request-promise-native");
 
 export function getForestStocks() {
   return new Promise((resolve, reject) => {
-    let promises = [];
-
-    let stocksToShow = interestingStocks;
-
-    stocksToShow.forEach(id => {
-      promises.push(getStock(id));
-    });
-
-    Promise.all(promises).then(stocks => {
-      let returnData = [];
-      stocks.forEach(stockData => {
-        const stockDetails = getStockDetails(stockData.id, stockData);
-        returnData.push({ ...stockData, ...stockDetails });
-      });
-
-      resolve(returnData);
+    rp("http://bissenisse.duckdns.org:8080/category/forest").then(stockData => {
+      const parsedData = JSON.parse(stockData);
+      resolve(parsedData.stocks);
     });
   });
 }
