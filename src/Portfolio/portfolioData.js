@@ -12,12 +12,12 @@ const portfolios = [
     id: "1",
     name: "Basportföljen",
     stocks: [
-      {
-        id: "5465",
-        name: "Axfood",
-        amount: 10,
-        sector: "Konsumentvaror"
-      }
+      // {
+      //   id: "5465",
+      //   name: "Axfood",
+      //   amount: 10,
+      //   sector: "Konsumentvaror"
+      // }
     ],
     strategy: {
       ...basePortfolioStrategy,
@@ -29,12 +29,12 @@ const portfolios = [
     id: "2",
     name: "Raketportföljen",
     stocks: [
-      {
-        id: "3323",
-        name: "Apple Inc",
-        amount: 1,
-        sector: "Teknik"
-      }
+      // {
+      //   id: "3323",
+      //   name: "Apple Inc",
+      //   amount: 1,
+      //   sector: "Teknik"
+      // }
     ],
     strategy: basePortfolioStrategy
   }

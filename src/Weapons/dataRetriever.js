@@ -9,16 +9,16 @@ export function getWeaponStocks() {
 
     let stocksToShow = interestingStocks;
 
-    stocksToShow.forEach(id => {
-      promises.push(getStock(id));
-    });
+    // stocksToShow.forEach(id => {
+    //   promises.push(getStock(id));
+    // });
 
     Promise.all(promises).then(stocks => {
       let returnData = [];
-      stocks.forEach(stockData => {
-        const stockDetails = getStockDetails(stockData.id, stockData);
-        returnData.push({ ...stockData, ...stockDetails });
-      });
+      // stocks.forEach(stockData => {
+      //   const stockDetails = getStockDetails(stockData.id, stockData);
+      //   returnData.push({ ...stockData, ...stockDetails });
+      // });
 
       resolve(returnData);
     });
