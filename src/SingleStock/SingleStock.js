@@ -137,6 +137,7 @@ class InputSection extends React.Component {
     this.state = {
       currency: "SEK",
       multiplier: "NONE",
+      period: "YEAR",
       year: 2020,
       revenue: 0,
       earningsBeforeInterestAndTax: 0,
@@ -182,24 +183,40 @@ class InputSection extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const reqBody = {
-      annualReports: [
-        {
-          currency: this.state.currency,
-          year: this.state.year,
-          revenue: this.multiply(this.state.revenue),
-          earningsBeforeInterestAndTax: this.multiply(
-            this.state.earningsBeforeInterestAndTax
-          ),
-          netEarnings: this.multiply(this.state.netEarnings),
-          totalAssets: this.multiply(this.state.totalAssets),
-          totalEquity: this.multiply(this.state.totalEquity),
-          totalDebt: this.multiply(this.state.totalDebt),
-          numberOfShares: this.state.numberOfShares * 1,
-          numberOfEmployees: this.state.numberOfEmployees * 1
-        }
-      ]
+
+    let report = {
+      currency: this.state.currency,
+      year: this.state.year,
+      revenue: this.multiply(this.state.revenue),
+      earningsBeforeInterestAndTax: this.multiply(
+        this.state.earningsBeforeInterestAndTax
+      ),
+      netEarnings: this.multiply(this.state.netEarnings),
+      numberOfShares: this.state.numberOfShares * 1,
+      numberOfEmployees: this.state.numberOfEmployees * 1
     };
+
+    if (this.state.period !== "YEAR") {
+      report.period = this.state.period;
+    }
+
+    if (this.state.totalAssets !== 0) {
+      report.totalAssets = this.multiply(this.state.totalAssets);
+    }
+    if (this.state.totalEquity !== 0) {
+      report.totalEquity = this.multiply(this.state.totalEquity);
+    }
+    if (this.state.totalDebt !== 0) {
+      report.totalDebt = this.multiply(this.state.totalDebt);
+    }
+
+    let reqBody = {};
+
+    if (this.state.period === "YEAR") {
+      reqBody.annualReports = [report];
+    } else {
+      reqBody.interimReports = [report];
+    }
     saveStockData(this.props.id, reqBody);
   }
 
@@ -214,6 +231,21 @@ class InputSection extends React.Component {
             checked={this.state.year}
             onChange={this.handleInputChange}
           />
+        </label>
+        <br />
+        <label>
+          Kvartal:
+          <select
+            name="period"
+            value={this.state.period}
+            onChange={this.handleInputChange}
+          >
+            <option value="YEAR">Helår</option>
+            <option value="Q1">Q1</option>
+            <option value="Q2">Q2</option>
+            <option value="Q3">Q3</option>
+            <option value="Q4">Q4</option>
+          </select>
         </label>
         <br />
         <h3>Räkenskaper</h3>
