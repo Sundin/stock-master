@@ -16,7 +16,10 @@ import {
   ANNUAL_REPORTS_TABLE,
   INTERIM_REPORTS_TABLE,
   NET_EARNINGS,
-  EBIT
+  EBIT,
+  MILLION,
+  BILLION,
+  THOUSAND
 } from "../constants";
 import { getStockDetails } from "../stockDetails/stockDetails";
 import { getStock } from "../avanza";
@@ -133,7 +136,7 @@ class InputSection extends React.Component {
     super(props);
     this.state = {
       currency: "SEK",
-      unit: "",
+      multiplier: "NONE",
       year: 2020,
       revenue: 0,
       earningsBeforeInterestAndTax: 0,
@@ -159,6 +162,24 @@ class InputSection extends React.Component {
     });
   }
 
+  multiply(value) {
+    if (!this.state.multiplier || this.state.multiplier === "") {
+      return value * 1;
+    }
+    switch (this.state.multiplier) {
+      case "MILLION":
+        return value * MILLION;
+      case "BILLION":
+        return value * BILLION;
+      case "THOUSAND":
+        return value * THOUSAND;
+      case "NONE":
+        return value * 1;
+      default:
+        return value * 1;
+    }
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     const reqBody = {
@@ -166,14 +187,16 @@ class InputSection extends React.Component {
         {
           currency: this.state.currency,
           year: this.state.year,
-          revenue: this.state.revenue,
-          earningsBeforeInterestAndTax: this.state.earningsBeforeInterestAndTax,
-          netEarnings: this.state.netEarnings,
-          totalAssets: this.state.totalAssets,
-          totalEquity: this.state.totalEquity,
-          totalDebt: this.state.totalDebt,
-          numberOfShares: this.state.numberOfShares,
-          numberOfEmployees: this.state.numberOfEmployees
+          revenue: this.multiply(this.state.revenue),
+          earningsBeforeInterestAndTax: this.multiply(
+            this.state.earningsBeforeInterestAndTax
+          ),
+          netEarnings: this.multiply(this.state.netEarnings),
+          totalAssets: this.multiply(this.state.totalAssets),
+          totalEquity: this.multiply(this.state.totalEquity),
+          totalDebt: this.multiply(this.state.totalDebt),
+          numberOfShares: this.state.numberOfShares * 1,
+          numberOfEmployees: this.state.numberOfEmployees * 1
         }
       ]
     };
@@ -196,26 +219,30 @@ class InputSection extends React.Component {
         <h3>Räkenskaper</h3>
         <label>
           Valuta:
-          <input
+          <select
+            name="multiplier"
+            value={this.state.multiplier}
+            onChange={this.handleInputChange}
+          >
+            <option value="NONE"></option>
+            <option value="THOUSAND">Tusen</option>
+            <option value="MILLION">Miljoner</option>
+            <option value="BILLION">Miljarder</option>
+          </select>
+          <select
             name="currency"
-            type="text"
-            checked={this.state.currency}
+            value={this.state.currency}
             onChange={this.handleInputChange}
-          />
+          >
+            <option value="SEK">SEK</option>
+            <option value="EUR">EUR</option>
+            <option value="USD">USD</option>
+            <option value="DKK">DKK</option>
+          </select>
         </label>
         <br />
         <label>
-          Enhet (MILLION; BILLION):
-          <input
-            name="unit"
-            type="text"
-            checked={this.state.unit}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Omsättning:
+          Omsättning (revenue):
           <input
             name="revenue"
             type="number"
@@ -237,7 +264,7 @@ class InputSection extends React.Component {
         <br />
 
         <label>
-          Net earnings:
+          Vinst (Net earnings):
           <input
             name="netEarnings"
             type="number"
@@ -248,7 +275,7 @@ class InputSection extends React.Component {
         <br />
 
         <label>
-          Total assets:
+          Tillgångar (Total assets):
           <input
             name="totalAssets"
             type="number"
@@ -259,7 +286,7 @@ class InputSection extends React.Component {
         <br />
 
         <label>
-          Total equity:
+          Eget kapital (Total equity):
           <input
             name="totalEquity"
             type="number"
@@ -270,7 +297,7 @@ class InputSection extends React.Component {
         <br />
 
         <label>
-          Total debt:
+          Skuld (Total debt):
           <input
             name="totalDebt"
             type="number"
@@ -280,7 +307,7 @@ class InputSection extends React.Component {
         </label>
         <br />
 
-        <h3>Anann info</h3>
+        <h3>Annan info</h3>
         <label>
           Antal anställda:
           <input

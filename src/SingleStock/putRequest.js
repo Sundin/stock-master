@@ -1,6 +1,7 @@
 const rp = require("request-promise-native");
 
 export function saveStockData(id, data) {
+  console.log(data);
   return new Promise((resolve, reject) => {
     rp({
       method: "PUT",
