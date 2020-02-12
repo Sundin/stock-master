@@ -21,9 +21,7 @@ import {
   BILLION,
   THOUSAND
 } from "../constants";
-import { getStockDetails } from "../stockDetails/stockDetails";
-import { getStock } from "../avanza";
-import { saveStockData } from "./putRequest";
+import { saveStockData, getStockData } from "./backend";
 
 class SingleStock extends React.Component {
   state = {
@@ -46,12 +44,9 @@ class SingleStock extends React.Component {
   };
 
   componentDidMount() {
-    getStock(this.props.id).then(basicData => {
+    getStockData(this.props.id).then(data => {
       this.setState({
-        stockDetails: {
-          ...basicData,
-          ...getStockDetails(this.props.id, basicData)
-        }
+        stockDetails: data
       });
     });
   }
@@ -100,7 +95,10 @@ class SingleStock extends React.Component {
     }
     return (
       <div>
-        <InputSection id={this.props.id} />
+        <InputSection
+          id={this.props.id}
+          stockDetails={this.state.stockDetails}
+        />
       </div>
     );
   }
@@ -120,10 +118,10 @@ class SingleStock extends React.Component {
       <div>
         <h1>{stockDetails.name}</h1>
 
-        {this.renderInputSection()}
-
         {this.renderAnnualReports()}
         {this.renderInterimReports()}
+
+        {this.renderInputSection()}
       </div>
     );
   }
@@ -184,9 +182,10 @@ class InputSection extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
+    // Multiply by 1 to ensure its a number, not a string
     let report = {
       currency: this.state.currency,
-      year: this.state.year,
+      year: this.state.year * 1,
       revenue: this.multiply(this.state.revenue),
       earningsBeforeInterestAndTax: this.multiply(
         this.state.earningsBeforeInterestAndTax
@@ -210,158 +209,174 @@ class InputSection extends React.Component {
       report.totalDebt = this.multiply(this.state.totalDebt);
     }
 
-    let reqBody = {};
+    let reqBody = this.props.stockDetails;
+
+    if (!reqBody.annualReports || !Array.isArray(reqBody.annualReports)) {
+      reqBody.annualReports = [];
+    }
+    if (!reqBody.interimReports || !Array.isArray(reqBody.interimReports)) {
+      reqBody.interimReports = [];
+    }
 
     if (this.state.period === "YEAR") {
-      reqBody.annualReports = [report];
+      reqBody.annualReports = reqBody.annualReports
+        // Replace report if it already exists
+        .filter(r => r.year !== report.year);
+      reqBody.annualReports.push(report);
     } else {
-      reqBody.interimReports = [report];
+      reqBody.interimReports = reqBody.interimReports
+        // Replace report if it already exists
+        .filter(r => r.year !== report.year || r.period !== report.period);
+      reqBody.interimReports.push(report);
     }
     saveStockData(this.props.id, reqBody);
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          År:
-          <input
-            name="year"
-            type="number"
-            checked={this.state.year}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Kvartal:
-          <select
-            name="period"
-            value={this.state.period}
-            onChange={this.handleInputChange}
-          >
-            <option value="YEAR">Helår</option>
-            <option value="Q1">Q1</option>
-            <option value="Q2">Q2</option>
-            <option value="Q3">Q3</option>
-            <option value="Q4">Q4</option>
-          </select>
-        </label>
-        <br />
-        <h3>Räkenskaper</h3>
-        <label>
-          Valuta:
-          <select
-            name="multiplier"
-            value={this.state.multiplier}
-            onChange={this.handleInputChange}
-          >
-            <option value="NONE"></option>
-            <option value="THOUSAND">Tusen</option>
-            <option value="MILLION">Miljoner</option>
-            <option value="BILLION">Miljarder</option>
-          </select>
-          <select
-            name="currency"
-            value={this.state.currency}
-            onChange={this.handleInputChange}
-          >
-            <option value="SEK">SEK</option>
-            <option value="EUR">EUR</option>
-            <option value="USD">USD</option>
-            <option value="DKK">DKK</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Omsättning (revenue):
-          <input
-            name="revenue"
-            type="number"
-            value={this.state.revenue}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
+      <div>
+        <h2>Lägg till rapport</h2>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            År:
+            <input
+              name="year"
+              type="number"
+              checked={this.state.year}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <br />
+          <label>
+            Kvartal:
+            <select
+              name="period"
+              value={this.state.period}
+              onChange={this.handleInputChange}
+            >
+              <option value="YEAR">Helår</option>
+              <option value="Q1">Q1</option>
+              <option value="Q2">Q2</option>
+              <option value="Q3">Q3</option>
+              <option value="Q4">Q4</option>
+            </select>
+          </label>
+          <br />
+          <h3>Räkenskaper</h3>
+          <label>
+            Valuta:
+            <select
+              name="multiplier"
+              value={this.state.multiplier}
+              onChange={this.handleInputChange}
+            >
+              <option value="NONE"></option>
+              <option value="THOUSAND">Tusen</option>
+              <option value="MILLION">Miljoner</option>
+              <option value="BILLION">Miljarder</option>
+            </select>
+            <select
+              name="currency"
+              value={this.state.currency}
+              onChange={this.handleInputChange}
+            >
+              <option value="SEK">SEK</option>
+              <option value="EUR">EUR</option>
+              <option value="USD">USD</option>
+              <option value="DKK">DKK</option>
+            </select>
+          </label>
+          <br />
+          <label>
+            Omsättning (revenue):
+            <input
+              name="revenue"
+              type="number"
+              value={this.state.revenue}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <br />
 
-        <label>
-          EBIT:
-          <input
-            name="earningsBeforeInterestAndTax"
-            type="number"
-            value={this.state.earningsBeforeInterestAndTax}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
+          <label>
+            EBIT:
+            <input
+              name="earningsBeforeInterestAndTax"
+              type="number"
+              value={this.state.earningsBeforeInterestAndTax}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <br />
 
-        <label>
-          Vinst (Net earnings):
-          <input
-            name="netEarnings"
-            type="number"
-            value={this.state.netEarnings}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
+          <label>
+            Vinst (Net earnings):
+            <input
+              name="netEarnings"
+              type="number"
+              value={this.state.netEarnings}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <br />
 
-        <label>
-          Tillgångar (Total assets):
-          <input
-            name="totalAssets"
-            type="number"
-            value={this.state.totalAssets}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
+          <label>
+            Tillgångar (Total assets):
+            <input
+              name="totalAssets"
+              type="number"
+              value={this.state.totalAssets}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <br />
 
-        <label>
-          Eget kapital (Total equity):
-          <input
-            name="totalEquity"
-            type="number"
-            value={this.state.totalEquity}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
+          <label>
+            Eget kapital (Total equity):
+            <input
+              name="totalEquity"
+              type="number"
+              value={this.state.totalEquity}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <br />
 
-        <label>
-          Skuld (Total debt):
-          <input
-            name="totalDebt"
-            type="number"
-            value={this.state.totalDebt}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <br />
+          <label>
+            Skuld (Total debt):
+            <input
+              name="totalDebt"
+              type="number"
+              value={this.state.totalDebt}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <br />
 
-        <h3>Annan info</h3>
-        <label>
-          Antal anställda:
-          <input
-            name="numberOfEmployees"
-            type="number"
-            value={this.state.numberOfEmployees}
-            onChange={this.handleInputChange}
-          />
-        </label>
-        <label>
-          Antal aktier:
-          <input
-            name="numberOfShares"
-            type="number"
-            value={this.state.numberOfShares}
-            onChange={this.handleInputChange}
-          />
-        </label>
+          <h3>Annan info</h3>
+          <label>
+            Antal anställda:
+            <input
+              name="numberOfEmployees"
+              type="number"
+              value={this.state.numberOfEmployees}
+              onChange={this.handleInputChange}
+            />
+          </label>
+          <label>
+            Antal aktier:
+            <input
+              name="numberOfShares"
+              type="number"
+              value={this.state.numberOfShares}
+              onChange={this.handleInputChange}
+            />
+          </label>
 
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
+          <br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 }
