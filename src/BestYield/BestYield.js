@@ -1,6 +1,6 @@
 import React from "react";
 import StockTable from "../components/StockTable";
-import { getInterestingYieldStocks } from "./dataRetriever";
+import { getStocks } from "../dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
 
@@ -13,7 +13,7 @@ class BestYield extends React.Component {
   };
 
   componentDidMount() {
-    getInterestingYieldStocks()
+    getStocks("best-yield")
       .then(stocks => {
         this.setState({
           stocks: stocks

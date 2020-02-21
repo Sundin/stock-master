@@ -1,6 +1,6 @@
 import React from "react";
 import StockTable from "../components/StockTable";
-import { getIndustryStocks } from "./dataRetriever";
+import { getStocks } from "../dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
 import {
@@ -42,7 +42,7 @@ class Industry extends React.Component {
   };
 
   componentDidMount() {
-    getIndustryStocks()
+    getStocks("industry")
       .then(stocks => {
         this.setState({
           stocks: stocks

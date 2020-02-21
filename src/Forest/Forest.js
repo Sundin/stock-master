@@ -1,6 +1,6 @@
 import React from "react";
 import StockTable from "../components/StockTable";
-import { getForestStocks } from "./dataRetriever";
+import { getStocks } from "../dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
 import { PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY } from "../constants";
@@ -15,7 +15,7 @@ class Forest extends React.Component {
   };
 
   componentDidMount() {
-    getForestStocks()
+    getStocks("forest")
       .then(stocks => {
         this.setState({
           stocks: stocks

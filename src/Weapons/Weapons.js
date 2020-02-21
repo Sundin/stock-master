@@ -1,6 +1,6 @@
 import React from "react";
 import StockTable from "../components/StockTable";
-import { getWeaponStocks } from "./dataRetriever";
+import { getStocks } from "../dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
 import {
@@ -42,7 +42,7 @@ class Weapons extends React.Component {
   };
 
   componentDidMount() {
-    getWeaponStocks()
+    getStocks("weapons")
       .then(stocks => {
         this.setState({
           stocks: stocks

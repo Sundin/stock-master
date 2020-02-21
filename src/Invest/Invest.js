@@ -1,6 +1,6 @@
 import React from "react";
 import StockTable from "../components/StockTable";
-import { getStocks } from "./dataRetriever";
+import { getStocks } from "../dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
 
@@ -13,7 +13,7 @@ class BlueChip extends React.Component {
   };
 
   componentDidMount() {
-    getStocks()
+    getStocks("invest")
       .then(stocks => {
         this.setState({
           stocks: stocks
