@@ -24,7 +24,8 @@ const classNames = require("classnames");
 class App extends React.Component {
   state = {
     activePage: bestYieldPage,
-    activeStock: null
+    activeStock: null,
+    columnsToShow: []
   };
 
   componentDidMount() {
@@ -33,7 +34,12 @@ class App extends React.Component {
 
   renderActivePage() {
     if (this.state.activeStock) {
-      return <SingleStock id={this.state.activeStock} />;
+      return (
+        <SingleStock
+          id={this.state.activeStock}
+          columnsToShow={this.state.columnsToShow}
+        />
+      );
     }
 
     switch (this.state.activePage) {
@@ -73,8 +79,8 @@ class App extends React.Component {
     );
   }
 
-  showSingleStock(id) {
-    this.setState({ activeStock: id });
+  showSingleStock(id, columnsToShow) {
+    this.setState({ activeStock: id, columnsToShow: columnsToShow });
   }
 
   render() {

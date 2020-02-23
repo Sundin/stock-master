@@ -80,7 +80,10 @@ function getMainColumn(tableType) {
 
 class Stock extends React.Component {
   handleClick() {
-    this.props.showSingleStock(this.props.stockData.id);
+    this.props.showSingleStock(
+      this.props.stockData.id,
+      this.props.columnsToShow
+    );
   }
 
   renderMainColumn() {
