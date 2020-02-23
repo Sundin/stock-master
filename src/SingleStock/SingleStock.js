@@ -274,7 +274,7 @@ class InputSection extends React.Component {
           <br />
 
           <label>
-            EBIT:
+            Rörelseresultat (EBIT):
             <input
               name="earningsBeforeInterestAndTax"
               type="number"
