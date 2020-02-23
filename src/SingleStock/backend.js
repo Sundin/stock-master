@@ -1,11 +1,11 @@
 const rp = require("request-promise-native");
 
-export function saveStockData(id, data) {
+export function saveReport(id, data) {
   console.log(data);
   return new Promise((resolve, reject) => {
     rp({
       method: "PUT",
-      uri: `https://bissenisse.duckdns.org:443/stock/${id}`,
+      uri: `https://bissenisse.duckdns.org:443/stock/${id}/reports`,
       body: data,
       json: true
     }).then(returnData => {

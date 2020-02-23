@@ -9,7 +9,7 @@ import {
   BILLION,
   THOUSAND
 } from "../constants";
-import { saveStockData, getStockData } from "./backend";
+import { saveReport, getStockData } from "./backend";
 
 class SingleStock extends React.Component {
   state = {
@@ -184,27 +184,7 @@ class InputSection extends React.Component {
       report.totalDebt = this.multiply(this.state.totalDebt);
     }
 
-    let reqBody = this.props.stockDetails;
-
-    if (!reqBody.annualReports || !Array.isArray(reqBody.annualReports)) {
-      reqBody.annualReports = [];
-    }
-    if (!reqBody.interimReports || !Array.isArray(reqBody.interimReports)) {
-      reqBody.interimReports = [];
-    }
-
-    if (this.state.period === "YEAR") {
-      reqBody.annualReports = reqBody.annualReports
-        // Replace report if it already exists
-        .filter(r => r.year !== report.year);
-      reqBody.annualReports.push(report);
-    } else {
-      reqBody.interimReports = reqBody.interimReports
-        // Replace report if it already exists
-        .filter(r => r.year !== report.year || r.period !== report.period);
-      reqBody.interimReports.push(report);
-    }
-    saveStockData(this.props.id, reqBody);
+    saveReport(this.props.id, report);
   }
 
   render() {
