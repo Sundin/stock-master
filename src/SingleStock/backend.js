@@ -1,9 +1,9 @@
 const rp = require("request-promise-native");
+const { formatAllFields } = require("../api/formatAllFields");
 
 const BASE_URL = "https://bissenisse.duckdns.org:443";
 
 export function saveReport(id, data) {
-  console.log(data);
   return new Promise((resolve, reject) => {
     rp({
       method: "PUT",
@@ -21,8 +21,21 @@ export function getStockData(id) {
     rp({
       uri: `${BASE_URL}/stock/${id}`
     }).then(returnData => {
-      const parsedData = JSON.parse(returnData);
-      console.log(parsedData);
+      let parsedData = JSON.parse(returnData);
+      parsedData = formatAllFields(parsedData);
+
+      if (parsedData.interimReports) {
+        parsedData.interimReports = parsedData.interimReports.map(report =>
+          formatAllFields(report)
+        );
+      }
+
+      if (parsedData.annualReports) {
+        parsedData.annualReports = parsedData.annualReports.map(report =>
+          formatAllFields(report)
+        );
+      }
+
       resolve(parsedData);
     });
   });
