@@ -1,8 +1,8 @@
 const rp = require("request-promise-native");
 const { formatAllFields } = require("./api/formatAllFields");
 
-// const BASE_URL = "https://bissenisse.duckdns.org:443";
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "https://bissenisse.duckdns.org:443";
+// const BASE_URL = "http://localhost:8080";
 
 export function getStocks(category) {
   return new Promise((resolve, reject) => {
