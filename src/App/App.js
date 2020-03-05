@@ -28,10 +28,6 @@ class App extends React.Component {
     columnsToShow: []
   };
 
-  componentDidMount() {
-    require("dotenv").config();
-  }
-
   renderActivePage() {
     if (this.state.activeStock) {
       return (

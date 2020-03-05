@@ -1,11 +1,13 @@
 const rp = require("request-promise-native");
 
+const BASE_URL = "https://bissenisse.duckdns.org:443";
+
 export function saveReport(id, data) {
   console.log(data);
   return new Promise((resolve, reject) => {
     rp({
       method: "PUT",
-      uri: `https://bissenisse.duckdns.org:443/stock/${id}/reports`,
+      uri: `${BASE_URL}/stock/${id}/reports`,
       body: data,
       json: true
     }).then(returnData => {
@@ -17,7 +19,7 @@ export function saveReport(id, data) {
 export function getStockData(id) {
   return new Promise((resolve, reject) => {
     rp({
-      uri: `https://bissenisse.duckdns.org:443/stock/${id}`
+      uri: `${BASE_URL}/stock/${id}`
     }).then(returnData => {
       const parsedData = JSON.parse(returnData);
       console.log(parsedData);
