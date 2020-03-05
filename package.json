@@ -5,10 +5,9 @@
   "homepage": "https://sundin.github.io/stock-master",
   "dependencies": {
     "classnames": "2.2.6",
-    "dotenv": "8.2.0",
     "gh-pages": "2.2.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
     "react-scripts": "3.1.2",
     "request": "2.88.0",
     "request-promise-native": "1.0.8"
