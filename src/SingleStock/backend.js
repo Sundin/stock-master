@@ -1,7 +1,7 @@
+import { BASE_URL } from "../constants";
+
 const rp = require("request-promise-native");
 const { formatAllFields } = require("../api/formatAllFields");
-
-const BASE_URL = "https://bissenisse.duckdns.org:443";
 
 export function saveReport(id, data) {
   return new Promise((resolve, reject) => {
