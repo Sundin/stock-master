@@ -9,6 +9,7 @@ import Industry from "../Industry/Industry";
 import Forest from "../Forest/Forest";
 import Invest from "../Invest/Invest";
 import RealEstate from "../RealEstate/RealEstate";
+import Bank from "../Bank/Bank";
 
 const portfolioPage = "PORTFOLIO_PAGE";
 const bestYieldPage = "BEST_YIELD_PAGE";
@@ -18,6 +19,7 @@ const industryPage = "INDUSTRY_PAGE";
 const forestPage = "FOREST_PAGE";
 const investPage = "INVEST_PAGE";
 const realEstatePage = "REAL_ESTATE_PAGE";
+const bankPage = "BANK_PAGE";
 
 const classNames = require("classnames");
 
@@ -55,6 +57,8 @@ class App extends React.Component {
         return <Invest showSingleStock={this.showSingleStock.bind(this)} />;
       case realEstatePage:
         return <RealEstate showSingleStock={this.showSingleStock.bind(this)} />;
+      case bankPage:
+        return <Bank showSingleStock={this.showSingleStock.bind(this)} />;
       default:
         return <div></div>;
     }
@@ -91,6 +95,7 @@ class App extends React.Component {
         {this.renderButton("Investment", investPage)}
         {this.renderButton("Fastigheter", realEstatePage)}
         {this.renderButton("Vapen", weaponsPage)}
+        {this.renderButton("Bank", bankPage)}
         {this.renderActivePage()}
       </div>
     );

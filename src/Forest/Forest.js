@@ -3,7 +3,19 @@ import StockTable from "../components/StockTable";
 import { getStocks } from "../dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
-import { PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY } from "../constants";
+import {
+  PRICE_EARNINGS_RATIO,
+  DIRECT_YIELD,
+  VOLATILITY,
+  PRICE_BOOK_VALUE,
+  EARNINGS_PER_SHARE,
+  REVENUE_PER_EMPLOYEE,
+  REVENUE_PER_SHARE,
+  OPERATING_MARGIN,
+  SOLIDITY,
+  PRICE_SALES_RATIO,
+  MARKET_CAP
+} from "../constants";
 
 class Forest extends React.Component {
   state = {
@@ -11,7 +23,19 @@ class Forest extends React.Component {
     ownedStocks: [],
     error: null,
     sortKey: PRICE_EARNINGS_RATIO,
-    columnsToShow: [PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY]
+    columnsToShow: [
+      PRICE_EARNINGS_RATIO,
+      DIRECT_YIELD,
+      VOLATILITY,
+      PRICE_BOOK_VALUE,
+      EARNINGS_PER_SHARE,
+      REVENUE_PER_EMPLOYEE,
+      REVENUE_PER_SHARE,
+      OPERATING_MARGIN,
+      SOLIDITY,
+      PRICE_SALES_RATIO,
+      MARKET_CAP
+    ]
   };
 
   componentDidMount() {
