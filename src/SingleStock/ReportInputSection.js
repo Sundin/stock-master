@@ -6,20 +6,25 @@ import { saveReport } from "./backend";
 class ReportInputSection extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currency: "SEK",
-      multiplier: "NONE",
-      period: "YEAR",
-      year: 2020,
-      revenue: 0,
-      earningsBeforeInterestAndTax: 0,
-      netEarnings: 0,
-      totalAssets: 0,
-      totalEquity: 0,
-      totalDebt: 0,
-      numberOfShares: 0,
-      numberOfEmployees: 0
-    };
+
+    if (props.reportData) {
+      this.state = props.reportData;
+    } else {
+      this.state = {
+        currency: "SEK",
+        multiplier: "NONE",
+        period: "YEAR",
+        year: 2020,
+        revenue: 0,
+        earningsBeforeInterestAndTax: 0,
+        netEarnings: 0,
+        totalAssets: 0,
+        totalEquity: 0,
+        totalDebt: 0,
+        numberOfShares: 0,
+        numberOfEmployees: 0
+      };
+    }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -96,7 +101,7 @@ class ReportInputSection extends React.Component {
             <input
               name="year"
               type="number"
-              checked={this.state.year}
+              value={this.state.year}
               onChange={this.handleInputChange}
             />
           </label>

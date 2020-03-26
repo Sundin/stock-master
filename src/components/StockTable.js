@@ -59,6 +59,7 @@ function StockTable(props) {
               owned={owned}
               columnsToShow={columnsToShow}
               showSingleStock={props.showSingleStock}
+              handleClickReport={props.handleClickReport}
               type={type}
             />
           );
@@ -87,15 +88,27 @@ class Stock extends React.Component {
     );
   }
 
+  handleClickReport(stockdata) {
+    this.props.handleClickReport(stockdata);
+  }
+
   renderMainColumn() {
     const { type, stockData, owned } = this.props;
     switch (type) {
       case ANNUAL_REPORTS_TABLE:
-        return <td>{stockData.year}</td>;
+        return (
+          <td>
+            <a href="#" onClick={() => this.handleClickReport(stockData)}>
+              {stockData.year}
+            </a>
+          </td>
+        );
       case INTERIM_REPORTS_TABLE:
         return (
           <td>
-            {stockData.year} {stockData.period}
+            <a href="#" onClick={() => this.handleClickReport(stockData)}>
+              {stockData.year} {stockData.period}
+            </a>
           </td>
         );
       default:
@@ -105,7 +118,7 @@ class Stock extends React.Component {
               owned: owned
             })}
           >
-            <a href="#" onClick={e => this.handleClick(e)}>
+            <a href="#" onClick={() => this.handleClick()}>
               {stockData.name}
             </a>
             {stockData.currency === "SEK"

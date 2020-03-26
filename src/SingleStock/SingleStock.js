@@ -14,7 +14,8 @@ class SingleStock extends React.Component {
     stocksDetails: null,
     error: null,
     sortKey: PRICE_EARNINGS_RATIO,
-    showReportInput: false
+    showReportInput: false,
+    reportData: null
   };
 
   componentDidMount() {
@@ -39,6 +40,7 @@ class SingleStock extends React.Component {
           stocks={stockDetails.annualReports}
           ownedStocks={[]}
           columnsToShow={this.props.columnsToShow}
+          handleClickReport={this.handleClickReport.bind(this)}
         />
       </div>
     );
@@ -58,9 +60,14 @@ class SingleStock extends React.Component {
           stocks={stockDetails.interimReports}
           ownedStocks={[]}
           columnsToShow={this.props.columnsToShow}
+          handleClickReport={this.handleClickReport.bind(this)}
         />
       </div>
     );
+  }
+
+  handleClickReport(reportData) {
+    this.setState({ showReportInput: true, reportData: reportData });
   }
 
   renderInputSection() {
@@ -72,6 +79,7 @@ class SingleStock extends React.Component {
         <ReportInputSection
           id={this.props.id}
           stockDetails={this.state.stockDetails}
+          reportData={this.state.reportData}
         />
       </div>
     );
@@ -81,7 +89,7 @@ class SingleStock extends React.Component {
     return (
       <button
         onClick={() => {
-          this.setState({ showReportInput: true });
+          this.setState({ showReportInput: true, reportData: null });
         }}
       >
         New Report
