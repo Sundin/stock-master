@@ -19,7 +19,6 @@ The file `src/data/portfolioData.js` needs to be created, which should contain d
 
 The following variables need to be manually kept up to date:
 
-- The currency exchange rates in [src/avanza.js](src/avanza.js).
 - `tenYearsBondInterest` and `averageOMXS30volatility` in [src/BestYield/stockIndicators.js](src/BestYield/stockIndicators.js).
 
 ## Available Scripts
