@@ -107,6 +107,9 @@ class Stock extends React.Component {
             <a href="#" onClick={e => this.handleClick(e)}>
               {stockData.name}
             </a>
+            {stockData.currency === "SEK"
+              ? ""
+              : " (" + stockData.currency + ")"}
           </td>
         );
     }
