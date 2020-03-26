@@ -22,6 +22,7 @@ import {
   MULTIPLE_STOCKS_TABLE,
   INTERIM_REPORTS_TABLE
 } from "../constants";
+import { formatField } from "../api/formatAllFields";
 
 const classNames = require("classnames");
 
@@ -130,9 +131,10 @@ class Stock extends React.Component {
             "%)"
           );
         }
-        return stockData[column];
+
+        return formatField(column, stockData[column]);
       default:
-        return stockData[column];
+        return formatField(column, stockData[column]);
     }
   }
 

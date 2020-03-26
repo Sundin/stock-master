@@ -1,5 +1,12 @@
 const { YEAR, BILLION, MILLION, THOUSAND } = require("../constants");
 
+export function formatField(key, value) {
+  if (keyShouldBeFormatted(key)) {
+    return formatNumber(value);
+  }
+  return value;
+}
+
 export function formatAllFields(inputData) {
   let stockDetails = { ...inputData };
 
