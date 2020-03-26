@@ -14,7 +14,8 @@ import {
   OPERATING_MARGIN,
   SOLIDITY,
   PRICE_SALES_RATIO,
-  MARKET_CAP
+  MARKET_CAP,
+  RETURN_ON_EQUITY
 } from "../constants";
 
 class Bank extends React.Component {
@@ -34,7 +35,8 @@ class Bank extends React.Component {
       OPERATING_MARGIN,
       SOLIDITY,
       PRICE_SALES_RATIO,
-      MARKET_CAP
+      MARKET_CAP,
+      RETURN_ON_EQUITY
     ]
   };
 

@@ -16,7 +16,8 @@ import {
   YEAR,
   ID,
   EBIT,
-  NET_EARNINGS
+  NET_EARNINGS,
+  RETURN_ON_EQUITY
 } from "./constants";
 
 export function translate(key) {
@@ -57,6 +58,8 @@ export function translate(key) {
       return "EBIT";
     case NET_EARNINGS:
       return "Vinst";
+    case RETURN_ON_EQUITY:
+      return "ROE (%)";
     default:
       return "";
   }
