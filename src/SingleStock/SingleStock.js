@@ -13,7 +13,8 @@ class SingleStock extends React.Component {
   state = {
     stocksDetails: null,
     error: null,
-    sortKey: PRICE_EARNINGS_RATIO
+    sortKey: PRICE_EARNINGS_RATIO,
+    showReportInput: false
   };
 
   componentDidMount() {
@@ -76,15 +77,31 @@ class SingleStock extends React.Component {
     );
   }
 
+  renderNewReportButton() {
+    return (
+      <button
+        onClick={() => {
+          this.setState({ showReportInput: true });
+        }}
+      >
+        New Report
+      </button>
+    );
+  }
+
   render() {
     if (this.state.error != null) {
       return <p>{this.state.error}</p>;
     }
 
-    const { stockDetails } = this.state;
+    const { stockDetails, showReportInput } = this.state;
 
     if (!stockDetails) {
       return <div />;
+    }
+
+    if (showReportInput) {
+      return this.renderInputSection();
     }
 
     return (
@@ -93,8 +110,8 @@ class SingleStock extends React.Component {
 
         {this.renderAnnualReports()}
         {this.renderInterimReports()}
-
-        {this.renderInputSection()}
+        <hr />
+        {this.renderNewReportButton()}
       </div>
     );
   }
