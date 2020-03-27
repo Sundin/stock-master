@@ -14,7 +14,9 @@ import {
   OPERATING_MARGIN,
   SOLIDITY,
   PRICE_SALES_RATIO,
-  MARKET_CAP
+  MARKET_CAP,
+  RETURN_ON_EQUITY,
+  RETURN_ON_CAPITAL_EMPLOYED
 } from "../constants";
 
 class Forest extends React.Component {
@@ -34,7 +36,9 @@ class Forest extends React.Component {
       OPERATING_MARGIN,
       SOLIDITY,
       PRICE_SALES_RATIO,
-      MARKET_CAP
+      MARKET_CAP,
+      RETURN_ON_EQUITY,
+      RETURN_ON_CAPITAL_EMPLOYED
     ]
   };
 

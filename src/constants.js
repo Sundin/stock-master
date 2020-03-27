@@ -35,6 +35,7 @@ export const EBIT = "earningsBeforeInterestAndTax";
 export const CHANGE_VALUES = "changeValues";
 export const OLLE = "OLLE";
 export const RETURN_ON_EQUITY = "returnOnEquity";
+export const RETURN_ON_CAPITAL_EMPLOYED = "returnOnCapitalEmployed";
 
 export const ANNUAL_REPORTS_TABLE = "annualReportsTable";
 export const INTERIM_REPORTS_TABLE = "interimReportsTable";
