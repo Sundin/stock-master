@@ -12,7 +12,9 @@ import {
   SOLIDITY,
   MARKET_CAP,
   NET_EARNINGS,
-  EBIT
+  EBIT,
+  RETURN_ON_EQUITY,
+  RETURN_ON_CAPITAL_EMPLOYED
 } from "../constants";
 
 class BlueChip extends React.Component {
@@ -30,7 +32,9 @@ class BlueChip extends React.Component {
       TOTAL_ASSETS,
       PRICE_BOOK_VALUE,
       SOLIDITY,
-      MARKET_CAP
+      MARKET_CAP,
+      RETURN_ON_EQUITY,
+      RETURN_ON_CAPITAL_EMPLOYED
     ]
   };
 
