@@ -134,18 +134,13 @@ class Stock extends React.Component {
     switch (type) {
       case ANNUAL_REPORTS_TABLE:
       case INTERIM_REPORTS_TABLE:
+        const value = formatField(column, stockData[column]);
         if (stockData.changeValues && stockData.changeValues[column]) {
           const sign = stockData.changeValues[column] > 0 ? "+" : "";
-          return (
-            stockData[column] +
-            " (" +
-            sign +
-            stockData.changeValues[column] +
-            "%)"
-          );
+          return value + " (" + sign + stockData.changeValues[column] + "%)";
         }
 
-        return formatField(column, stockData[column]);
+        return value;
       default:
         return formatField(column, stockData[column]);
     }
