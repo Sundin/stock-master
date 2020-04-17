@@ -9,7 +9,13 @@ import {
   DIRECT_YIELD,
   MARKET_CAP,
   PRICE_BOOK_VALUE,
-  PRICE_SALES_RATIO
+  PRICE_SALES_RATIO,
+  REVENUE,
+  EBIT,
+  NET_EARNINGS,
+  TOTAL_ASSETS,
+  TOTAL_EQUITY,
+  TOTAL_DEBT
 } from "../constants";
 import { getStockData } from "./backend";
 import ReportInputSection from "./ReportInputSection";
@@ -31,7 +37,7 @@ class SingleStock extends React.Component {
   }
 
   getColumnsToShow() {
-    return this.props.columnsToShow.filter(col => {
+    const inheritedColumns = this.props.columnsToShow.filter(col => {
       return (
         col !== PRICE_EARNINGS_RATIO &&
         col !== VOLATILITY &&
@@ -41,6 +47,15 @@ class SingleStock extends React.Component {
         col !== PRICE_SALES_RATIO
       );
     });
+    const extraColumns = [
+      REVENUE,
+      EBIT,
+      NET_EARNINGS,
+      TOTAL_ASSETS,
+      TOTAL_EQUITY,
+      TOTAL_DEBT
+    ];
+    return [...new Set([...inheritedColumns, ...extraColumns])];
   }
 
   renderAnnualReports() {

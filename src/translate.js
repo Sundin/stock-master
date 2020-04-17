@@ -18,7 +18,9 @@ import {
   EBIT,
   NET_EARNINGS,
   RETURN_ON_EQUITY,
-  RETURN_ON_CAPITAL_EMPLOYED
+  RETURN_ON_CAPITAL_EMPLOYED,
+  TOTAL_EQUITY,
+  TOTAL_DEBT
 } from "./constants";
 
 export function translate(key) {
@@ -43,6 +45,10 @@ export function translate(key) {
       return "Rörelsemarginal (%)";
     case TOTAL_ASSETS:
       return "Tillgångar";
+    case TOTAL_EQUITY:
+      return "Eget kapital";
+    case TOTAL_DEBT:
+      return "Skuld";
     case EARNINGS_PER_SHARE:
       return "EPS";
     case PRICE_BOOK_VALUE:
