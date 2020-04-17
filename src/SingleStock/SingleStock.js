@@ -4,7 +4,12 @@ import StockTable from "../components/StockTable";
 import {
   PRICE_EARNINGS_RATIO,
   ANNUAL_REPORTS_TABLE,
-  INTERIM_REPORTS_TABLE
+  INTERIM_REPORTS_TABLE,
+  VOLATILITY,
+  DIRECT_YIELD,
+  MARKET_CAP,
+  PRICE_BOOK_VALUE,
+  PRICE_SALES_RATIO
 } from "../constants";
 import { getStockData } from "./backend";
 import ReportInputSection from "./ReportInputSection";
@@ -13,7 +18,6 @@ class SingleStock extends React.Component {
   state = {
     stocksDetails: null,
     error: null,
-    sortKey: PRICE_EARNINGS_RATIO,
     showReportInput: false,
     reportData: null
   };
@@ -23,6 +27,19 @@ class SingleStock extends React.Component {
       this.setState({
         stockDetails: data
       });
+    });
+  }
+
+  getColumnsToShow() {
+    return this.props.columnsToShow.filter(col => {
+      return (
+        col !== PRICE_EARNINGS_RATIO &&
+        col !== VOLATILITY &&
+        col !== DIRECT_YIELD &&
+        col !== MARKET_CAP &&
+        col !== PRICE_BOOK_VALUE &&
+        col !== PRICE_SALES_RATIO
+      );
     });
   }
 
@@ -39,7 +56,7 @@ class SingleStock extends React.Component {
           type={ANNUAL_REPORTS_TABLE}
           stocks={stockDetails.annualReports}
           ownedStocks={[]}
-          columnsToShow={this.props.columnsToShow}
+          columnsToShow={this.getColumnsToShow()}
           handleClickReport={this.handleClickReport.bind(this)}
         />
       </div>
@@ -59,7 +76,7 @@ class SingleStock extends React.Component {
           type={INTERIM_REPORTS_TABLE}
           stocks={stockDetails.interimReports}
           ownedStocks={[]}
-          columnsToShow={this.props.columnsToShow}
+          columnsToShow={this.getColumnsToShow()}
           handleClickReport={this.handleClickReport.bind(this)}
         />
       </div>
