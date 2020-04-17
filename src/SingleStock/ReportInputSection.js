@@ -96,7 +96,7 @@ class ReportInputSection extends React.Component {
   render() {
     return (
       <div>
-        <h2>Lägg till rapport</h2>
+        <h2>{this.props.stockDetails.name} – Lägg till rapport</h2>
         <form onSubmit={this.handleSubmit}>
           <label>
             År:
