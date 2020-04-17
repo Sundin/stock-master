@@ -88,7 +88,9 @@ class ReportInputSection extends React.Component {
       report.totalDebt = this.multiply(this.state.totalDebt);
     }
 
-    saveReport(this.props.id, report);
+    saveReport(this.props.id, report).then(() => {
+      this.props.reportSaved();
+    });
   }
 
   render() {

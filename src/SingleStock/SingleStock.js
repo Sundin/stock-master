@@ -70,6 +70,10 @@ class SingleStock extends React.Component {
     this.setState({ showReportInput: true, reportData: reportData });
   }
 
+  reportSaved() {
+    this.setState({ showReportInput: false, reportData: null });
+  }
+
   renderInputSection() {
     if (!this.props.id) {
       return <div />;
@@ -80,6 +84,7 @@ class SingleStock extends React.Component {
           id={this.props.id}
           stockDetails={this.state.stockDetails}
           reportData={this.state.reportData}
+          reportSaved={this.reportSaved.bind(this)}
         />
       </div>
     );
