@@ -36,6 +36,7 @@ export const CHANGE_VALUES = "changeValues";
 export const OLLE = "OLLE";
 export const RETURN_ON_EQUITY = "returnOnEquity";
 export const RETURN_ON_CAPITAL_EMPLOYED = "returnOnCapitalEmployed";
+export const NET_ASSET_VALUE = "netAssetValue";
 
 export const ANNUAL_REPORTS_TABLE = "annualReportsTable";
 export const INTERIM_REPORTS_TABLE = "interimReportsTable";

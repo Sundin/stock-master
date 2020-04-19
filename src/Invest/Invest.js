@@ -14,10 +14,11 @@ import {
   NET_EARNINGS,
   EBIT,
   RETURN_ON_EQUITY,
-  RETURN_ON_CAPITAL_EMPLOYED
+  RETURN_ON_CAPITAL_EMPLOYED,
+  NET_ASSET_VALUE
 } from "../constants";
 
-class BlueChip extends React.Component {
+class Investment extends React.Component {
   state = {
     stocks: [],
     ownedStocks: [],
@@ -32,9 +33,10 @@ class BlueChip extends React.Component {
       TOTAL_ASSETS,
       PRICE_BOOK_VALUE,
       SOLIDITY,
-      MARKET_CAP,
       RETURN_ON_EQUITY,
-      RETURN_ON_CAPITAL_EMPLOYED
+      RETURN_ON_CAPITAL_EMPLOYED,
+      MARKET_CAP,
+      NET_ASSET_VALUE
     ]
   };
 
@@ -82,4 +84,4 @@ class BlueChip extends React.Component {
   }
 }
 
-export default BlueChip;
+export default Investment;

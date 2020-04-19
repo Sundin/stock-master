@@ -20,7 +20,8 @@ import {
   RETURN_ON_EQUITY,
   RETURN_ON_CAPITAL_EMPLOYED,
   TOTAL_EQUITY,
-  TOTAL_DEBT
+  TOTAL_DEBT,
+  NET_ASSET_VALUE
 } from "./constants";
 
 export function translate(key) {
@@ -69,6 +70,8 @@ export function translate(key) {
       return "ROE (%)";
     case RETURN_ON_CAPITAL_EMPLOYED:
       return "ROCE (%)";
+    case NET_ASSET_VALUE:
+      return "Substansvärde";
     default:
       return "";
   }
