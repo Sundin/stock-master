@@ -15,7 +15,8 @@ import {
   NET_EARNINGS,
   TOTAL_ASSETS,
   TOTAL_EQUITY,
-  TOTAL_DEBT
+  TOTAL_DEBT,
+  NET_ASSET_VALUE
 } from "../constants";
 import { getStockData } from "./backend";
 import ReportInputSection from "./ReportInputSection";
@@ -44,7 +45,8 @@ class SingleStock extends React.Component {
         col !== DIRECT_YIELD &&
         col !== MARKET_CAP &&
         col !== PRICE_BOOK_VALUE &&
-        col !== PRICE_SALES_RATIO
+        col !== PRICE_SALES_RATIO &&
+        col !== NET_ASSET_VALUE
       );
     });
     const extraColumns = [
