@@ -80,15 +80,15 @@ export function translate(key) {
 export function tooltip(key) {
   switch (key) {
     case PRICE_EARNINGS_RATIO:
-      return "Pris/vinst (per aktie)";
+      return "Aktiekurs/vinst per aktie";
     case PRICE_SALES_RATIO:
-      return "Pris/omsättning (per aktie)";
+      return "Aktiekurs/omsättning per aktie";
     case DIRECT_YIELD:
       return "Direktavkastning (%)";
     case VOLATILITY:
-      return "Volatilitet";
+      return "Volatilitet (%)";
     case NUMBER_OF_EMPLOYEES:
-      return "Anställda";
+      return "Antal anställda";
     case REVENUE:
       return "Omsättning";
     case REVENUE_PER_EMPLOYEE:
@@ -104,9 +104,9 @@ export function tooltip(key) {
     case TOTAL_DEBT:
       return "Skuld";
     case EARNINGS_PER_SHARE:
-      return "Vinst per akite";
+      return "Vinst per aktie";
     case PRICE_BOOK_VALUE:
-      return "Pris/eget kapital (per aktie)";
+      return "Aktiekurs/eget kapital per aktie";
     case SOLIDITY:
       return "Soliditet (%)";
     case MARKET_CAP:

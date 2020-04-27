@@ -1,9 +1,10 @@
 export const exchangeRates = {
   DKK: 1.41,
-  USD: 9.42
+  USD: 9.42,
 };
 
 export const BASE_URL = "https://bissenisse.duckdns.org:443";
+// export const BASE_URL = "http://localhost:8080";
 
 export const BILLION = 1000000000;
 export const MILLION = 1000000;
