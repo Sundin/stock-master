@@ -1,4 +1,5 @@
 import React from "react";
+import ReactTooltip from "react-tooltip";
 import {
   yieldIsGood,
   yieldIsVeryGood,
@@ -8,10 +9,10 @@ import {
   volatilityIsBad,
   volatilityIsVeryGood,
   volatilityIsVeryBad,
-  peIsVeryBad
+  peIsVeryBad,
 } from "./stockIndicators";
 import { stockIsOwned } from "../stockUtils";
-import { translate } from "../translate";
+import { translate, tooltip } from "../translate";
 import {
   PRICE_EARNINGS_RATIO,
   DIRECT_YIELD,
@@ -20,7 +21,7 @@ import {
   ANNUAL_REPORTS_TABLE,
   YEAR,
   MULTIPLE_STOCKS_TABLE,
-  INTERIM_REPORTS_TABLE
+  INTERIM_REPORTS_TABLE,
 } from "../constants";
 import { formatField } from "../api/formatAllFields";
 
@@ -36,36 +37,39 @@ function StockTable(props) {
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th width="40%">{getMainColumn(type)}</th>
-          {columnsToShow.map(column => {
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th width="40%">{getMainColumn(type)}</th>
+            {columnsToShow.map((column) => {
+              return (
+                <th width="15%" key={column} data-tip={tooltip(column)}>
+                  {translate(column)}
+                </th>
+              );
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {stocks.map((stockData) => {
+            const owned = stockIsOwned(stockData.id, ownedStocks);
             return (
-              <th width="15%" key={column}>
-                {translate(column)}
-              </th>
+              <Stock
+                stockData={stockData}
+                key={stockData.id}
+                owned={owned}
+                columnsToShow={columnsToShow}
+                showSingleStock={props.showSingleStock}
+                handleClickReport={props.handleClickReport}
+                type={type}
+              />
             );
           })}
-        </tr>
-      </thead>
-      <tbody>
-        {stocks.map(stockData => {
-          const owned = stockIsOwned(stockData.id, ownedStocks);
-          return (
-            <Stock
-              stockData={stockData}
-              key={stockData.id}
-              owned={owned}
-              columnsToShow={columnsToShow}
-              showSingleStock={props.showSingleStock}
-              handleClickReport={props.handleClickReport}
-              type={type}
-            />
-          );
-        })}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      <ReactTooltip />
+    </>
   );
 }
 
@@ -115,7 +119,7 @@ class Stock extends React.Component {
         return (
           <td
             className={classNames({
-              owned: owned
+              owned: owned,
             })}
           >
             <a href="#" onClick={() => this.handleClick()}>
@@ -157,7 +161,7 @@ class Stock extends React.Component {
     return (
       <tr key={stockData.id}>
         {this.renderMainColumn()}
-        {columnsToShow.map(column => {
+        {columnsToShow.map((column) => {
           return (
             <td
               width="15%"
@@ -179,19 +183,19 @@ function getClassNames(key, stockData) {
       return classNames({
         good: peIsGood(stockData),
         veryGood: peIsVeryGood(stockData),
-        veryBad: peIsVeryBad(stockData)
+        veryBad: peIsVeryBad(stockData),
       });
     case "directYield":
       return classNames({
         good: yieldIsGood(stockData),
-        veryGood: yieldIsVeryGood(stockData)
+        veryGood: yieldIsVeryGood(stockData),
       });
     case "volatility":
       return classNames({
         good: volatilityIsGood(stockData),
         veryGood: volatilityIsVeryGood(stockData),
         bad: volatilityIsBad(stockData),
-        veryBad: volatilityIsVeryBad(stockData)
+        veryBad: volatilityIsVeryBad(stockData),
       });
     default:
       return classNames({});
@@ -200,7 +204,7 @@ function getClassNames(key, stockData) {
 
 StockTable.defaultProps = {
   type: MULTIPLE_STOCKS_TABLE,
-  columnsToShow: [ID, PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY]
+  columnsToShow: [ID, PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY],
 };
 
 export default StockTable;

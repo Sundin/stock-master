@@ -21,7 +21,7 @@ import {
   RETURN_ON_CAPITAL_EMPLOYED,
   TOTAL_EQUITY,
   TOTAL_DEBT,
-  NET_ASSET_VALUE
+  NET_ASSET_VALUE,
 } from "./constants";
 
 export function translate(key) {
@@ -72,6 +72,59 @@ export function translate(key) {
       return "ROCE (%)";
     case NET_ASSET_VALUE:
       return "Substansvärde";
+    default:
+      return "";
+  }
+}
+
+export function tooltip(key) {
+  switch (key) {
+    case PRICE_EARNINGS_RATIO:
+      return "Pris/vinst (per aktie)";
+    case PRICE_SALES_RATIO:
+      return "Pris/omsättning (per aktie)";
+    case DIRECT_YIELD:
+      return "Direktavkastning (%)";
+    case VOLATILITY:
+      return "Volatilitet";
+    case NUMBER_OF_EMPLOYEES:
+      return "Anställda";
+    case REVENUE:
+      return "Omsättning";
+    case REVENUE_PER_EMPLOYEE:
+      return "Omsättning / anställd";
+    case REVENUE_PER_SHARE:
+      return "Omsättning / aktie";
+    case OPERATING_MARGIN:
+      return "Rörelsemarginal (%)";
+    case TOTAL_ASSETS:
+      return "Tillgångar";
+    case TOTAL_EQUITY:
+      return "Eget kapital";
+    case TOTAL_DEBT:
+      return "Skuld";
+    case EARNINGS_PER_SHARE:
+      return "Vinst per akite";
+    case PRICE_BOOK_VALUE:
+      return "Pris/eget kapital (per aktie)";
+    case SOLIDITY:
+      return "Soliditet (%)";
+    case MARKET_CAP:
+      return "Börsvärde";
+    case YEAR:
+      return "År";
+    case ID:
+      return "ID";
+    case EBIT:
+      return "Vinst före skatt";
+    case NET_EARNINGS:
+      return "Nettoresultat";
+    case RETURN_ON_EQUITY:
+      return "Räntabilitet på eget kapital (%)";
+    case RETURN_ON_CAPITAL_EMPLOYED:
+      return "Räntabilitet på sysselsatt kapital (%)";
+    case NET_ASSET_VALUE:
+      return "Substansvärde (på börsnoterade innehav)";
     default:
       return "";
   }

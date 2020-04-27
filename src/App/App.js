@@ -27,7 +27,7 @@ class App extends React.Component {
   state = {
     activePage: bestYieldPage,
     activeStock: null,
-    columnsToShow: []
+    columnsToShow: [],
   };
 
   renderActivePage() {
@@ -71,7 +71,7 @@ class App extends React.Component {
           this.setState({ activePage: page, activeStock: null });
         }}
         className={classNames({
-          active: this.state.activePage === page
+          active: this.state.activePage === page,
         })}
       >
         {title}
