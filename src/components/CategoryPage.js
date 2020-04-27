@@ -41,15 +41,21 @@ class CategoryPage extends React.Component {
       <>
         Visa senaste:
         <button
+          onClick={() => {
+            this.props.setReportType("year");
+          }}
           className={classNames({
-            active: true,
+            active: this.props.reportType === "year",
           })}
         >
           Helår
         </button>
         <button
+          onClick={() => {
+            this.props.setReportType("quarter");
+          }}
           className={classNames({
-            active: false,
+            active: this.props.reportType === "quarter",
           })}
           data-tip="Kommer snart!"
         >

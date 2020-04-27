@@ -45,6 +45,8 @@ class Forest extends React.Component {
         category="forest"
         title="Skog"
         columnsToShow={this.state.columnsToShow}
+        reportType={this.props.reportType}
+        setReportType={this.props.setReportType}
       />
     );
   }

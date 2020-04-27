@@ -1,20 +1,15 @@
 import React from "react";
 import "./App.css";
-import BestYield from "../BestYield/BestYield";
-import BlueChip from "../BlueChip/BlueChip";
 import Portfolio from "../Portfolio/Portfolio";
-import Weapons from "../Weapons/Weapons";
 import SingleStock from "../SingleStock/SingleStock";
-import Industry from "../Industry/Industry";
 import Forest from "../Forest/Forest";
 import Invest from "../Invest/Invest";
-import RealEstate from "../RealEstate/RealEstate";
 import Bank from "../Bank/Bank";
+import CategoryPage from "../components/CategoryPage";
 
 const portfolioPage = "PORTFOLIO_PAGE";
 const bestYieldPage = "BEST_YIELD_PAGE";
 const blueChipPage = "BLUE_CHIP_PAGE";
-const weaponsPage = "WEAPONS_PAGE";
 const industryPage = "INDUSTRY_PAGE";
 const forestPage = "FOREST_PAGE";
 const investPage = "INVEST_PAGE";
@@ -28,6 +23,7 @@ class App extends React.Component {
     activePage: bestYieldPage,
     activeStock: null,
     columnsToShow: [],
+    reportType: "year",
   };
 
   renderActivePage() {
@@ -40,25 +36,71 @@ class App extends React.Component {
       );
     }
 
+    const passOnProps = {
+      reportType: this.state.reportType,
+      setReportType: this.setReportType.bind(this),
+    };
+
     switch (this.state.activePage) {
       case portfolioPage:
         return <Portfolio showSingleStock={this.showSingleStock.bind(this)} />;
       case bestYieldPage:
-        return <BestYield showSingleStock={this.showSingleStock.bind(this)} />;
+        return (
+          <CategoryPage
+            category="best-yield"
+            title="Intressanta utdelningsaktier"
+            showSingleStock={this.showSingleStock.bind(this)}
+            {...passOnProps}
+          />
+        );
       case blueChipPage:
-        return <BlueChip showSingleStock={this.showSingleStock.bind(this)} />;
-      case weaponsPage:
-        return <Weapons showSingleStock={this.showSingleStock.bind(this)} />;
+        return (
+          <CategoryPage
+            category="blue-chip"
+            title="Intressanta basaktier"
+            showSingleStock={this.showSingleStock.bind(this)}
+            {...passOnProps}
+          />
+        );
       case industryPage:
-        return <Industry showSingleStock={this.showSingleStock.bind(this)} />;
+        return (
+          <CategoryPage
+            category="industry"
+            title="Verkstad"
+            showSingleStock={this.showSingleStock.bind(this)}
+            {...passOnProps}
+          />
+        );
       case forestPage:
-        return <Forest showSingleStock={this.showSingleStock.bind(this)} />;
+        return (
+          <Forest
+            showSingleStock={this.showSingleStock.bind(this)}
+            {...passOnProps}
+          />
+        );
       case investPage:
-        return <Invest showSingleStock={this.showSingleStock.bind(this)} />;
+        return (
+          <Invest
+            showSingleStock={this.showSingleStock.bind(this)}
+            {...passOnProps}
+          />
+        );
       case realEstatePage:
-        return <RealEstate showSingleStock={this.showSingleStock.bind(this)} />;
+        return (
+          <CategoryPage
+            category="realEstate"
+            title="Fastighetsbolag"
+            showSingleStock={this.showSingleStock.bind(this)}
+            {...passOnProps}
+          />
+        );
       case bankPage:
-        return <Bank showSingleStock={this.showSingleStock.bind(this)} />;
+        return (
+          <Bank
+            showSingleStock={this.showSingleStock.bind(this)}
+            {...passOnProps}
+          />
+        );
       default:
         return <div></div>;
     }
@@ -83,6 +125,10 @@ class App extends React.Component {
     this.setState({ activeStock: id, columnsToShow: columnsToShow });
   }
 
+  setReportType(reportType) {
+    // this.setState({ reportType: reportType });
+  }
+
   render() {
     return (
       <div>
@@ -94,7 +140,6 @@ class App extends React.Component {
         {this.renderButton("Skog", forestPage)}
         {this.renderButton("Investment", investPage)}
         {this.renderButton("Fastigheter", realEstatePage)}
-        {/* {this.renderButton("Vapen", weaponsPage)} */}
         {this.renderButton("Bank", bankPage)}
         {this.renderActivePage()}
       </div>

@@ -43,6 +43,8 @@ class Investment extends React.Component {
         category="invest"
         title="Investmentbolag"
         columnsToShow={this.state.columnsToShow}
+        reportType={this.props.reportType}
+        setReportType={this.props.setReportType}
       />
     );
   }

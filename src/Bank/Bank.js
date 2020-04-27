@@ -43,6 +43,8 @@ class Bank extends React.Component {
         category="bank"
         title="Bank"
         columnsToShow={this.state.columnsToShow}
+        reportType={this.props.reportType}
+        setReportType={this.props.setReportType}
       />
     );
   }
