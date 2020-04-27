@@ -84,6 +84,7 @@ class CategoryPage extends React.Component {
           }}
           showSingleStock={this.props.showSingleStock}
           columnsToShow={this.props.columnsToShow}
+          reportType={this.props.reportType}
         />
       </div>
     );

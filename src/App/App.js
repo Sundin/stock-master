@@ -104,7 +104,7 @@ class App extends React.Component {
   }
 
   setReportType(reportType) {
-    // this.setState({ reportType: reportType });
+    this.setState({ reportType: reportType });
   }
 
   render() {

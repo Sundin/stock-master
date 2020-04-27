@@ -29,7 +29,14 @@ import { formatField } from "../api/formatAllFields";
 const classNames = require("classnames");
 
 function StockTable(props) {
-  const { stocks, ownedStocks, sortKey, columnsToShow, type } = props;
+  const {
+    stocks,
+    ownedStocks,
+    sortKey,
+    columnsToShow,
+    type,
+    reportType,
+  } = props;
 
   if (sortKey) {
     stocks.sort((a, b) => {
@@ -57,7 +64,11 @@ function StockTable(props) {
             const owned = stockIsOwned(stockData.id, ownedStocks);
             return (
               <Stock
-                stockData={stockData}
+                stockData={
+                  reportType === "quarter"
+                    ? { ...stockData, ...stockData.latestInterimReport }
+                    : { ...stockData, ...stockData.latestAnnualReport }
+                }
                 key={stockData.id}
                 owned={owned}
                 columnsToShow={columnsToShow}
