@@ -87,14 +87,14 @@ class App extends React.Component {
     return (
       <div>
         <h1>BisseNisse</h1>
-        {this.renderButton("Portfolio", portfolioPage)}
+        {/* {this.renderButton("Portfolio", portfolioPage)} */}
         {this.renderButton("Utdelningsaktier", bestYieldPage)}
         {this.renderButton("Basaktier", blueChipPage)}
         {this.renderButton("Verkstad", industryPage)}
         {this.renderButton("Skog", forestPage)}
         {this.renderButton("Investment", investPage)}
         {this.renderButton("Fastigheter", realEstatePage)}
-        {this.renderButton("Vapen", weaponsPage)}
+        {/* {this.renderButton("Vapen", weaponsPage)} */}
         {this.renderButton("Bank", bankPage)}
         {this.renderActivePage()}
       </div>
