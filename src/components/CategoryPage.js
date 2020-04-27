@@ -16,6 +16,17 @@ class CategoryPage extends React.Component {
   };
 
   componentDidMount() {
+    this.loadData();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.category === prevProps.category) {
+      return;
+    }
+    this.loadData();
+  }
+
+  loadData() {
     getStocks(this.props.category)
       .then((stocks) => {
         this.setState({
