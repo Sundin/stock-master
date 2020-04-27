@@ -1,58 +1,11 @@
 import React from "react";
-import StockTable from "../components/StockTable";
-import { getStocks } from "../dataRetriever";
 
-import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
+import CategoryPage from "../components/CategoryPage";
 
-class BlueChip extends React.Component {
-  state = {
-    stocks: [],
-    ownedStocks: [],
-    error: null,
-    sortKey: "priceEarningsRatio"
-  };
-
-  componentDidMount() {
-    getStocks("realEstate")
-      .then(stocks => {
-        this.setState({
-          stocks: stocks
-        });
-      })
-      .catch(err => {
-        console.error(err);
-        this.setState({
-          error: err.message
-        });
-      });
-
-    getAllOwnedStocks().then(ownedStocks => {
-      this.setState({
-        ownedStocks: ownedStocks
-      });
-    });
-  }
-
+class RealEstate extends React.Component {
   render() {
-    if (this.state.error != null) {
-      return <p>{this.state.error}</p>;
-    }
-
-    return (
-      <div>
-        <h1>Fastighetsbolag</h1>
-        <StockTable
-          stocks={this.state.stocks}
-          ownedStocks={this.state.ownedStocks}
-          sortKey={this.state.sortKey}
-          onSort={sortKey => {
-            this.setState({ sortKey: sortKey });
-          }}
-          showSingleStock={this.props.showSingleStock}
-        />
-      </div>
-    );
+    return <CategoryPage category="realEstate" title="Fastighetsbolag" />;
   }
 }
 
-export default BlueChip;
+export default RealEstate;

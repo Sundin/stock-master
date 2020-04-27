@@ -1,8 +1,4 @@
 import React from "react";
-import StockTable from "../components/StockTable";
-import { getStocks } from "../dataRetriever";
-
-import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
 import {
   PRICE_EARNINGS_RATIO,
   DIRECT_YIELD,
@@ -15,8 +11,9 @@ import {
   EBIT,
   RETURN_ON_EQUITY,
   RETURN_ON_CAPITAL_EMPLOYED,
-  NET_ASSET_VALUE
+  NET_ASSET_VALUE,
 } from "../constants";
+import CategoryPage from "../components/CategoryPage";
 
 class Investment extends React.Component {
   state = {
@@ -36,50 +33,17 @@ class Investment extends React.Component {
       RETURN_ON_EQUITY,
       RETURN_ON_CAPITAL_EMPLOYED,
       MARKET_CAP,
-      NET_ASSET_VALUE
-    ]
+      NET_ASSET_VALUE,
+    ],
   };
 
-  componentDidMount() {
-    getStocks("invest")
-      .then(stocks => {
-        this.setState({
-          stocks: stocks
-        });
-      })
-      .catch(err => {
-        console.error(err);
-        this.setState({
-          error: err.message
-        });
-      });
-
-    getAllOwnedStocks().then(ownedStocks => {
-      this.setState({
-        ownedStocks: ownedStocks
-      });
-    });
-  }
-
   render() {
-    if (this.state.error != null) {
-      return <p>{this.state.error}</p>;
-    }
-
     return (
-      <div>
-        <h1>Investment</h1>
-        <StockTable
-          stocks={this.state.stocks}
-          ownedStocks={this.state.ownedStocks}
-          sortKey={this.state.sortKey}
-          onSort={sortKey => {
-            this.setState({ sortKey: sortKey });
-          }}
-          columnsToShow={this.state.columnsToShow}
-          showSingleStock={this.props.showSingleStock}
-        />
-      </div>
+      <CategoryPage
+        category="invest"
+        title="Investmentbolag"
+        columnsToShow={this.state.columnsToShow}
+      />
     );
   }
 }
