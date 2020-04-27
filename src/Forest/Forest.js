@@ -47,6 +47,7 @@ class Forest extends React.Component {
         columnsToShow={this.state.columnsToShow}
         reportType={this.props.reportType}
         setReportType={this.props.setReportType}
+        showSingleStock={this.props.showSingleStock}
       />
     );
   }

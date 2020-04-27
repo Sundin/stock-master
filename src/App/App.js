@@ -39,6 +39,7 @@ class App extends React.Component {
     const passOnProps = {
       reportType: this.state.reportType,
       setReportType: this.setReportType.bind(this),
+      showSingleStock: this.showSingleStock.bind(this),
     };
 
     switch (this.state.activePage) {
@@ -49,7 +50,6 @@ class App extends React.Component {
           <CategoryPage
             category="best-yield"
             title="Intressanta utdelningsaktier"
-            showSingleStock={this.showSingleStock.bind(this)}
             {...passOnProps}
           />
         );
@@ -58,49 +58,27 @@ class App extends React.Component {
           <CategoryPage
             category="blue-chip"
             title="Intressanta basaktier"
-            showSingleStock={this.showSingleStock.bind(this)}
             {...passOnProps}
           />
         );
       case industryPage:
         return (
-          <CategoryPage
-            category="industry"
-            title="Verkstad"
-            showSingleStock={this.showSingleStock.bind(this)}
-            {...passOnProps}
-          />
+          <CategoryPage category="industry" title="Verkstad" {...passOnProps} />
         );
       case forestPage:
-        return (
-          <Forest
-            showSingleStock={this.showSingleStock.bind(this)}
-            {...passOnProps}
-          />
-        );
+        return <Forest {...passOnProps} />;
       case investPage:
-        return (
-          <Invest
-            showSingleStock={this.showSingleStock.bind(this)}
-            {...passOnProps}
-          />
-        );
+        return <Invest {...passOnProps} />;
       case realEstatePage:
         return (
           <CategoryPage
             category="realEstate"
             title="Fastighetsbolag"
-            showSingleStock={this.showSingleStock.bind(this)}
             {...passOnProps}
           />
         );
       case bankPage:
-        return (
-          <Bank
-            showSingleStock={this.showSingleStock.bind(this)}
-            {...passOnProps}
-          />
-        );
+        return <Bank {...passOnProps} />;
       default:
         return <div></div>;
     }
