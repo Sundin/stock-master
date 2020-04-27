@@ -22,7 +22,8 @@ class ReportInputSection extends React.Component {
         totalEquity: 0,
         totalDebt: 0,
         numberOfShares: 0,
-        numberOfEmployees: 0
+        numberOfEmployees: 0,
+        reportDate: "",
       };
     }
 
@@ -36,7 +37,7 @@ class ReportInputSection extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
     });
   }
 
@@ -71,7 +72,8 @@ class ReportInputSection extends React.Component {
       ),
       netEarnings: this.multiply(this.state.netEarnings),
       numberOfShares: this.state.numberOfShares * 1,
-      numberOfEmployees: this.state.numberOfEmployees * 1
+      numberOfEmployees: this.state.numberOfEmployees * 1,
+      reportDate: new Date(this.state.reportDate),
     };
 
     if (this.state.period !== "YEAR") {
@@ -121,6 +123,16 @@ class ReportInputSection extends React.Component {
               <option value="Q3">Q3</option>
               <option value="Q4">Q4</option>
             </select>
+          </label>
+          <br />
+          <label>
+            Rapportdatum:
+            <input
+              name="reportDate"
+              type="string"
+              value={this.state.reportDate}
+              onChange={this.handleInputChange}
+            />
           </label>
           <br />
           <h3>Räkenskaper</h3>

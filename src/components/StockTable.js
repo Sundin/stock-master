@@ -1,5 +1,6 @@
 import React from "react";
 import ReactTooltip from "react-tooltip";
+import WarningIcon from "./icons/WarningIcon";
 import {
   yieldIsGood,
   yieldIsVeryGood,
@@ -122,15 +123,46 @@ class Stock extends React.Component {
               owned: owned,
             })}
           >
+            <ReactTooltip />
             <a href="#" onClick={() => this.handleClick()}>
               {stockData.name}
             </a>
             {stockData.currency === "SEK"
               ? ""
               : " (" + stockData.currency + ")"}
+            {this.shouldShowOldReportWarning(stockData.reportDate) ? (
+              <a
+                data-tip={
+                  "Avser rapport från " +
+                  this.formatDate(new Date(stockData.reportDate))
+                }
+              >
+                <WarningIcon width={20} fill="#fa2" />
+              </a>
+            ) : (
+              ""
+            )}
           </td>
         );
     }
+  }
+
+  formatDate = (d) =>
+    d.getFullYear() +
+    "-" +
+    ("0" + (d.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("0" + d.getDate()).slice(-2) +
+    " .";
+
+  shouldShowOldReportWarning(reportDate) {
+    if (!reportDate) {
+      return false;
+    }
+    const currentTime = new Date().getTime();
+    const reportTime = new Date(reportDate).getTime();
+    const threeMonthsInMilliseconds = 7889400000;
+    return currentTime - reportTime > threeMonthsInMilliseconds;
   }
 
   renderStockData(column) {
