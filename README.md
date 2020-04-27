@@ -54,6 +54,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 Deploy app to GitHub pages.
 
+Note that this will deploy your current local changes and not your latest commit.
+
 ## Learn More
 
 ### Code Splitting
