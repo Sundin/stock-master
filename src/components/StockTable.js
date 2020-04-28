@@ -25,25 +25,25 @@ import {
   INTERIM_REPORTS_TABLE,
   QUARTERLY_REPORT,
   ANNUAL_REPORT,
+  OLLE,
 } from "../constants";
 import { formatField } from "../api/formatAllFields";
 
 const classNames = require("classnames");
 
 function StockTable(props) {
-  const {
-    stocks,
-    ownedStocks,
-    sortKey,
-    columnsToShow,
-    type,
-    reportType,
-  } = props;
+  const { stocks, ownedStocks, sortKey, type, reportType } = props;
 
   if (sortKey) {
     stocks.sort((a, b) => {
       return b[sortKey] - a[sortKey];
     });
+  }
+
+  let columnsToShow = props.columnsToShow;
+
+  if (reportType === QUARTERLY_REPORT) {
+    columnsToShow = columnsToShow.concat([OLLE]);
   }
 
   return (

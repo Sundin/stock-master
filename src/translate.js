@@ -22,6 +22,7 @@ import {
   TOTAL_EQUITY,
   TOTAL_DEBT,
   NET_ASSET_VALUE,
+  OLLE,
 } from "./constants";
 
 export function translate(key) {
@@ -72,6 +73,8 @@ export function translate(key) {
       return "ROCE (%)";
     case NET_ASSET_VALUE:
       return "Substansvärde";
+    case OLLE:
+      return "OLLE";
     default:
       return "";
   }
@@ -125,6 +128,8 @@ export function tooltip(key) {
       return "Räntabilitet på sysselsatt kapital (%)";
     case NET_ASSET_VALUE:
       return "Substansvärde (på börsnoterade innehav)";
+    case OLLE:
+      return "Aktiekurs/senaste kvartalsomsättningen per aktie x 4";
     default:
       return "";
   }
