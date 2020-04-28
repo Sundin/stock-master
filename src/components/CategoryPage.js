@@ -59,6 +59,7 @@ class CategoryPage extends React.Component {
           className={classNames({
             active: this.props.reportType === ANNUAL_REPORT,
           })}
+          data-tip="Visa data från senaste årsredovisningen"
         >
           Helår
         </button>
@@ -69,7 +70,7 @@ class CategoryPage extends React.Component {
           className={classNames({
             active: this.props.reportType === QUARTERLY_REPORT,
           })}
-          data-tip="Kommer snart!"
+          data-tip="Visa data från senaste kvartalsrapporten"
         >
           Kvartal
         </button>
