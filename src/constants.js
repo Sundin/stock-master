@@ -42,3 +42,6 @@ export const NET_ASSET_VALUE = "netAssetValue";
 export const ANNUAL_REPORTS_TABLE = "annualReportsTable";
 export const INTERIM_REPORTS_TABLE = "interimReportsTable";
 export const MULTIPLE_STOCKS_TABLE = "multipleStocksTable";
+
+export const QUARTERLY_REPORT = "quarter";
+export const ANNUAL_REPORT = "year";

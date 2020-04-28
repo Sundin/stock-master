@@ -6,6 +6,7 @@ import Forest from "../Forest/Forest";
 import Invest from "../Invest/Invest";
 import Bank from "../Bank/Bank";
 import CategoryPage from "../components/CategoryPage";
+import { ANNUAL_REPORT } from "../constants";
 
 const portfolioPage = "PORTFOLIO_PAGE";
 const bestYieldPage = "BEST_YIELD_PAGE";
@@ -23,7 +24,7 @@ class App extends React.Component {
     activePage: bestYieldPage,
     activeStock: null,
     columnsToShow: [],
-    reportType: "year",
+    reportType: ANNUAL_REPORT,
   };
 
   renderActivePage() {

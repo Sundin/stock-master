@@ -23,6 +23,8 @@ import {
   YEAR,
   MULTIPLE_STOCKS_TABLE,
   INTERIM_REPORTS_TABLE,
+  QUARTERLY_REPORT,
+  ANNUAL_REPORT,
 } from "../constants";
 import { formatField } from "../api/formatAllFields";
 
@@ -65,7 +67,7 @@ function StockTable(props) {
             return (
               <Stock
                 stockData={
-                  reportType === "quarter"
+                  reportType === QUARTERLY_REPORT
                     ? { ...stockData, ...stockData.latestInterimReport }
                     : { ...stockData, ...stockData.latestAnnualReport }
                 }
@@ -75,6 +77,7 @@ function StockTable(props) {
                 showSingleStock={props.showSingleStock}
                 handleClickReport={props.handleClickReport}
                 type={type}
+                reportType={reportType}
               />
             );
           })}
@@ -109,7 +112,7 @@ class Stock extends React.Component {
   }
 
   renderMainColumn() {
-    const { type, stockData, owned } = this.props;
+    const { type, stockData, owned, reportType } = this.props;
     switch (type) {
       case ANNUAL_REPORTS_TABLE:
         return (
@@ -141,7 +144,10 @@ class Stock extends React.Component {
             {stockData.currency === "SEK"
               ? ""
               : " (" + stockData.currency + ")"}
-            {this.shouldShowOldReportWarning(stockData.reportDate) ? (
+            {this.shouldShowOldReportWarning(
+              stockData.reportDate,
+              reportType
+            ) ? (
               <a
                 data-tip={
                   "Avser rapport från " +
@@ -166,13 +172,17 @@ class Stock extends React.Component {
     ("0" + d.getDate()).slice(-2) +
     " .";
 
-  shouldShowOldReportWarning(reportDate) {
+  shouldShowOldReportWarning(reportDate, reportType) {
     if (!reportDate) {
       return false;
     }
     const currentTime = new Date().getTime();
     const reportTime = new Date(reportDate).getTime();
     const threeMonthsInMilliseconds = 7889400000;
+    const oneYearInMilliseconds = threeMonthsInMilliseconds * 4;
+    if (reportType === ANNUAL_REPORT) {
+      return currentTime - reportTime > oneYearInMilliseconds;
+    }
     return currentTime - reportTime > threeMonthsInMilliseconds;
   }
 

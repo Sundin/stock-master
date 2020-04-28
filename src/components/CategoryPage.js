@@ -5,6 +5,7 @@ import StockTable from "../components/StockTable";
 import { getStocks } from "../dataRetriever";
 
 import { getAllOwnedStocks } from "../Portfolio/portfolioUtils";
+import { QUARTERLY_REPORT, ANNUAL_REPORT } from "../constants";
 const classNames = require("classnames");
 
 class CategoryPage extends React.Component {
@@ -53,20 +54,20 @@ class CategoryPage extends React.Component {
         Visa senaste:
         <button
           onClick={() => {
-            this.props.setReportType("year");
+            this.props.setReportType(ANNUAL_REPORT);
           }}
           className={classNames({
-            active: this.props.reportType === "year",
+            active: this.props.reportType === ANNUAL_REPORT,
           })}
         >
           Helår
         </button>
         <button
           onClick={() => {
-            this.props.setReportType("quarter");
+            this.props.setReportType(QUARTERLY_REPORT);
           }}
           className={classNames({
-            active: this.props.reportType === "quarter",
+            active: this.props.reportType === QUARTERLY_REPORT,
           })}
           data-tip="Kommer snart!"
         >
