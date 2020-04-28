@@ -237,7 +237,7 @@ class ReportInputSection extends React.Component {
             />
           </label>
           <label>
-            Antal aktier:
+            Antal aktier (samtliga aktieslag):
             <input
               name="numberOfShares"
               type="number"
