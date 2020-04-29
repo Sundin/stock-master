@@ -26,6 +26,7 @@ import {
   QUARTERLY_REPORT,
   ANNUAL_REPORT,
   OLLE,
+  LAST_PRICE,
 } from "../constants";
 import { formatField } from "../api/formatAllFields";
 
@@ -257,7 +258,13 @@ function getClassNames(key, stockData) {
 
 StockTable.defaultProps = {
   type: MULTIPLE_STOCKS_TABLE,
-  columnsToShow: [ID, PRICE_EARNINGS_RATIO, DIRECT_YIELD, VOLATILITY],
+  columnsToShow: [
+    ID,
+    LAST_PRICE,
+    PRICE_EARNINGS_RATIO,
+    DIRECT_YIELD,
+    VOLATILITY,
+  ],
 };
 
 export default StockTable;

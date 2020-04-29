@@ -23,6 +23,7 @@ import {
   TOTAL_DEBT,
   NET_ASSET_VALUE,
   OLLE,
+  LAST_PRICE,
 } from "./constants";
 
 export function translate(key) {
@@ -75,6 +76,8 @@ export function translate(key) {
       return "Substansvärde";
     case OLLE:
       return "OLLE";
+    case LAST_PRICE:
+      return "Aktiekurs";
     default:
       return "";
   }
@@ -130,6 +133,8 @@ export function tooltip(key) {
       return "Substansvärde (på börsnoterade innehav)";
     case OLLE:
       return "Aktiekurs/senaste kvartalsomsättningen per aktie x 4";
+    case LAST_PRICE:
+      return "Aktiekurs (max 4h gammal)";
     default:
       return "";
   }

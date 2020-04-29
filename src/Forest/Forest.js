@@ -13,6 +13,7 @@ import {
   MARKET_CAP,
   RETURN_ON_EQUITY,
   RETURN_ON_CAPITAL_EMPLOYED,
+  LAST_PRICE,
 } from "../constants";
 import CategoryPage from "../components/CategoryPage";
 
@@ -23,6 +24,7 @@ class Forest extends React.Component {
     error: null,
     sortKey: PRICE_EARNINGS_RATIO,
     columnsToShow: [
+      LAST_PRICE,
       PRICE_EARNINGS_RATIO,
       DIRECT_YIELD,
       VOLATILITY,

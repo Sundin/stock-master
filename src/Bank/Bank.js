@@ -12,6 +12,7 @@ import {
   PRICE_SALES_RATIO,
   MARKET_CAP,
   RETURN_ON_EQUITY,
+  LAST_PRICE,
 } from "../constants";
 import CategoryPage from "../components/CategoryPage";
 
@@ -22,6 +23,7 @@ class Bank extends React.Component {
     error: null,
     sortKey: PRICE_EARNINGS_RATIO,
     columnsToShow: [
+      LAST_PRICE,
       PRICE_EARNINGS_RATIO,
       DIRECT_YIELD,
       VOLATILITY,

@@ -12,6 +12,7 @@ import {
   RETURN_ON_EQUITY,
   RETURN_ON_CAPITAL_EMPLOYED,
   NET_ASSET_VALUE,
+  LAST_PRICE,
 } from "../constants";
 import CategoryPage from "../components/CategoryPage";
 
@@ -22,6 +23,7 @@ class Investment extends React.Component {
     error: null,
     sortKey: "priceEarningsRatio",
     columnsToShow: [
+      LAST_PRICE,
       PRICE_EARNINGS_RATIO,
       DIRECT_YIELD,
       NET_EARNINGS,
