@@ -24,6 +24,10 @@ import {
   NET_ASSET_VALUE,
   OLLE,
   LAST_PRICE,
+  PROFIT_FROM_PROPERTY_MANAGEMENT_BEFORE_TAX,
+  PFPMBF_PER_SHARE,
+  PRICE_PFPMBT_RATIO,
+  PRICE_PFPMAT_RATIO,
 } from "./constants";
 
 export function translate(key) {
@@ -78,6 +82,14 @@ export function translate(key) {
       return "OLLE";
     case LAST_PRICE:
       return "Aktiekurs";
+    case PROFIT_FROM_PROPERTY_MANAGEMENT_BEFORE_TAX:
+      return "Förvaltningsresultat";
+    case PFPMBF_PER_SHARE:
+      return "EPS (före skatt)";
+    case PRICE_PFPMBT_RATIO:
+      return "P/FV";
+    case PRICE_PFPMAT_RATIO:
+      return "P/FV (efter skatt)";
     default:
       return "";
   }
@@ -135,6 +147,12 @@ export function tooltip(key) {
       return "Aktiekurs/senaste kvartalsomsättningen per aktie x 4";
     case LAST_PRICE:
       return "Aktiekurs (max 4h gammal)";
+    case PFPMBF_PER_SHARE:
+      return "EPS baserat på förvaltningsresultat före skatt";
+    case PRICE_PFPMBT_RATIO:
+      return "Aktiekurs / förvaltningsresultat före skatt (per aktie)";
+    case PRICE_PFPMAT_RATIO:
+      return "Aktiekurs / förvaltningsresultat beräknat med en schablonskatt på 25%";
     default:
       return "";
   }

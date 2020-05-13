@@ -24,6 +24,7 @@ class ReportInputSection extends React.Component {
         numberOfShares: 0,
         numberOfEmployees: 0,
         reportDate: "",
+        profitFromPropertyManagementBeforeTax: 0,
       };
     }
 
@@ -90,6 +91,12 @@ class ReportInputSection extends React.Component {
       report.totalDebt = this.multiply(this.state.totalDebt);
     }
 
+    if (this.state.profitFromPropertyManagementBeforeTax !== 0) {
+      report.profitFromPropertyManagementBeforeTax = this.multiply(
+        this.state.profitFromPropertyManagementBeforeTax
+      );
+    }
+
     saveReport(this.props.id, report).then(() => {
       this.props.reportSaved();
     });
@@ -135,6 +142,15 @@ class ReportInputSection extends React.Component {
             />
           </label>
           <br />
+          <label>
+            Antal aktier (samtliga aktieslag):
+            <input
+              name="numberOfShares"
+              type="number"
+              value={this.state.numberOfShares}
+              onChange={this.handleInputChange}
+            />
+          </label>
           <h3>Räkenskaper</h3>
           <label>
             Valuta:
@@ -226,6 +242,17 @@ class ReportInputSection extends React.Component {
           </label>
           <br />
 
+          <h5>Branschspecifika räkenskaper</h5>
+          <label>
+            Förvaltningsresultat:
+            <input
+              name="profitFromPropertyManagementBeforeTax"
+              type="number"
+              value={this.state.profitFromPropertyManagementBeforeTax}
+              onChange={this.handleInputChange}
+            />
+          </label>
+
           <h3>Annan info</h3>
           <label>
             Antal anställda:
@@ -233,15 +260,6 @@ class ReportInputSection extends React.Component {
               name="numberOfEmployees"
               type="number"
               value={this.state.numberOfEmployees}
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <label>
-            Antal aktier (samtliga aktieslag):
-            <input
-              name="numberOfShares"
-              type="number"
-              value={this.state.numberOfShares}
               onChange={this.handleInputChange}
             />
           </label>

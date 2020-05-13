@@ -6,7 +6,27 @@ import Forest from "../Forest/Forest";
 import Invest from "../Invest/Invest";
 import Bank from "../Bank/Bank";
 import CategoryPage from "../components/CategoryPage";
-import { ANNUAL_REPORT } from "../constants";
+import {
+  ANNUAL_REPORT,
+  PROFIT_FROM_PROPERTY_MANAGEMENT_BEFORE_TAX,
+  LAST_PRICE,
+  DIRECT_YIELD,
+  PRICE_EARNINGS_RATIO,
+  PFPMBF_PER_SHARE,
+  PRICE_PFPMBT_RATIO,
+  PRICE_PFPMAT_RATIO,
+  VOLATILITY,
+  PRICE_BOOK_VALUE,
+  EARNINGS_PER_SHARE,
+  REVENUE_PER_EMPLOYEE,
+  REVENUE_PER_SHARE,
+  OPERATING_MARGIN,
+  SOLIDITY,
+  PRICE_SALES_RATIO,
+  MARKET_CAP,
+  RETURN_ON_EQUITY,
+  RETURN_ON_CAPITAL_EMPLOYED,
+} from "../constants";
 
 const portfolioPage = "PORTFOLIO_PAGE";
 const bestYieldPage = "BEST_YIELD_PAGE";
@@ -16,6 +36,7 @@ const forestPage = "FOREST_PAGE";
 const investPage = "INVEST_PAGE";
 const realEstatePage = "REAL_ESTATE_PAGE";
 const bankPage = "BANK_PAGE";
+const techPage = "TECH_PAGE";
 
 const classNames = require("classnames");
 
@@ -76,10 +97,43 @@ class App extends React.Component {
             category="realEstate"
             title="Fastighetsbolag"
             {...passOnProps}
+            columnsToShow={[
+              LAST_PRICE,
+              PRICE_EARNINGS_RATIO,
+              DIRECT_YIELD,
+              PROFIT_FROM_PROPERTY_MANAGEMENT_BEFORE_TAX,
+              PFPMBF_PER_SHARE,
+              PRICE_PFPMBT_RATIO,
+              PRICE_PFPMAT_RATIO,
+            ]}
           />
         );
       case bankPage:
         return <Bank {...passOnProps} />;
+      case techPage:
+        return (
+          <CategoryPage
+            category="tech"
+            title="Teknik"
+            {...passOnProps}
+            columnsToShow={[
+              LAST_PRICE,
+              PRICE_EARNINGS_RATIO,
+              DIRECT_YIELD,
+              VOLATILITY,
+              PRICE_BOOK_VALUE,
+              EARNINGS_PER_SHARE,
+              REVENUE_PER_EMPLOYEE,
+              REVENUE_PER_SHARE,
+              OPERATING_MARGIN,
+              SOLIDITY,
+              PRICE_SALES_RATIO,
+              MARKET_CAP,
+              RETURN_ON_EQUITY,
+              RETURN_ON_CAPITAL_EMPLOYED,
+            ]}
+          />
+        );
       default:
         return <div></div>;
     }
@@ -120,6 +174,7 @@ class App extends React.Component {
         {this.renderButton("Investment", investPage)}
         {this.renderButton("Fastigheter", realEstatePage)}
         {this.renderButton("Bank", bankPage)}
+        {this.renderButton("Teknik", techPage)}
         {this.renderActivePage()}
       </div>
     );

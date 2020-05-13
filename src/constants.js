@@ -38,6 +38,13 @@ export const OLLE = "OLLE";
 export const RETURN_ON_EQUITY = "returnOnEquity";
 export const RETURN_ON_CAPITAL_EMPLOYED = "returnOnCapitalEmployed";
 export const NET_ASSET_VALUE = "netAssetValue";
+export const PROFIT_FROM_PROPERTY_MANAGEMENT_BEFORE_TAX =
+  "profitFromPropertyManagementBeforeTax";
+export const PFPMBF_PER_SHARE = "profitFromPropertyManagementBeforeTaxPerShare";
+export const PRICE_PFPMBT_RATIO =
+  "price_profitFromPropertyManagementBeforeTax_ratio";
+export const PRICE_PFPMAT_RATIO =
+  "price_profitFromPropertyManagementAfterTax_ratio";
 
 export const ANNUAL_REPORTS_TABLE = "annualReportsTable";
 export const INTERIM_REPORTS_TABLE = "interimReportsTable";
