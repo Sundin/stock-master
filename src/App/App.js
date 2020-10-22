@@ -26,6 +26,7 @@ import {
   MARKET_CAP,
   RETURN_ON_EQUITY,
   RETURN_ON_CAPITAL_EMPLOYED,
+  SHOW_PORTFOLIO,
 } from "../constants";
 
 const portfolioPage = "PORTFOLIO_PAGE";
@@ -166,7 +167,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>BisseNisse</h1>
-        {/* {this.renderButton("Portfolio", portfolioPage)} */}
+        {SHOW_PORTFOLIO && this.renderButton("Portfolio", portfolioPage)} 
         {this.renderButton("Utdelningsaktier", bestYieldPage)}
         {this.renderButton("Basaktier", blueChipPage)}
         {this.renderButton("Verkstad", industryPage)}

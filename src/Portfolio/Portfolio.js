@@ -6,7 +6,8 @@ import {
   numberOfStocksIsGood,
   getStockValue
 } from "./portfolioUtils";
-import { PRICE_EARNINGS_RATIO } from "../constants";
+import { PRICE_EARNINGS_RATIO, LAST_PRICE } from "../constants";
+import { formatField } from "../api/formatAllFields";
 
 var classNames = require("classnames");
 
@@ -16,20 +17,20 @@ class Portfolio extends React.Component {
     error: null
   };
 
-  // componentDidMount() {
-  //   getPortfolios()
-  //     .then(portfolios => {
-  //       this.setState({
-  //         portfolios: portfolios
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.error(err);
-  //       this.setState({
-  //         error: err.message
-  //       });
-  //     });
-  // }
+  componentDidMount() {
+    getPortfolios()
+      .then(portfolios => {
+        this.setState({
+          portfolios: portfolios
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        this.setState({
+          error: err.message
+        });
+      });
+  }
 
   getTotalPortfolioValue() {
     return this.state.portfolios.reduce((sum, portfolio) => {
@@ -161,8 +162,9 @@ function PortfolioDetails(props) {
             <th width="10%">ID</th>
             <th width="30%">Aktie</th>
             <th width="20%">Andel av portfölj</th>
-            <th widrth="30%">Bransch</th>
-            <th widrth="10%">P/E</th>
+            <th width="30%">Bransch</th>
+            <th width="10%">P/E</th>
+            <th width="10%">Aktiekurs (SEK)</th>
           </tr>
         </thead>
         <tbody>
@@ -203,6 +205,7 @@ function StockRow(props) {
       </td>
       <td>{stock.sector}</td>
       <td>{stock[PRICE_EARNINGS_RATIO]}</td>
+      <td>{formatField(LAST_PRICE, stock[LAST_PRICE])}</td>
     </tr>
   );
 }
