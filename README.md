@@ -21,9 +21,19 @@ The following variables need to be manually kept up to date:
 
 - `tenYearsBondInterest` and `averageOMXS30volatility` in [src/BestYield/stockIndicators.js](src/BestYield/stockIndicators.js).
 
-## Available Scripts
+### Viewing your local portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Change `SHOW_PORTFOLIO` to `true` in `constants.js`.
+
+Use this import in `Portfolio/dataRetriever.js`:
+
+    import portfolios from "../data/portfolioData";
+
+Construct your portfolio in `data/portfolioData.js`.
+
+* You can add the key `cash` to any stock in your portfolio. This will increase (or decrease) the sum of that stock with the entered amount. This is useful when figuring out what stocks to buy or sell in order to fulfill your personal investment strategy.
+
+## Available Scripts
 
 In the project directory, you can run:
 
@@ -61,17 +71,3 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 Deploy app to GitHub pages.
 
 Note that this will deploy your current local changes and not your latest commit.
-
-## Learn More
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration

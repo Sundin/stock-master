@@ -36,8 +36,9 @@ function getStocksInPortfolio(portfolio) {
 function getStockWithAmount(stock) {
   return new Promise((resolve, reject) => {
     getStockData(stock.id).then(stockData => {
-      stockData = convertToSEK(stockData);
-      resolve({ ...stock, ...stockData });
+      let combinedData = { ...stock, ...stockData };
+      combinedData = convertToSEK(combinedData);
+      resolve(combinedData);
     });
   });
 }

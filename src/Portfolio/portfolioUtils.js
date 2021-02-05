@@ -23,7 +23,10 @@ export function numberOfStocksIsGood(portfolioData) {
 }
 
 export function getStockValue(stock) {
-  return stock.amount * stock.lastPrice;
+  // Adds hard-coded cash value for stocks in portfolio.
+  // This is useful when figuring out how much to invest in a certain stock
+  // in order to fulfill your investment strategy
+  return stock.amount * stock.lastPrice + (stock.cash ? stock.cash : 0);
 }
 
 export function getAllOwnedStocks() {
