@@ -113,7 +113,7 @@ function getSectors(portfolios) {
       if (!sectors[stock.sector]) {
         sectors[stock.sector] = 0;
       }
-      sectors[stock.sector] += stock.amount * stock.lastPrice;
+      sectors[stock.sector] += getStockValue(stock);
     });
   });
   return sectors;
