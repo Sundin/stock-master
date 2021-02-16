@@ -5,6 +5,7 @@ import SingleStock from "../SingleStock/SingleStock";
 import Forest from "../Forest/Forest";
 import Invest from "../Invest/Invest";
 import Bank from "../Bank/Bank";
+import Space from "../Space/Space";
 import CategoryPage from "../components/CategoryPage";
 import {
   ANNUAL_REPORT,
@@ -38,6 +39,7 @@ const investPage = "INVEST_PAGE";
 const realEstatePage = "REAL_ESTATE_PAGE";
 const bankPage = "BANK_PAGE";
 const techPage = "TECH_PAGE";
+const spacePage = "SPACE_PAGE";
 
 const classNames = require("classnames");
 
@@ -135,6 +137,8 @@ class App extends React.Component {
             ]}
           />
         );
+      case spacePage:
+        return <Space {...passOnProps} />;
       default:
         return <div></div>;
     }
@@ -176,6 +180,7 @@ class App extends React.Component {
         {this.renderButton("Fastigheter", realEstatePage)}
         {this.renderButton("Bank", bankPage)}
         {this.renderButton("Teknik", techPage)}
+        {this.renderButton("Rymdteknik", spacePage)}
         {this.renderActivePage()}
       </div>
     );
