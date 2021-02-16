@@ -36,7 +36,7 @@ class StockTable extends React.PureComponent {
 
     if (sortKey) {
       stocks.sort((a, b) => {
-        return b[sortKey] - a[sortKey];
+        return a[sortKey] <  b[sortKey] ? -1 : 1;
       });
     }
   
@@ -51,7 +51,7 @@ class StockTable extends React.PureComponent {
         <table>
           <thead>
             <tr>
-              <th width="40%">{getMainColumn(type)}</th>
+              <th width="40%" onClick={() => this.sortBy("name")}>{getMainColumn(type)}</th>
               {columnsToShow.map((column) => {
                 return (
                   <th width="15%" key={column} data-tip={tooltip(column)} onClick={() => this.sortBy(column)}>
