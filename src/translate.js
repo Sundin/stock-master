@@ -153,6 +153,8 @@ export function tooltip(key) {
       return "Aktiekurs / förvaltningsresultat före skatt (per aktie)";
     case PRICE_PFPMAT_RATIO:
       return "Aktiekurs / förvaltningsresultat beräknat med en schablonskatt på 25%";
+    case PROFIT_FROM_PROPERTY_MANAGEMENT_BEFORE_TAX:
+      return "Hyresintäkter - driftskostnader - räntekostnader"
     default:
       return "";
   }
