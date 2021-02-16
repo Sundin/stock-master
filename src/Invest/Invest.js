@@ -21,7 +21,6 @@ class Investment extends React.Component {
     stocks: [],
     ownedStocks: [],
     error: null,
-    sortKey: "priceEarningsRatio",
     columnsToShow: [
       LAST_PRICE,
       PRICE_EARNINGS_RATIO,

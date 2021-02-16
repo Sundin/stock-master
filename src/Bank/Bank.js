@@ -21,7 +21,6 @@ class Bank extends React.Component {
     stocks: [],
     ownedStocks: [],
     error: null,
-    sortKey: PRICE_EARNINGS_RATIO,
     columnsToShow: [
       LAST_PRICE,
       PRICE_EARNINGS_RATIO,

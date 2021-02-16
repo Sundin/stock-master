@@ -17,9 +17,22 @@ import {
 } from "../constants";
 import Stock from "./Stock";
 
-class StockTable extends React.Component {
+// PureComponents only rerender if at least one state or prop value changes.
+// Change is determined by doing a shallow comparison of state and prop keys.
+// Memoization might increase performance further
+// https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html
+class StockTable extends React.PureComponent {
+  state = {
+    sortKey: PRICE_EARNINGS_RATIO,
+  };
+
+  sortBy(sortKey) {
+    this.setState({sortKey: sortKey});
+  }
+
   render() {
-    const { stocks, ownedStocks, sortKey, type, reportType } = this.props;
+    const { stocks, ownedStocks, type, reportType } = this.props;
+    const { sortKey } = this.state;
 
     if (sortKey) {
       stocks.sort((a, b) => {
@@ -41,7 +54,7 @@ class StockTable extends React.Component {
               <th width="40%">{getMainColumn(type)}</th>
               {columnsToShow.map((column) => {
                 return (
-                  <th width="15%" key={column} data-tip={tooltip(column)} onClick={() => console.log(column)}>
+                  <th width="15%" key={column} data-tip={tooltip(column)} onClick={() => this.sortBy(column)}>
                     {translate(column)}
                   </th>
                 );

@@ -13,7 +13,6 @@ class CategoryPage extends React.Component {
     stocks: [],
     ownedStocks: [],
     error: null,
-    sortKey: "priceEarningsRatio",
   };
 
   componentDidMount() {
@@ -91,10 +90,6 @@ class CategoryPage extends React.Component {
         <StockTable
           stocks={this.state.stocks}
           ownedStocks={this.state.ownedStocks}
-          sortKey={this.state.sortKey}
-          onSort={(sortKey) => {
-            this.setState({ sortKey: sortKey });
-          }}
           showSingleStock={this.props.showSingleStock}
           columnsToShow={this.props.columnsToShow}
           reportType={this.props.reportType}
