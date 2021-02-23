@@ -94,6 +94,9 @@ class CategoryPage extends React.Component {
           columnsToShow={this.props.columnsToShow}
           reportType={this.props.reportType}
         />
+        <p>
+          <i>Klicka på en kolumnrubrik för att sortera tabellen.</i>
+        </p>
       </div>
     );
   }
