@@ -30,13 +30,27 @@ class StockTable extends React.PureComponent {
     this.setState({sortKey: sortKey});
   }
 
+  normalizeData(stockData) {
+    return this.props.reportType === QUARTERLY_REPORT
+        ? { ...stockData, ...stockData.latestInterimReport }
+        : { ...stockData, ...stockData.latestAnnualReport };
+  }
+
   render() {
     const { stocks, ownedStocks, type, reportType } = this.props;
     const { sortKey } = this.state;
 
     if (sortKey) {
       stocks.sort((a, b) => {
-        return a[sortKey] <  b[sortKey] ? -1 : 1;
+        const aData = this.normalizeData(a)[sortKey];
+        const bData = this.normalizeData(b)[sortKey];
+        if (!aData) {
+          return 1;
+        }
+        if (!bData) {
+          return -1;
+        }
+        return aData < bData ? -1 : 1;
       });
     }
   
@@ -66,11 +80,7 @@ class StockTable extends React.PureComponent {
               const owned = stockIsOwned(stockData.id, ownedStocks);
               return (
                 <Stock
-                  stockData={
-                    reportType === QUARTERLY_REPORT
-                      ? { ...stockData, ...stockData.latestInterimReport }
-                      : { ...stockData, ...stockData.latestAnnualReport }
-                  }
+                  stockData={this.normalizeData(stockData)}
                   key={stockData.id}
                   owned={owned}
                   columnsToShow={columnsToShow}
