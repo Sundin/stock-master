@@ -6,7 +6,7 @@ import {
   numberOfStocksIsGood,
   getStockValue
 } from "./portfolioUtils";
-import { PRICE_EARNINGS_RATIO, LAST_PRICE } from "../constants";
+import { PRICE_EARNINGS_RATIO, LAST_PRICE, DIRECT_YIELD } from "../constants";
 import { formatField } from "../api/formatAllFields";
 
 var classNames = require("classnames");
@@ -165,6 +165,7 @@ function PortfolioDetails(props) {
             <th width="30%">Bransch</th>
             <th width="10%">P/E</th>
             <th width="10%">Aktiekurs (SEK)</th>
+            <th width="10%">Direktavkastning</th>
           </tr>
         </thead>
         <tbody>
@@ -206,6 +207,7 @@ function StockRow(props) {
       <td>{stock.sector}</td>
       <td>{stock[PRICE_EARNINGS_RATIO]}</td>
       <td>{formatField(LAST_PRICE, stock[LAST_PRICE])}</td>
+      <td>{stock[DIRECT_YIELD]}%</td>
     </tr>
   );
 }
