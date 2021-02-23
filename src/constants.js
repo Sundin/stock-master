@@ -41,6 +41,7 @@ export const OLLE = "OLLE";
 export const RETURN_ON_EQUITY = "returnOnEquity";
 export const RETURN_ON_CAPITAL_EMPLOYED = "returnOnCapitalEmployed";
 export const NET_ASSET_VALUE = "netAssetValue";
+export const NET_ASSET_VALUE_RATIO = "netAssetValueRatio";
 export const PROFIT_FROM_PROPERTY_MANAGEMENT_BEFORE_TAX =
   "profitFromPropertyManagementBeforeTax";
 export const PFPMBF_PER_SHARE = "profitFromPropertyManagementBeforeTaxPerShare";

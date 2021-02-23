@@ -28,6 +28,7 @@ import {
   PFPMBF_PER_SHARE,
   PRICE_PFPMBT_RATIO,
   PRICE_PFPMAT_RATIO,
+  NET_ASSET_VALUE_RATIO,
 } from "./constants";
 
 export function translate(key) {
@@ -78,6 +79,8 @@ export function translate(key) {
       return "ROCE (%)";
     case NET_ASSET_VALUE:
       return "Substansvärde";
+    case NET_ASSET_VALUE_RATIO:
+        return "Substansvärdering (%)";
     case OLLE:
       return "OLLE";
     case LAST_PRICE:
@@ -143,6 +146,8 @@ export function tooltip(key) {
       return "Räntabilitet på sysselsatt kapital (%)";
     case NET_ASSET_VALUE:
       return "Substansvärde (på börsnoterade innehav)";
+    case NET_ASSET_VALUE_RATIO:
+      return "Substanspremie/-rabatt"
     case OLLE:
       return "Aktiekurs/senaste kvartalsomsättningen per aktie x 4";
     case LAST_PRICE:

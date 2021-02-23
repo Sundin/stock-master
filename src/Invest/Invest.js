@@ -11,6 +11,7 @@ import {
   RETURN_ON_EQUITY,
   RETURN_ON_CAPITAL_EMPLOYED,
   NET_ASSET_VALUE,
+  NET_ASSET_VALUE_RATIO,
   LAST_PRICE,
 } from "../constants";
 import CategoryPage from "../components/CategoryPage";
@@ -33,6 +34,7 @@ class Investment extends React.Component {
       RETURN_ON_CAPITAL_EMPLOYED,
       MARKET_CAP,
       NET_ASSET_VALUE,
+      NET_ASSET_VALUE_RATIO,
     ],
   };
 

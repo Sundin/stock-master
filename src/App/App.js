@@ -9,7 +9,6 @@ import Space from "../Space/Space";
 import CategoryPage from "../components/CategoryPage";
 import {
   ANNUAL_REPORT,
-  PROFIT_FROM_PROPERTY_MANAGEMENT_BEFORE_TAX,
   LAST_PRICE,
   DIRECT_YIELD,
   PRICE_EARNINGS_RATIO,
