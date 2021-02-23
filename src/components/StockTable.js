@@ -6,7 +6,6 @@ import {
   PRICE_EARNINGS_RATIO,
   DIRECT_YIELD,
   VOLATILITY,
-  ID,
   ANNUAL_REPORTS_TABLE,
   YEAR,
   MULTIPLE_STOCKS_TABLE,
@@ -24,9 +23,13 @@ import Stock from "./Stock";
 class StockTable extends React.PureComponent {
   state = {
     sortKey: PRICE_EARNINGS_RATIO,
+    sortOrder: 1,
   };
 
   sortBy(sortKey) {
+    if (sortKey === this.state.sortKey) {
+      this.setState(prevState => ({sortOrder: prevState.sortOrder *  -1}));
+    }
     this.setState({sortKey: sortKey});
   }
 
@@ -38,19 +41,19 @@ class StockTable extends React.PureComponent {
 
   render() {
     const { stocks, ownedStocks, type, reportType } = this.props;
-    const { sortKey } = this.state;
+    const { sortKey, sortOrder } = this.state;
 
     if (sortKey) {
       stocks.sort((a, b) => {
         const aData = this.normalizeData(a)[sortKey];
         const bData = this.normalizeData(b)[sortKey];
         if (!aData) {
-          return 1;
+          return -1 * sortOrder;
         }
         if (!bData) {
-          return -1;
+          return 1 * sortOrder;
         }
-        return aData < bData ? -1 : 1;
+        return aData < bData ? -1 * sortOrder : 1 * sortOrder;
       });
     }
   
