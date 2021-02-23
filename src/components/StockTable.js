@@ -113,7 +113,6 @@ function getMainColumn(tableType) {
 StockTable.defaultProps = {
   type: MULTIPLE_STOCKS_TABLE,
   columnsToShow: [
-    ID,
     LAST_PRICE,
     PRICE_EARNINGS_RATIO,
     DIRECT_YIELD,

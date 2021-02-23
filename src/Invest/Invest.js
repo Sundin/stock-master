@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  PRICE_EARNINGS_RATIO,
   DIRECT_YIELD,
   TOTAL_ASSETS,
   EARNINGS_PER_SHARE,
@@ -23,7 +22,6 @@ class Investment extends React.Component {
     error: null,
     columnsToShow: [
       LAST_PRICE,
-      PRICE_EARNINGS_RATIO,
       DIRECT_YIELD,
       NET_EARNINGS,
       EBIT,
