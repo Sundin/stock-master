@@ -44,7 +44,7 @@ const classNames = require("classnames");
 
 class App extends React.Component {
   state = {
-    activePage: bestYieldPage,
+    activePage: SHOW_PORTFOLIO ? portfolioPage : bestYieldPage,
     activeStock: null,
     columnsToShow: [],
     reportType: ANNUAL_REPORT,
