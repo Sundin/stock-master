@@ -4,7 +4,7 @@ import {
   getPortfolioValue,
   portfolioRatioIsGood,
   numberOfStocksIsGood,
-  getStockValue
+  getStockValue,
 } from "./portfolioUtils";
 import { PRICE_EARNINGS_RATIO, LAST_PRICE, DIRECT_YIELD } from "../constants";
 import { formatField } from "../api/formatAllFields";
@@ -14,20 +14,20 @@ var classNames = require("classnames");
 class Portfolio extends React.Component {
   state = {
     portfolios: [],
-    error: null
+    error: null,
   };
 
   componentDidMount() {
     getPortfolios()
-      .then(portfolios => {
+      .then((portfolios) => {
         this.setState({
-          portfolios: portfolios
+          portfolios: portfolios,
         });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         this.setState({
-          error: err.message
+          error: err.message,
         });
       });
   }
@@ -45,13 +45,13 @@ class Portfolio extends React.Component {
 
     const sectors = getSectors(this.state.portfolios);
     let sortedSectors = [];
-    Object.keys(sectors).forEach(sector => {
+    Object.keys(sectors).forEach((sector) => {
       sortedSectors.push({
         name: sector,
-        value: (sectors[sector] / this.getTotalPortfolioValue()) * 100
+        value: (sectors[sector] / this.getTotalPortfolioValue()) * 100,
       });
     });
-    sortedSectors = sortedSectors.sort(function(a, b) {
+    sortedSectors = sortedSectors.sort(function (a, b) {
       return a.value < b.value ? 1 : b.value < a.value ? -1 : 0;
     });
 
@@ -67,7 +67,7 @@ class Portfolio extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.portfolios.map(portfolioData => (
+            {this.state.portfolios.map((portfolioData) => (
               <PortfolioRow
                 portfolioData={portfolioData}
                 totalPortfolioValue={this.getTotalPortfolioValue()}
@@ -86,7 +86,7 @@ class Portfolio extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {sortedSectors.map(sector => (
+            {sortedSectors.map((sector) => (
               <tr>
                 <td>{sector.name}</td>
                 <td>{sector.value.toFixed(2)}%</td>
@@ -95,12 +95,18 @@ class Portfolio extends React.Component {
           </tbody>
         </table>
 
-        {this.state.portfolios.map(portfolioData => (
+        {this.state.portfolios.map((portfolioData) => (
           <PortfolioDetails
             portfolioData={portfolioData}
             key={portfolioData.id}
           />
         ))}
+
+        <div height="100px" width="100%">
+          <p>
+            <i>Copyright Bisse-Nisse 2022.</i>
+          </p>
+        </div>
       </div>
     );
   }
@@ -108,8 +114,8 @@ class Portfolio extends React.Component {
 
 function getSectors(portfolios) {
   let sectors = {};
-  portfolios.forEach(portfolioData => {
-    portfolioData.stocks.forEach(stock => {
+  portfolios.forEach((portfolioData) => {
+    portfolioData.stocks.forEach((stock) => {
       if (!sectors[stock.sector]) {
         sectors[stock.sector] = 0;
       }
@@ -129,7 +135,7 @@ function PortfolioRow(props) {
       <td
         className={classNames({
           good: portfolioRatioIsGood(portfolioData, totalPortfolioValue),
-          bad: !portfolioRatioIsGood(portfolioData, totalPortfolioValue)
+          bad: !portfolioRatioIsGood(portfolioData, totalPortfolioValue),
         })}
       >
         {portfolioRatio.toFixed(2)}%
@@ -137,7 +143,7 @@ function PortfolioRow(props) {
       <td
         className={classNames({
           good: numberOfStocksIsGood(portfolioData),
-          bad: !numberOfStocksIsGood(portfolioData)
+          bad: !numberOfStocksIsGood(portfolioData),
         })}
       >
         {portfolioData.stocks.length}
@@ -148,10 +154,8 @@ function PortfolioRow(props) {
 
 function PortfolioDetails(props) {
   const { portfolioData } = props;
-  const {
-    minRatioOfEachShareInPortfolio,
-    maxRatioOfEachShareInPortfolio
-  } = portfolioData.strategy;
+  const { minRatioOfEachShareInPortfolio, maxRatioOfEachShareInPortfolio } =
+    portfolioData.strategy;
 
   return (
     <div>
@@ -169,7 +173,7 @@ function PortfolioDetails(props) {
           </tr>
         </thead>
         <tbody>
-          {portfolioData.stocks.map(stock => (
+          {portfolioData.stocks.map((stock) => (
             <StockRow
               stock={stock}
               portfolioValue={getPortfolioValue(portfolioData)}
@@ -199,7 +203,7 @@ function StockRow(props) {
       <td
         className={classNames({
           good: stockRatioIsGood(stockRatio, minRatio, maxRatio),
-          bad: !stockRatioIsGood(stockRatio, minRatio, maxRatio)
+          bad: !stockRatioIsGood(stockRatio, minRatio, maxRatio),
         })}
       >
         {stockRatio.toFixed(2)}%

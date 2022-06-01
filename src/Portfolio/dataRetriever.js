@@ -1,4 +1,4 @@
-// import portfolios from "../data/portfolioData";
+//import portfolios from "../data/portfolioData";
 import portfolios from "./portfolioData";
 import { getStockValue } from "./portfolioUtils";
 import { getStockData } from "../SingleStock/backend";
